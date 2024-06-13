@@ -12,9 +12,9 @@ export default function HomeScreen() {
                 padding: 16,
             }}
         >
-            <Text>Home</Text>
+            <Text>Not home</Text>
             <Divider />
-            <Button title='THIS DOES ABSOLUTELY NOTHING' onPress={() => {}} />
+            <Button title='THIS STILL DOES ABSOLUTELY NOTHING' onPress={() => {}} />
         </Surface>
     );
 }
