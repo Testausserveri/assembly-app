@@ -1,7 +1,6 @@
+import { TabBar, TabBarIcon } from '@/components';
 import { Tabs } from 'expo-router';
 import React from 'react';
-
-import { TabBar, TabBarIcon } from '@/components';
 import { useTranslation } from 'react-i18next';
 
 export default function TabLayout() {

@@ -1,13 +1,13 @@
+import Locales from '@/locales';
+import { Themes } from '@/styles';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-import { PaperProvider } from 'react-native-paper';
-import { Themes } from '@/styles';
 import i18n from 'i18next';
-import Locales from '@/locales';
+import { useEffect } from 'react';
 import { initReactI18next } from 'react-i18next';
+import { PaperProvider } from 'react-native-paper';
+import 'react-native-reanimated';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
