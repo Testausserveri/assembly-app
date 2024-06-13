@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from 'react-native';
 import { Divider, Surface, Text } from 'react-native-paper';
 
 export default function HomeScreen() {
+    const { t } = useTranslation();
+
     return (
         <Surface
             style={{
@@ -12,9 +15,9 @@ export default function HomeScreen() {
                 padding: 16,
             }}
         >
-            <Text>Not home</Text>
+            <Text>{t('other')}</Text>
             <Divider />
-            <Button title='THIS STILL DOES ABSOLUTELY NOTHING' onPress={() => {}} />
+            <Button title={t('other') + ' ' + t('useless')} onPress={() => {}} />
         </Surface>
     );
 }
