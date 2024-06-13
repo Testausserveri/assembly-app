@@ -15,9 +15,9 @@ export default function HomeScreen() {
                 padding: 16,
             }}
         >
-            <Text>{t('home')}</Text>
+            <Text>{t('other')}</Text>
             <Divider />
-            <Button title={t('useless')} onPress={() => {}} />
+            <Button title={t('other') + ' ' + t('useless')} onPress={() => {}} />
         </Surface>
     );
 }
