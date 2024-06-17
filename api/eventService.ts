@@ -93,28 +93,35 @@ const API_BASE_PATH = `https://wp.assembly.org/${determineEvent()}/index.php?res
  *
  * @returns {Promise<AssemblyEvent[]>}
  */
-const getEvents: () => Promise<AssemblyEvent[]> = async (): Promise<AssemblyEvent[]> => {
-    const location_resp = await fetch(API_BASE_PATH + '/event_locations');
-    const locations: ApiEventLocation[] = await location_resp.json();
+const getEvents = async (): Promise<AssemblyEvent[]> => {
+    try {
+        const location_resp = await fetch(API_BASE_PATH + '/event_locations');
+        if (!location_resp.ok) return [];
+        const locations: ApiEventLocation[] = await location_resp.json();
 
-    const event_resp = await fetch(API_BASE_PATH + '/events');
-    const events: ApiAssemblyEvent[] = await event_resp.json();
+        const event_resp = await fetch(API_BASE_PATH + '/events');
+        if (!event_resp.ok) return [];
+        const events: ApiAssemblyEvent[] = await event_resp.json();
 
-    return events.map((e) => {
-        const a: AssemblyEvent = {
-            id: e.ID,
-            title: e.post_title,
-            excerpt: e.post_excerpt,
-            start: new Date(e.starts),
-            end: new Date(e.ends),
-            locations: locations
-                .filter((l) => e.locations.calendar_event_location?.find((cel) => cel == l.term_id))
-                .map((l) => l.name),
-            thumbnail: e.thumbnail,
-        };
+        return events.map((e) => {
+            const a: AssemblyEvent = {
+                id: e.ID,
+                title: e.post_title,
+                excerpt: e.post_excerpt,
+                start: new Date(e.starts),
+                end: new Date(e.ends),
+                locations: locations
+                    .filter((l) => e.locations.calendar_event_location?.find((cel) => cel == l.term_id))
+                    .map((l) => l.name),
+                thumbnail: e.thumbnail,
+            };
 
-        return a;
-    });
+            return a;
+        });
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
 };
 
 export { AssemblyEvent, getEvents };
