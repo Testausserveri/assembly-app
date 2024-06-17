@@ -78,11 +78,12 @@ type AssemblyEvent = {
 const determineEvent = (): string => {
     const now = new Date();
     const julyFirst = new Date(now.getFullYear(), 7, 1);
+    const shortYear = now.getFullYear().toString().slice(-2);
 
     if (now >= julyFirst) {
-        return "summer" + now.getFullYear();
+        return "summer" + shortYear;
     } else {
-        return "winter" + now.getFullYear();
+        return "winter" + shortYear;
     }
 }
 
