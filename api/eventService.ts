@@ -75,7 +75,18 @@ type AssemblyEvent = {
     thumbnail: string;
 };
 
-const API_BASE_PATH = 'https://wp.assembly.org/summer23/index.php?rest_route=/api/v1';
+const determineEvent = (): string => {
+    const now = new Date();
+    const julyFirst = new Date(now.getFullYear(), 7, 1);
+
+    if (now >= julyFirst) {
+        return "summer" + now.getFullYear();
+    } else {
+        return "winter" + now.getFullYear();
+    }
+}
+
+const API_BASE_PATH = `https://wp.assembly.org/${determineEvent()}/index.php?rest_route=/api/v1`;
 
 /**
  * This function returns a promise for all AssemblyEvents fetched from the api
