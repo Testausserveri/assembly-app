@@ -1,23 +1,22 @@
 import { useTranslation } from 'react-i18next';
 import { Button } from 'react-native';
 import { Divider, Surface, Text } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
+import Timetable from '@/components/timetable/Timetable';
 
-export default function HomeScreen() {
+export default function TimetableScreen() {
     const { t } = useTranslation();
-
+    const theme = useTheme();
     return (
         <Surface
             style={{
                 flex: 1,
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: 8,
-                padding: 16,
+                backgroundColor: theme.colors.background,
             }}
         >
-            <Text>{t('other')}</Text>
-            <Divider />
-            <Button title={t('other') + ' ' + t('useless')} onPress={() => {}} />
+            <Timetable theme={ theme } />
         </Surface>
     );
 }

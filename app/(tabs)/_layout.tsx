@@ -22,11 +22,11 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name='other'
+                name='timetable'
                 options={{
-                    title: t('other'),
+                    title: t('timetable'),
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'egg' : 'egg-outline'} color={color} />
+                        <TabBarIcon name={focused ? 'calendar-clear' : 'calendar-clear-outline'} color={color} />
                     ),
                 }}
             />

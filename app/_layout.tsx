@@ -26,8 +26,8 @@ i18n.use(initReactI18next).init({
 
 export default function RootLayout() {
     const [loaded] = useFonts({
-        SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-        // TODO: Assembly brand fonts
+        Gaba: require('../assets/fonts/Gaba-Super.otf'),
+        RobotoMono: require('../assets/fonts/RobotoMono-Bold.ttf')
     });
 
     useEffect(() => {
