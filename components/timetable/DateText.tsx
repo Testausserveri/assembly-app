@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-const DateText = ({ theme }) => {
+const DateText = ({ text }) => {
+
+    const theme = useTheme();
+
     return(
         <View
             style={{
@@ -18,10 +22,11 @@ const DateText = ({ theme }) => {
                     textAlign: 'center',
                     fontFamily: "RobotoMono",
                     color: theme.colors.primary,
-                    fontSize: 35
+                    fontSize: 35,
+                    textTransform: 'uppercase',
                  }}
             >
-            MONDAY
+            {text}
             </Text>
         </View>
     )
