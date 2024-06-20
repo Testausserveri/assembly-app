@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-const EventInfo = ({ title, location, time, theme}) => {
+const EventInfo = ({ title, location, time}) => {
+
+    const theme = useTheme();
+
     return(
         <View
             style={{

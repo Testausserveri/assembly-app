@@ -1,8 +1,12 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import EventInfo from '@/components/timetable/EventInfo'
+import { useTheme } from 'react-native-paper';
 
-const Event = ({ title, location, time, style, thumbnail, theme }) => {
+const Event = ({ title, location, time, color, thumbnail }) => {
+
+    const theme = useTheme();
+
     return(
         <View
             style={{
@@ -48,7 +52,7 @@ const Event = ({ title, location, time, style, thumbnail, theme }) => {
                     left: 0,
                     borderTopLeftRadius: 10,
                     borderBottomLeftRadius: 10,
-                }, style]}
+                }, color]}
             >
             </View>
             <View
@@ -60,7 +64,7 @@ const Event = ({ title, location, time, style, thumbnail, theme }) => {
                     left: "3%",
                 }}
             >
-                <EventInfo title={title} location={location} time={time} theme={theme} />
+                <EventInfo title={title} location={location} time={time} />
             </View>
         </View>
     )

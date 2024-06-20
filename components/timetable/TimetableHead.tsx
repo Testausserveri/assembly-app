@@ -2,8 +2,12 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import TimetableTitle from '@/components/timetable/TimetableTitle'
 import DateSelector from '@/components/timetable/DateSelector'
+import { useTheme } from 'react-native-paper';
 
-const TimetableHead = ({ theme }) => {
+const TimetableHead = ({ date, pressNext, pressLast }) => {
+
+    const theme = useTheme();
+
     return(
         <View
               style={{
@@ -12,8 +16,8 @@ const TimetableHead = ({ theme }) => {
                 height: '25%',
                 top: 0,
               }}>
-              <TimetableTitle theme={ theme } />
-              <DateSelector theme={ theme } />
+              <TimetableTitle />
+              <DateSelector date={ date } pressNext={ pressNext } pressLast={ pressLast } />
         </View>
     )
 };

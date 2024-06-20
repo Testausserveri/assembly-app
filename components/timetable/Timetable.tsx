@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import TimetableHead from '@/components/timetable/TimetableHead'
 import EventsBox from '@/components/timetable/EventsBox';
+import { useTheme } from 'react-native-paper';
 
-const Timetable = ({ theme }) => {
+const Timetable = () => {
+
+    const theme = useTheme();
+
+    const pressNext = () => {
+        console.log("next")
+    };
+
+    const pressLast = () => {
+        console.log("last")
+    };
+
     return(
         <View
               style={{
@@ -12,8 +24,8 @@ const Timetable = ({ theme }) => {
                 height: '100%',
                 top: 0,
               }}>
-              <TimetableHead theme={ theme } />
-              <EventsBox theme={ theme } />
+              <TimetableHead date="friday" pressLast={ pressLast } pressNext={ pressNext } />
+              <EventsBox pressLast={ pressLast } pressNext={ pressNext } />
         </View>
     )
 };

@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
-const TimetableTitle = ({ theme }) => {
+const TimetableTitle = () => {
+    const { t } = useTranslation();
+    const theme = useTheme();
+    const title = t("timetable")
     return(
         <View
             style={{
@@ -16,10 +21,11 @@ const TimetableTitle = ({ theme }) => {
                     textAlign: 'center',
                     fontFamily: "Gaba",
                     color: theme.colors.primary,
-                    fontSize: 40
+                    fontSize: 40,
+                    textTransform: 'uppercase',
                  }}
             >
-            TIMETABLE
+            { title }
             </Text>
         </View>
     )

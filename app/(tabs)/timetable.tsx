@@ -1,8 +1,9 @@
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'react-native';
-import { Divider, Surface, Text } from 'react-native-paper';
+import { Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 import Timetable from '@/components/timetable/Timetable';
+import { getEvents } from '@/api/eventService'
 
 export default function TimetableScreen() {
     const { t } = useTranslation();
@@ -16,7 +17,7 @@ export default function TimetableScreen() {
                 backgroundColor: theme.colors.background,
             }}
         >
-            <Timetable theme={ theme } />
+            <Timetable />
         </Surface>
     );
 }
