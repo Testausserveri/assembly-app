@@ -4,7 +4,10 @@ import DateText from '@/components/timetable/DateText'
 import DateSelectorArrowButton from '@/components/timetable/DateSelectorArrowButton'
 import { useTheme } from 'react-native-paper';
 
-const DateSelector = ({theme}) => {
+const DateSelector = ({ date, pressNext, pressLast }) => {
+
+    const theme = useTheme();
+
     return(
         <View
             style={{
@@ -24,7 +27,7 @@ const DateSelector = ({theme}) => {
                     justifyContent: "center",
                 }}
             >
-                <DateSelectorArrowButton style={{left: 0, transform: [{ rotate: '180deg'}]}} theme={ theme } />
+                <DateSelectorArrowButton visible={ true } onPress={ pressLast } style={{ left: 0, transform: [{ rotate: '180deg' }] }} />
                 <View
                     style={{
                         position: 'absolute',
@@ -35,9 +38,9 @@ const DateSelector = ({theme}) => {
                         backgroundColor: theme.colors.primaryContainer,
                     }}
                 >
-                    <DateText theme={ theme } />
+                    <DateText text={date} />
                 </View>
-                <DateSelectorArrowButton style={{right: 0, transform: [{ rotate: '0deg'}]}} theme={ theme } />
+                <DateSelectorArrowButton visible={ true } onPress={ pressNext } style={{ right: 0, transform: [{ rotate: '0deg' }] }} />
             </View>
         </View>
     )
