@@ -1,8 +1,12 @@
 import React from 'react';
 import { View, Text, Stylesheet, Button, TouchableOpacity } from 'react-native';
 import Ionicon from '@expo/vector-icons/Ionicons';
+import { useTheme } from 'react-native-paper';
 
-const DateSelectorArrowButton = ({ style, theme }) => {
+const DateSelectorArrowButton = ({ visible, onPress, style }) => {
+
+    const theme = useTheme();
+
     return(
         <View
             style={[{
@@ -12,6 +16,7 @@ const DateSelectorArrowButton = ({ style, theme }) => {
                 top: 0,
                 justifyContent: "center",
                 zIndex: 1,
+                display: (visible ? "" : "none")
             }, style]}
         >
             <TouchableOpacity
@@ -22,6 +27,7 @@ const DateSelectorArrowButton = ({ style, theme }) => {
                     borderRadius:50,
                 }}
                 activeOpacity={1}
+                onPress={ onPress }
             >
                 <View
                     style={{
