@@ -1,4 +1,5 @@
 import { Colors } from '@/styles';
+// eslint-disable-next-line
 import { ENVIRONMENT } from '@env';
 
 type ApiEventLocation = {

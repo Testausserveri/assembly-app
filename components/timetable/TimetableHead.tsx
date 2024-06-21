@@ -1,7 +1,6 @@
 import DateSelector from '@/components/timetable/DateSelector';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
 import { Surface, Text, useTheme } from 'react-native-paper';
 
 interface TimetableHeadProps {

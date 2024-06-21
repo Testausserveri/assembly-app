@@ -1,6 +1,4 @@
-import { AssemblyEvent, getEvents } from '@/api/eventService';
 import Timetable from '@/components/timetable/Timetable';
-import { useEffect, useState } from 'react';
 import { Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

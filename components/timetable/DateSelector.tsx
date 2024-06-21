@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import weekday from 'dayjs/plugin/weekday';
-import { useTranslation } from 'react-i18next';
 import { IconButton, Surface, Text, useTheme } from 'react-native-paper';
 
 dayjs.extend(weekday);
@@ -13,7 +12,6 @@ interface DateSelectorProps {
 
 const DateSelector = ({ date, next, previous }: DateSelectorProps) => {
     const theme = useTheme();
-    const { t } = useTranslation();
 
     return (
         <Surface
