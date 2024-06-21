@@ -46,7 +46,7 @@ const DateSelector = ({ date, next, previous }: DateSelectorProps) => {
                     backgroundColor: theme.colors.primaryContainer,
                 }}
             >
-                <Text variant='headlineSmall'>{`${t(dayjs(date).format('dddd'))} ${dayjs(date).format('DD/MM')}`}</Text>
+                <Text variant='headlineSmall'>{`${dayjs(date).format('dddd DD/MM')}`}</Text>
             </Surface>
             <IconButton
                 icon='arrow-right'
