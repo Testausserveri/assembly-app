@@ -1,25 +1,34 @@
+import DateSelector from '@/components/timetable/DateSelector';
 import React from 'react';
-import { View, Text } from 'react-native';
-import TimetableTitle from '@/components/timetable/TimetableTitle'
-import DateSelector from '@/components/timetable/DateSelector'
-import { useTheme } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
+import { Surface, Text, useTheme } from 'react-native-paper';
 
-const TimetableHead = ({ date, pressNext, pressLast }) => {
+interface TimetableHeadProps {
+    date: string;
+    next: () => void;
+    previous: () => void;
+}
 
+const TimetableHead = ({ date, next, previous }: TimetableHeadProps) => {
     const theme = useTheme();
+    const { t } = useTranslation();
+    const title = t('timetable');
 
-    return(
-        <View
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '25%',
-                top: 0,
-              }}>
-              <TimetableTitle />
-              <DateSelector date={ date } pressNext={ pressNext } pressLast={ pressLast } />
-        </View>
-    )
+    return (
+        <Surface
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+                backgroundColor: theme.colors.background,
+            }}
+        >
+            <Text variant='headlineLarge'>{title}</Text>
+            <DateSelector date={date} next={next} previous={previous} />
+        </Surface>
+    );
 };
 
 export default TimetableHead;

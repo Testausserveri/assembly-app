@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { initReactI18next } from 'react-i18next';
 import { PaperProvider } from 'react-native-paper';
 import 'react-native-reanimated';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -27,7 +28,7 @@ i18n.use(initReactI18next).init({
 export default function RootLayout() {
     const [loaded] = useFonts({
         Gaba: require('../assets/fonts/Gaba-Super.otf'),
-        RobotoMono: require('../assets/fonts/RobotoMono-Bold.ttf')
+        RobotoMono: require('../assets/fonts/RobotoMono-Bold.ttf'),
     });
 
     useEffect(() => {
@@ -41,11 +42,13 @@ export default function RootLayout() {
     }
 
     return (
-        <PaperProvider theme={Themes['dark']['default']}>
-            <Stack>
-                <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-                <Stack.Screen name='+not-found' />
-            </Stack>
-        </PaperProvider>
+        <SafeAreaProvider>
+            <PaperProvider theme={Themes['dark']['default']}>
+                <Stack initialRouteName='timetable'>
+                    <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+                    <Stack.Screen name='+not-found' />
+                </Stack>
+            </PaperProvider>
+        </SafeAreaProvider>
     );
 }

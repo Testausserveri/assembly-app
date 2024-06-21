@@ -1,44 +1,43 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { CommonActions } from '@react-navigation/native';
 import React from 'react';
-import { BottomNavigation } from 'react-native-paper';
+import { BottomNavigation, useTheme } from 'react-native-paper';
 
-const TabBar = (props: BottomTabBarProps) => (
-    <BottomNavigation.Bar
-        shifting
-        navigationState={props.state}
-        safeAreaInsets={props.insets}
-        onTabPress={({ route, preventDefault }) => {
-            const event = props.navigation.emit({
-                type: 'tabPress',
-                target: route.key,
-                canPreventDefault: true,
-            });
-
-            if (event.defaultPrevented) {
-                preventDefault();
-            } else {
-                props.navigation.dispatch({
-                    ...CommonActions.navigate(route.name, route.params),
-                    target: props.state.key,
+const TabBar = (props: BottomTabBarProps) => {
+    const theme = useTheme();
+    return (
+        <BottomNavigation.Bar
+            style={{ backgroundColor: theme.colors.background }}
+            shifting
+            navigationState={props.state}
+            safeAreaInsets={props.insets}
+            labeled={false}
+            onTabPress={({ route, preventDefault }) => {
+                const event = props.navigation.emit({
+                    type: 'tabPress',
+                    target: route.key,
+                    canPreventDefault: true,
                 });
-            }
-        }}
-        renderIcon={({ route, focused, color }) => {
-            const { options } = props.descriptors[route.key];
-            if (options.tabBarIcon) {
-                return options.tabBarIcon({ focused, color, size: 24 });
-            }
 
-            return null;
-        }}
-        getLabelText={({ route }) => {
-            const { options } = props.descriptors[route.key];
-            const label = options.title !== undefined ? options.title : route.name;
+                if (event.defaultPrevented) {
+                    preventDefault();
+                } else {
+                    props.navigation.dispatch({
+                        ...CommonActions.navigate(route.name, route.params),
+                        target: props.state.key,
+                    });
+                }
+            }}
+            renderIcon={({ route, focused, color }) => {
+                const { options } = props.descriptors[route.key];
+                if (options.tabBarIcon) {
+                    return options.tabBarIcon({ focused, color, size: 24 });
+                }
 
-            return label;
-        }}
-    />
-);
+                return null;
+            }}
+        />
+    );
+};
 
 export default TabBar;

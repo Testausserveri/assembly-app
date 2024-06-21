@@ -1,49 +1,63 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import DateText from '@/components/timetable/DateText'
-import DateSelectorArrowButton from '@/components/timetable/DateSelectorArrowButton'
-import { useTheme } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
+import { IconButton, Surface, Text, useTheme } from 'react-native-paper';
 
-const DateSelector = ({ date, pressNext, pressLast }) => {
+interface DateSelectorProps {
+    date: string;
+    next: () => void;
+    previous: () => void;
+}
 
+const DateSelector = ({ date, next, previous }: DateSelectorProps) => {
     const theme = useTheme();
+    const { t } = useTranslation();
 
-    return(
-        <View
+    return (
+        <Surface
             style={{
-                position: 'absolute',
+                position: 'relative',
                 width: '100%',
-                height: '50%',
-                bottom: 0,
+                paddingHorizontal: 6,
             }}
         >
-            <View
+            <IconButton
+                icon='arrow-left'
                 style={{
+                    backgroundColor: theme.colors.purpleHighlight,
+                    borderRadius: 50,
+                    alignSelf: 'center',
                     position: 'absolute',
-                    width: '95%',
-                    left: "2.5%",
-                    height: '100%',
-                    bottom: 0,
-                    justifyContent: "center",
+                    top: 0,
+                    left: 6,
+                    zIndex: 1,
+                }}
+                onPress={previous}
+            />
+            <Surface
+                style={{
+                    paddingVertical: 12,
+                    borderRadius: 8,
+                    alignItems: 'center',
+                    marginHorizontal: 24,
+                    backgroundColor: theme.colors.primaryContainer,
                 }}
             >
-                <DateSelectorArrowButton visible={ true } onPress={ pressLast } style={{ left: 0, transform: [{ rotate: '180deg' }] }} />
-                <View
-                    style={{
-                        position: 'absolute',
-                        width: '90%',
-                        left: '5%',
-                        height: '100%',
-                        borderRadius: 10,
-                        backgroundColor: theme.colors.primaryContainer,
-                    }}
-                >
-                    <DateText text={date} />
-                </View>
-                <DateSelectorArrowButton visible={ true } onPress={ pressNext } style={{ right: 0, transform: [{ rotate: '0deg' }] }} />
-            </View>
-        </View>
-    )
+                <Text variant='headlineSmall'>{t(date)}</Text>
+            </Surface>
+            <IconButton
+                icon='arrow-right'
+                style={{
+                    backgroundColor: theme.colors.purpleHighlight,
+                    borderRadius: 50,
+                    alignSelf: 'center',
+                    position: 'absolute',
+                    top: 0,
+                    right: 6,
+                    zIndex: 1,
+                }}
+                onPress={next}
+            />
+        </Surface>
+    );
 };
 
 export default DateSelector;

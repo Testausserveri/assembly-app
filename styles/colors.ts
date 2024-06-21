@@ -3,7 +3,8 @@ import { MD3DarkTheme } from 'react-native-paper';
 const Colors = {
     dark: {
         default: {
-            primary: '#FFFFFF',
+            ...MD3DarkTheme.colors,
+            primary: '#EDEDED',
             primaryContainer: '#393939',
             background: '#191919',
             elevation: '#393939',

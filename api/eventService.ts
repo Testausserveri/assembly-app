@@ -81,11 +81,11 @@ const determineEvent = (): string => {
     const shortYear = now.getFullYear().toString().slice(-2);
 
     if (now >= julyFirst) {
-        return "summer" + shortYear;
+        return 'summer' + shortYear;
     } else {
-        return "winter" + shortYear;
+        return 'winter' + shortYear;
     }
-}
+};
 
 const API_BASE_PATH = `https://wp.assembly.org/${determineEvent()}/index.php?rest_route=/api/v1`;
 
@@ -112,7 +112,9 @@ const getEvents = async (): Promise<AssemblyEvent[]> => {
                 start: new Date(e.starts),
                 end: new Date(e.ends),
                 locations: locations
-                    .filter((l) => e.locations.calendar_event_location?.find((cel) => cel == l.term_id))
+                    .filter((l) =>
+                        e.locations.calendar_event_location?.find((cel) => cel == l.term_id)
+                    )
                     .map((l) => l.name),
                 thumbnail: e.thumbnail,
             };

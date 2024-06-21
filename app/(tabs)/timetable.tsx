@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { AssemblyEvent, getEvents } from '@/api/eventService';
+import Timetable from '@/components/timetable/Timetable';
+import { useEffect, useState } from 'react';
 import { Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
-import Timetable from '@/components/timetable/Timetable';
-import { getEvents } from '@/api/eventService'
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TimetableScreen() {
-    const { t } = useTranslation();
     const theme = useTheme();
+    const insets = useSafeAreaInsets();
+
     return (
         <Surface
             style={{
                 flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
                 backgroundColor: theme.colors.background,
+                paddingTop: insets.top + 8,
             }}
         >
             <Timetable />

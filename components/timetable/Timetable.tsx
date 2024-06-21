@@ -1,33 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import TimetableHead from '@/components/timetable/TimetableHead'
+import { AssemblyEvent, getEvents } from '@/api/eventService';
 import EventsBox from '@/components/timetable/EventsBox';
-import { useTheme } from 'react-native-paper';
+import TimetableHead from '@/components/timetable/TimetableHead';
+import { useEffect, useState } from 'react';
+import { Surface } from 'react-native-paper';
 
 const Timetable = () => {
-
-    const theme = useTheme();
-
-    const pressNext = () => {
-        console.log("next")
-    };
+    const [events, setEvents] = useState<AssemblyEvent[]>([]);
 
     const pressLast = () => {
-        console.log("last")
+        console.log('Last');
     };
 
-    return(
-        <View
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                top: 0,
-              }}>
-              <TimetableHead date="friday" pressLast={ pressLast } pressNext={ pressNext } />
-              <EventsBox pressLast={ pressLast } pressNext={ pressNext } />
-        </View>
-    )
+    const pressNext = () => {
+        console.log('Next');
+    };
+
+    useEffect(() => {
+        getEvents().then((eventRes) => {
+            setEvents(eventRes);
+        });
+    }, []);
+
+    return (
+        <Surface
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                flex: 1,
+                gap: 8,
+            }}
+        >
+            <TimetableHead date='friday' previous={pressLast} next={pressNext} />
+            <EventsBox events={events} />
+        </Surface>
+    );
 };
 
 export default Timetable;
