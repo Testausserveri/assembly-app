@@ -1,10 +1,11 @@
 import DateSelector from '@/components/timetable/DateSelector';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import { Surface, Text, useTheme } from 'react-native-paper';
 
 interface TimetableHeadProps {
-    date: string;
+    date: Date;
     next: () => void;
     previous: () => void;
 }
@@ -24,6 +25,7 @@ const TimetableHead = ({ date, next, previous }: TimetableHeadProps) => {
                 gap: 8,
                 backgroundColor: theme.colors.background,
             }}
+            elevation={0}
         >
             <Text variant='headlineLarge'>{title}</Text>
             <DateSelector date={date} next={next} previous={previous} />

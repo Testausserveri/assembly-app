@@ -1,15 +1,32 @@
+import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 import { Image, View } from 'react-native';
 import { Surface, Text } from 'react-native-paper';
 
 interface EventProps {
     title: string;
     location: string;
-    time: string;
+    start: Date;
+    end: Date;
     color: string;
     thumbnail: string;
 }
 
-const Event = ({ title, location, time, color, thumbnail }: EventProps) => {
+const getEventTimeString = (start: Date, end: Date) => {
+    const startTime = dayjs(start);
+    const endTime = dayjs(end);
+
+    if (startTime.isSame(endTime)) {
+        return startTime.format('HH:mm');
+    }
+
+    return `${startTime.format('HH:mm')} - ${endTime.format('HH:mm')}`;
+};
+
+const Event = ({ title, location, start, end, color, thumbnail }: EventProps) => {
+    const timeString = getEventTimeString(start, end);
+    const { t } = useTranslation();
+
     return (
         <Surface
             style={{
@@ -22,6 +39,17 @@ const Event = ({ title, location, time, color, thumbnail }: EventProps) => {
                 backgroundColor: color,
             }}
         >
+            <View
+                style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                    borderRadius: 8,
+                    zIndex: 10,
+                    display: dayjs().isAfter(end) ? 'flex' : 'none', // Dim if event has ended
+                }}
+            />
             <Image
                 source={{ uri: thumbnail }}
                 resizeMode='cover'
@@ -49,9 +77,18 @@ const Event = ({ title, location, time, color, thumbnail }: EventProps) => {
                 }}
             />
             <Surface style={{ padding: 16, width: '100%', alignItems: 'center' }}>
-                <Text variant='titleLarge'>{title}</Text>
-                <Text variant='labelLarge'>{location}</Text>
-                <Text variant='labelLarge'>{time}</Text>
+                <Text variant='titleMedium' style={{ textAlign: 'center' }}>
+                    {title}
+                </Text>
+                {location && (
+                    <Text
+                        variant='labelLarge'
+                        style={{ textAlign: 'center' }}
+                    >{`${t('location')}: ${location}`}</Text>
+                )}
+                <Text variant='labelLarge' style={{ textAlign: 'center' }}>
+                    {timeString}
+                </Text>
             </Surface>
         </Surface>
     );

@@ -26,7 +26,10 @@ export default function TabLayout() {
                 options={{
                     title: t('timetable'),
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'calendar-clear' : 'calendar-clear-outline'} color={color} />
+                        <TabBarIcon
+                            name={focused ? 'calendar' : 'calendar-outline'}
+                            color={color}
+                        />
                     ),
                 }}
             />

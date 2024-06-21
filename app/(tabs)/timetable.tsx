@@ -14,7 +14,7 @@ export default function TimetableScreen() {
             style={{
                 flex: 1,
                 backgroundColor: theme.colors.background,
-                paddingTop: insets.top + 8,
+                paddingTop: insets.top + 16,
             }}
         >
             <Timetable />
