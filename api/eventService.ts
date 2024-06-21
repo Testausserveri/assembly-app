@@ -1,3 +1,6 @@
+import { Colors } from '@/styles';
+import { ENVIRONMENT } from '@env';
+
 type ApiEventLocation = {
     term_id: number;
     name: string;
@@ -71,11 +74,15 @@ type AssemblyEvent = {
     excerpt: string;
     start: Date;
     end: Date;
-    locations: string[];
+    location: string;
     thumbnail: string;
+    color: string;
 };
 
 const determineEvent = (): string => {
+    if (ENVIRONMENT === 'development') {
+        return 'summer23';
+    }
     const now = new Date();
     const julyFirst = new Date(now.getFullYear(), 7, 1);
     const shortYear = now.getFullYear().toString().slice(-2);
@@ -104,19 +111,19 @@ const getEvents = async (): Promise<AssemblyEvent[]> => {
         if (!event_resp.ok) return [];
         const events: ApiAssemblyEvent[] = await event_resp.json();
 
-        return events.map((e) => {
+        return events.map((event) => {
+            let eventLocation = locations.find((location) => {
+                return event.locations.calendar_event_location?.includes(location.term_id);
+            });
             const a: AssemblyEvent = {
-                id: e.ID,
-                title: e.post_title,
-                excerpt: e.post_excerpt,
-                start: new Date(e.starts),
-                end: new Date(e.ends),
-                locations: locations
-                    .filter((l) =>
-                        e.locations.calendar_event_location?.find((cel) => cel == l.term_id)
-                    )
-                    .map((l) => l.name),
-                thumbnail: e.thumbnail,
+                id: event.ID,
+                title: event.post_title,
+                excerpt: event.post_excerpt,
+                start: new Date(event.starts),
+                end: new Date(event.ends),
+                location: eventLocation ? eventLocation.name : '',
+                thumbnail: event.thumbnail,
+                color: eventLocation ? eventLocation.color : Colors.dark.default.primaryContainer,
             };
 
             return a;
