@@ -1,6 +1,7 @@
 import Locales from '@/locales';
 import { Themes } from '@/styles';
-import { ENVIRONMENT, SPOOFED_DATE } from '@env';
+import 'dayjs/locale/en';
+import 'dayjs/locale/fi';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -45,7 +46,7 @@ export default function RootLayout() {
     return (
         <SafeAreaProvider>
             <PaperProvider theme={Themes['dark']['default']}>
-                <Stack initialRouteName='timetable'>
+                <Stack>
                     <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
                     <Stack.Screen name='+not-found' />
                 </Stack>

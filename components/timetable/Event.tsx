@@ -89,7 +89,7 @@ const Event = ({ title, location, start, end, color, thumbnail }: EventProps) =>
                     >{`${t('location')}: ${location}`}</Text>
                 )}
                 <Text variant='labelLarge' style={{ textAlign: 'center' }}>
-                    {timeString}
+                    {`${t('time')}: ${timeString}`}
                 </Text>
             </Surface>
         </Surface>
