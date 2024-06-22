@@ -15,21 +15,19 @@ export default function TabLayout() {
             <Tabs.Screen
                 name='index'
                 options={{
-                    title: t('home'),
-                    tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-                    ),
-                }}
-            />
-            <Tabs.Screen
-                name='timetable'
-                options={{
-                    title: t('timetable'),
                     tabBarIcon: ({ color, focused }) => (
                         <TabBarIcon
                             name={focused ? 'calendar' : 'calendar-outline'}
                             color={color}
                         />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='useless'
+                options={{
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />
                     ),
                 }}
             />
