@@ -8,9 +8,17 @@ interface DateSelectorProps {
     date: Date;
     next: () => void;
     previous: () => void;
+    nextVisible?: boolean;
+    previousVisible?: boolean;
 }
 
-const DateSelector = ({ date, next, previous }: DateSelectorProps) => {
+const DateSelector = ({
+    date,
+    next,
+    previous,
+    nextVisible = true,
+    previousVisible = true,
+}: DateSelectorProps) => {
     const theme = useTheme();
 
     return (
@@ -22,19 +30,21 @@ const DateSelector = ({ date, next, previous }: DateSelectorProps) => {
             }}
             elevation={0}
         >
-            <IconButton
-                icon='arrow-left'
-                style={{
-                    backgroundColor: theme.colors.purpleHighlight,
-                    borderRadius: 50,
-                    alignSelf: 'center',
-                    position: 'absolute',
-                    top: 0,
-                    left: 6,
-                    zIndex: 1,
-                }}
-                onPress={previous}
-            />
+            {previousVisible && (
+                <IconButton
+                    icon='arrow-left'
+                    style={{
+                        backgroundColor: theme.colors.purpleHighlight,
+                        borderRadius: 50,
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        top: 0,
+                        left: 6,
+                        zIndex: 1,
+                    }}
+                    onPress={previous}
+                />
+            )}
             <Surface
                 style={{
                     paddingVertical: 12,
@@ -46,19 +56,21 @@ const DateSelector = ({ date, next, previous }: DateSelectorProps) => {
             >
                 <Text variant='headlineSmall'>{`${dayjs(date).format('dddd DD/MM')}`}</Text>
             </Surface>
-            <IconButton
-                icon='arrow-right'
-                style={{
-                    backgroundColor: theme.colors.purpleHighlight,
-                    borderRadius: 50,
-                    alignSelf: 'center',
-                    position: 'absolute',
-                    top: 0,
-                    right: 6,
-                    zIndex: 1,
-                }}
-                onPress={next}
-            />
+            {nextVisible && (
+                <IconButton
+                    icon='arrow-right'
+                    style={{
+                        backgroundColor: theme.colors.purpleHighlight,
+                        borderRadius: 50,
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        top: 0,
+                        right: 6,
+                        zIndex: 1,
+                    }}
+                    onPress={next}
+                />
+            )}
         </Surface>
     );
 };

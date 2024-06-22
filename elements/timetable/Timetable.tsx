@@ -70,6 +70,8 @@ const Timetable = () => {
                         date={events[eventDayIndex][0].start}
                         next={next}
                         previous={previous}
+                        nextVisible={eventDayIndex < events.length - 1}
+                        previousVisible={eventDayIndex > 0}
                     />
                     <EventsBox events={events[eventDayIndex] ?? []} />
                 </>

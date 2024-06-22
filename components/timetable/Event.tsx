@@ -50,20 +50,22 @@ const Event = ({ title, location, start, end, color, thumbnail }: EventProps) =>
                     display: dayjs().isAfter(end) ? 'flex' : 'none', // Dim if event has ended
                 }}
             />
-            <Image
-                source={{ uri: thumbnail }}
-                resizeMode='cover'
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    height: '100%',
-                    width: '97%',
-                    justifyContent: 'center',
-                    borderTopRightRadius: 8,
-                    borderBottomRightRadius: 8,
-                }}
-            />
+            {thumbnail && (
+                <Image
+                    source={{ uri: thumbnail }}
+                    resizeMode='cover'
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        height: '100%',
+                        width: '97%',
+                        justifyContent: 'center',
+                        borderTopRightRadius: 8,
+                        borderBottomRightRadius: 8,
+                    }}
+                />
+            )}
             <View
                 style={{
                     position: 'absolute',
