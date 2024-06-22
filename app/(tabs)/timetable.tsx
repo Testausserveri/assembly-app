@@ -1,4 +1,4 @@
-import Timetable from '@/components/timetable/Timetable';
+import Timetable from '@/elements/timetable/Timetable';
 import { useTranslation } from 'react-i18next';
 import { Appbar, Surface, Text } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';

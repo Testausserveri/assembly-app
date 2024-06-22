@@ -1,7 +1,6 @@
-import DateSelector from './DateSelector';
 import { AssemblyEvent, getEvents } from '@/api/eventService';
-import EventsBox from '@/components/timetable/EventsBox';
-import TimetableHead from '@/components/timetable/TimetableHead';
+import DateSelector from '@/components/timetable/DateSelector';
+import EventsBox from '@/elements/timetable/EventsBox';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Surface } from 'react-native-paper';
