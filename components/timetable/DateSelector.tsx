@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/en';
 import 'dayjs/locale/fi';
 import weekday from 'dayjs/plugin/weekday';
-import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { IconButton, Surface, Text, useTheme } from 'react-native-paper';
 

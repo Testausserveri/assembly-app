@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import i18next from 'i18next';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
