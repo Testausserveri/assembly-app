@@ -13,6 +13,8 @@ const fonts = configureFonts({
         headlineMedium: { fontFamily: 'Gaba' },
         headlineSmall: { fontFamily: 'Gaba' },
         titleLarge: { fontFamily: 'Gaba' },
+        titleMedium: { fontFamily: 'Gaba' },
+        titleSmall: { fontFamily: 'Gaba' },
     },
 });
 
