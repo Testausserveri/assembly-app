@@ -30,7 +30,7 @@ i18n.use(initReactI18next).init({
 export default function RootLayout() {
     const [loaded] = useFonts({
         Gaba: require('../assets/fonts/Gaba-Super.otf'),
-        RobotoMono: require('../assets/fonts/RobotoMono-Bold.ttf'),
+        Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
     });
 
     useEffect(() => {
