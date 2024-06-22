@@ -1,3 +1,4 @@
+import DateSelector from './DateSelector';
 import { AssemblyEvent, getEvents } from '@/api/eventService';
 import EventsBox from '@/components/timetable/EventsBox';
 import TimetableHead from '@/components/timetable/TimetableHead';
@@ -66,10 +67,10 @@ const Timetable = () => {
                 <ActivityIndicator animating />
             ) : (
                 <>
-                    <TimetableHead
+                    <DateSelector
                         date={events[eventDayIndex][0].start}
-                        previous={previous}
                         next={next}
+                        previous={previous}
                     />
                     <EventsBox events={events[eventDayIndex] ?? []} />
                 </>
