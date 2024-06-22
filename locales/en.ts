@@ -4,5 +4,6 @@ export default {
         useless: 'Useless',
         timetable: 'Timetable',
         location: 'Location',
+        time: 'Time',
     },
 };
