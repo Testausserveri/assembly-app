@@ -1,7 +1,5 @@
 import Locales from '@/locales';
 import { Themes } from '@/styles';
-import 'dayjs/locale/en';
-import 'dayjs/locale/fi';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';

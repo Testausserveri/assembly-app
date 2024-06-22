@@ -25,7 +25,8 @@ const getEventTimeString = (start: Date, end: Date) => {
 
 const Event = ({ title, location, start, end, color, thumbnail }: EventProps) => {
     const timeString = getEventTimeString(start, end);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    dayjs.locale(i18n.language);
 
     return (
         <Surface

@@ -1,5 +1,9 @@
 import dayjs from 'dayjs';
+import 'dayjs/locale/en';
+import 'dayjs/locale/fi';
 import weekday from 'dayjs/plugin/weekday';
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
 import { IconButton, Surface, Text, useTheme } from 'react-native-paper';
 
 dayjs.extend(weekday);
@@ -20,6 +24,12 @@ const DateSelector = ({
     previousVisible = true,
 }: DateSelectorProps) => {
     const theme = useTheme();
+
+    const { i18n } = useTranslation();
+    dayjs.locale(i18n.language);
+
+    let title = dayjs(date).format('dddd DD/MM');
+    title = title.charAt(0).toUpperCase() + title.slice(1);
 
     return (
         <Surface
@@ -54,7 +64,7 @@ const DateSelector = ({
                     backgroundColor: theme.colors.primaryContainer,
                 }}
             >
-                <Text variant='headlineSmall'>{`${dayjs(date).format('dddd DD/MM')}`}</Text>
+                <Text variant='headlineSmall'>{title}</Text>
             </Surface>
             {nextVisible && (
                 <IconButton
