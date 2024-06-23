@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+import { ENVIRONMENT } from '@env';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { Image, View } from 'react-native';
@@ -40,17 +42,18 @@ const Event = ({ title, location, start, end, color, thumbnail }: EventProps) =>
                 backgroundColor: color,
             }}
         >
-            <View
-                style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-                    borderRadius: 8,
-                    zIndex: 10,
-                    display: dayjs().isAfter(end) ? 'flex' : 'none', // Dim if event has ended
-                }}
-            />
+            {dayjs().isAfter(end) && ENVIRONMENT !== 'development' && (
+                <View
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                        borderRadius: 8,
+                        zIndex: 10,
+                    }}
+                />
+            )}
             {thumbnail && (
                 <Image
                     source={{ uri: thumbnail }}
