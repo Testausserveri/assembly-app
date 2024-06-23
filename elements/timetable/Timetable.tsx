@@ -3,6 +3,7 @@ import DateSelector from '@/components/timetable/DateSelector';
 import EventsBox from '@/elements/timetable/EventsBox';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import { ActivityIndicator, Surface } from 'react-native-paper';
 
 const Timetable = () => {
@@ -51,10 +52,11 @@ const Timetable = () => {
     }, []);
 
     return (
-        <Surface
+        <View
             style={{
                 display: 'flex',
                 gap: 16,
+                flex: 1
             }}
         >
             {events.length === 0 ? (
@@ -68,10 +70,12 @@ const Timetable = () => {
                         nextVisible={eventDayIndex < events.length - 1}
                         previousVisible={eventDayIndex > 0}
                     />
-                    <EventsBox events={events[eventDayIndex] ?? []} />
+                    <View style={{flex: 1}}>
+                        <EventsBox events={events[eventDayIndex] ?? []} />
+                    </View>
                 </>
             )}
-        </Surface>
+        </View>
     );
 };
 
