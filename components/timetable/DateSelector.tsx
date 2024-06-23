@@ -56,33 +56,33 @@ const DateSelector = ({
                     />
                 </View>
             )}
+            {nextVisible && (
+                <View style={{zIndex: 1}}>
+                    <IconButton
+                        icon='arrow-right'
+                        style={{
+                            backgroundColor: theme.colors.purpleHighlight,
+                            borderRadius: 50,
+                            alignSelf: 'center',
+                            position: 'absolute',
+                            top: 0,
+                            right: 6,
+                        }}
+                        onPress={next}
+                    />
+                </View>
+            )}
             <Surface
                 style={{
                     paddingVertical: 12,
                     borderRadius: 8,
                     alignItems: 'center',
                     marginHorizontal: 24,
-                    zIndex: -1,
                     backgroundColor: theme.colors.primaryContainer,
                 }}
             >
                 <Text variant='headlineSmall'>{title}</Text>
             </Surface>
-            {nextVisible && (
-                <IconButton
-                    icon='arrow-right'
-                    style={{
-                        backgroundColor: theme.colors.purpleHighlight,
-                        borderRadius: 50,
-                        alignSelf: 'center',
-                        position: 'absolute',
-                        top: 0,
-                        right: 6,
-                        zIndex: 1,
-                    }}
-                    onPress={next}
-                />
-            )}
         </Surface>
     );
 };
