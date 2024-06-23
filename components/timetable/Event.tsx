@@ -1,5 +1,3 @@
-// eslint-disable-next-line
-import { ENVIRONMENT } from '@env';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { Image, View } from 'react-native';
@@ -42,7 +40,7 @@ const Event = ({ title, location, start, end, color, thumbnail }: EventProps) =>
                 backgroundColor: color,
             }}
         >
-            {dayjs().isAfter(end) && ENVIRONMENT !== 'development' && (
+            {dayjs().isAfter(end) && process.env.EXPO_PUBLIC_ENVIRONMENT !== 'development' && (
                 <View
                     style={{
                         position: 'absolute',

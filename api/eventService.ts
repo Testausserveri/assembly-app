@@ -1,6 +1,4 @@
 import { Colors } from '@/styles';
-// eslint-disable-next-line
-import { ENVIRONMENT } from '@env';
 
 type ApiEventLocation = {
     term_id: number;
@@ -81,7 +79,7 @@ type AssemblyEvent = {
 };
 
 const determineEvent = (): string => {
-    if (ENVIRONMENT === 'development') {
+    if (process.env.EXPO_PUBLIC_ENVIRONMENT === 'development') {
         return 'summer23';
     }
     const now = new Date();
