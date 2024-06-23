@@ -12,7 +12,6 @@ export default function AppBar({ title }: AppBarProps) {
     return (
         <Appbar
             mode='center-aligned'
-            elevated
             style={{
                 backgroundColor: theme.colors.background,
             }}
