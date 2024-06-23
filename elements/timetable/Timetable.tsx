@@ -54,10 +54,6 @@ const Timetable = () => {
         <Surface
             style={{
                 display: 'flex',
-                flexDirection: 'column',
-                alignContent: 'center',
-                justifyContent: 'center',
-                flex: 1,
                 gap: 16,
             }}
         >
