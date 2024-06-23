@@ -43,10 +43,9 @@ const Timetable = () => {
             setEvents(eventsGroupedByDay);
 
             // Set index so that the current day is shown
-            const now = dayjs().subtract(30, 'minutes').toDate(); // Subract 30 minutes to get a little bit of leeway
             const index = eventsGroupedByDay.findIndex(
-                (events) => events[events.length - 1].end.getTime() > now.getTime()
-            ); // If last event of the day has ended more than 30 minutes ago, it's not the current day
+                (events) => events[events.length - 1].end.getTime() > new Date().getTime()
+            ); // If last event of the day has ended, it's not the current day
             setEventDayIndex(index === -1 ? eventsGroupedByDay.length - 1 : index);
         });
     }, []);
