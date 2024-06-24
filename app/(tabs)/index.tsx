@@ -11,7 +11,7 @@ export default function TimetableScreen() {
     return (
         <Surface
             style={{
-                height: "100%",
+                height: '100%',
                 backgroundColor: theme.colors.background,
                 paddingTop: insets.top,
             }}

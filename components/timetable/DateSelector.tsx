@@ -41,7 +41,7 @@ const DateSelector = ({
             elevation={0}
         >
             {previousVisible && (
-                <View style={{zIndex: 1}}>
+                <View style={{ zIndex: 1 }}>
                     <IconButton
                         icon='arrow-left'
                         style={{
@@ -57,7 +57,7 @@ const DateSelector = ({
                 </View>
             )}
             {nextVisible && (
-                <View style={{zIndex: 1}}>
+                <View style={{ zIndex: 1 }}>
                     <IconButton
                         icon='arrow-right'
                         style={{
