@@ -1,23 +1,23 @@
-import { useTranslation } from 'react-i18next';
-import { Button } from 'react-native';
-import { Divider, Surface, Text } from 'react-native-paper';
+import AppBar from '@/elements/AppBar';
+import Timetable from '@/elements/timetable/Timetable';
+import { Surface } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default function HomeScreen() {
-    const { t } = useTranslation();
+export default function TimetableScreen() {
+    const theme = useTheme();
+    const insets = useSafeAreaInsets();
 
     return (
         <Surface
             style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 8,
-                padding: 16,
+                height: '100%',
+                backgroundColor: theme.colors.background,
+                paddingTop: insets.top,
             }}
         >
-            <Text>{t('home')}</Text>
-            <Divider />
-            <Button title={t('useless')} onPress={() => {}} />
+            <AppBar title='timetable' />
+            <Timetable />
         </Surface>
     );
 }

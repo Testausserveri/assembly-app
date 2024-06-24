@@ -1,10 +1,8 @@
 import { TabBar, TabBarIcon } from '@/components';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 export default function TabLayout() {
-    const { t } = useTranslation();
     return (
         <Tabs
             tabBar={(props) => <TabBar {...props} />}
@@ -15,18 +13,19 @@ export default function TabLayout() {
             <Tabs.Screen
                 name='index'
                 options={{
-                    title: t('home'),
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+                        <TabBarIcon
+                            name={focused ? 'calendar' : 'calendar-outline'}
+                            color={color}
+                        />
                     ),
                 }}
             />
             <Tabs.Screen
-                name='other'
+                name='useless'
                 options={{
-                    title: t('other'),
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'egg' : 'egg-outline'} color={color} />
+                        <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />
                     ),
                 }}
             />

@@ -1,9 +1,10 @@
+import LanguageSelector from '@/elements/LanguageSelector';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'react-native';
-import { Divider, Surface, Text } from 'react-native-paper';
+import { Divider, Surface, Text, useTheme } from 'react-native-paper';
 
 export default function HomeScreen() {
     const { t } = useTranslation();
+    const theme = useTheme();
 
     return (
         <Surface
@@ -13,11 +14,12 @@ export default function HomeScreen() {
                 justifyContent: 'center',
                 gap: 8,
                 padding: 16,
+                backgroundColor: theme.colors.background,
             }}
         >
-            <Text>{t('other')}</Text>
+            <Text>{t('home')}</Text>
             <Divider />
-            <Button title={t('other') + ' ' + t('useless')} onPress={() => {}} />
+            <LanguageSelector />
         </Surface>
     );
 }

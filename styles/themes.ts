@@ -2,31 +2,27 @@
  * Themes
  */
 import Colors from './colors';
-import {
-    DarkTheme as NavigationDarkTheme,
-    DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
-import { MD3DarkTheme, adaptNavigationTheme, configureFonts } from 'react-native-paper';
+import { configureFonts } from 'react-native-paper';
 
-const { DarkTheme } = adaptNavigationTheme({
-    reactNavigationLight: NavigationDefaultTheme,
-    reactNavigationDark: NavigationDarkTheme,
+const fonts = configureFonts({
+    config: {
+        displayLarge: { fontFamily: 'Gaba' },
+        displayMedium: { fontFamily: 'Gaba' },
+        displaySmall: { fontFamily: 'Gaba' },
+        headlineLarge: { fontFamily: 'Gaba' },
+        headlineMedium: { fontFamily: 'Gaba' },
+        headlineSmall: { fontFamily: 'Gaba' },
+        titleLarge: { fontFamily: 'Gaba' },
+        titleMedium: { fontFamily: 'Gaba' },
+        titleSmall: { fontFamily: 'Gaba' },
+    },
 });
-
-const fonts = configureFonts({ config: { fontFamily: 'SpaceMono' } });
-
-const BaseDarkTheme = {
-    ...DarkTheme,
-    ...MD3DarkTheme,
-    fonts,
-};
 
 const Themes = {
     dark: {
         default: {
-            ...BaseDarkTheme,
+            fonts,
             colors: {
-                ...BaseDarkTheme.colors,
                 ...Colors.dark.default,
             },
         },
