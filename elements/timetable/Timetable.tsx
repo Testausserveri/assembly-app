@@ -1,9 +1,9 @@
 import { AssemblyEvent, getEvents } from '@/api/eventService';
 import DateSelector from '@/components/timetable/DateSelector';
 import EventsBox from '@/elements/timetable/EventsBox';
-import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Surface } from 'react-native-paper';
+import { View } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 
 const Timetable = () => {
     const [events, setEvents] = useState<AssemblyEvent[][]>([]);
@@ -51,14 +51,11 @@ const Timetable = () => {
     }, []);
 
     return (
-        <Surface
+        <View
             style={{
                 display: 'flex',
-                flexDirection: 'column',
-                alignContent: 'center',
-                justifyContent: 'center',
-                flex: 1,
                 gap: 16,
+                flex: 1,
             }}
         >
             {events.length === 0 ? (
@@ -72,10 +69,12 @@ const Timetable = () => {
                         nextVisible={eventDayIndex < events.length - 1}
                         previousVisible={eventDayIndex > 0}
                     />
-                    <EventsBox events={events[eventDayIndex] ?? []} />
+                    <View style={{ flex: 1 }}>
+                        <EventsBox events={events[eventDayIndex] ?? []} />
+                    </View>
                 </>
             )}
-        </Surface>
+        </View>
     );
 };
 

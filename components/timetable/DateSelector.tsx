@@ -3,6 +3,7 @@ import 'dayjs/locale/en';
 import 'dayjs/locale/fi';
 import weekday from 'dayjs/plugin/weekday';
 import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import { IconButton, Surface, Text, useTheme } from 'react-native-paper';
 
 dayjs.extend(weekday);
@@ -40,19 +41,36 @@ const DateSelector = ({
             elevation={0}
         >
             {previousVisible && (
-                <IconButton
-                    icon='arrow-left'
-                    style={{
-                        backgroundColor: theme.colors.purpleHighlight,
-                        borderRadius: 50,
-                        alignSelf: 'center',
-                        position: 'absolute',
-                        top: 0,
-                        left: 6,
-                        zIndex: 1,
-                    }}
-                    onPress={previous}
-                />
+                <View style={{ zIndex: 1 }}>
+                    <IconButton
+                        icon='arrow-left'
+                        style={{
+                            backgroundColor: theme.colors.purpleHighlight,
+                            borderRadius: 50,
+                            alignSelf: 'center',
+                            position: 'absolute',
+                            top: 0,
+                            left: 6,
+                        }}
+                        onPress={previous}
+                    />
+                </View>
+            )}
+            {nextVisible && (
+                <View style={{ zIndex: 1 }}>
+                    <IconButton
+                        icon='arrow-right'
+                        style={{
+                            backgroundColor: theme.colors.purpleHighlight,
+                            borderRadius: 50,
+                            alignSelf: 'center',
+                            position: 'absolute',
+                            top: 0,
+                            right: 6,
+                        }}
+                        onPress={next}
+                    />
+                </View>
             )}
             <Surface
                 style={{
@@ -65,21 +83,6 @@ const DateSelector = ({
             >
                 <Text variant='headlineSmall'>{title}</Text>
             </Surface>
-            {nextVisible && (
-                <IconButton
-                    icon='arrow-right'
-                    style={{
-                        backgroundColor: theme.colors.purpleHighlight,
-                        borderRadius: 50,
-                        alignSelf: 'center',
-                        position: 'absolute',
-                        top: 0,
-                        right: 6,
-                        zIndex: 1,
-                    }}
-                    onPress={next}
-                />
-            )}
         </Surface>
     );
 };
