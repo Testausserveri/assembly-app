@@ -22,3 +22,8 @@ web-build/
 
 expo-env.d.ts
 # @end expo-cli
+
+package-lock.json
+package.json
+tsconfig.json
+yarn.lock
