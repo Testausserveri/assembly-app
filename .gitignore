@@ -23,7 +23,5 @@ web-build/
 expo-env.d.ts
 # @end expo-cli
 
-package-lock.json
-package.json
 yarn.lock
 .vscode
