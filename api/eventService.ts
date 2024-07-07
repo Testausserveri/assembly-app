@@ -79,7 +79,10 @@ type AssemblyEvent = {
 };
 
 const determineEvent = (): string => {
-    if (process.env.EXPO_PUBLIC_ENVIRONMENT === 'development') {
+    if (
+        process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
+        process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview'
+    ) {
         return 'summer23';
     }
     const now = new Date();
