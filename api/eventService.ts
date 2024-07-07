@@ -1,5 +1,4 @@
 import { Colors } from '@/styles';
-import {determineEvent, API_BASE_PATH} from './helper';
 
 type ApiEventLocation = {
     term_id: number;

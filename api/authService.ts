@@ -1,5 +1,3 @@
-import {determineEvent, API_BASE_PATH} from './helper';
-
 const API_BASE_PATH = process.env.LOGIN_URL;
 
 type Person = {
@@ -17,7 +15,7 @@ type Person = {
     user_level: PersonLevel;
     marketing_box_granted: boolean;
     profile_preferences: ProfilePreferences;
-    region: “asm”;
+    region: asm;
     opened_lootboxes_count: number;
 };
 
@@ -46,7 +44,7 @@ type ProfilePreferences = {
  *
  * @returns {Promise<Person>}
  */
-const logInUsernamePassword = async (login: string, password: string): Promise<Person> => {
+export const logInUsernamePassword = async (login: string, password: string): Promise<Person> => {
     try {
         const login_resp = await fetch(API_BASE_PATH + '/auth/local?region=asm',{
             method: 'post',
