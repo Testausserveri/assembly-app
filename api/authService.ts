@@ -39,4 +39,26 @@ type ProfilePreferences = {
     allowShowUsername: boolean;
 };
 
+/**
+ * This function returns a promise for a user logging in with a username and password
+ *
+ * @returns {Promise<Person>}
+ */
+const logInUsernamePassword = async (login: string, password: string): Promise<Person> => {
+    try {
+        const login_resp = await fetch(API_BASE_PATH + '/auth/local?region=asm',{
+            method: 'post',
+            body: JSON.stringify({
+                'login' : login,
+                'password' : password
+            })
+        });
+        if (!login_resp.ok) return [];
+        const person: Person = await login_resp.json();
 
+        return person;
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
+};
