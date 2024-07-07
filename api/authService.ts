@@ -1,5 +1,7 @@
 import {determineEvent, API_BASE_PATH} from './helper';
 
+const API_BASE_PATH = `https://wp.assembly.org/${determineEvent()}/index.php?rest_route=/api/v1`;
+
 type Person = {
     id: number;
     email: string | null;
