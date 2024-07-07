@@ -11,9 +11,9 @@
             }
         },
         "preview": {
-            "distribution": "internal",
+            "distribution": "internal"
             "env": {
-                "EXPO_PUBLIC_ENVIRONMENT": "development"
+                "EXPO_PUBLIC_ENVIRONMENT": "preview"
             }
         },
         "production": {}
