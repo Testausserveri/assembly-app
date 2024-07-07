@@ -10,7 +10,7 @@
         "splash": {
             "image": "./assets/images/splash.png",
             "resizeMode": "contain",
-            "backgroundColor": "#EDEDED"
+            "backgroundColor": "#191919"
         },
         "ios": {
             "supportsTablet": true
@@ -18,7 +18,7 @@
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
-                "backgroundColor": "#EDEDED"
+                "backgroundColor": "#191919"
             },
             "package": "com.testausserveri.assemblyapp"
         },
