@@ -1,3 +1,4 @@
+import { ProfileView } from '@/components/ProfileView';
 import LanguageSelector from '@/elements/LanguageSelector';
 import { useTranslation } from 'react-i18next';
 import { Divider, Surface, Text, useTheme } from 'react-native-paper';
@@ -20,6 +21,7 @@ export default function HomeScreen() {
             <Text>{t('home')}</Text>
             <Divider />
             <LanguageSelector />
+            <ProfileView />
         </Surface>
     );
 }
