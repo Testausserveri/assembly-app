@@ -8,7 +8,10 @@ interface EventsBoxProps {
 
 const EventsBox = ({ events }: EventsBoxProps) => {
     return (
-        <ScrollView style={{ paddingHorizontal: 30 }} contentContainerStyle={{ gap: 8 }}>
+        <ScrollView
+            style={{ paddingHorizontal: 30, paddingBottom: 8 }}
+            contentContainerStyle={{ gap: 8 }}
+        >
             {events.map((event) => (
                 <Event
                     key={event.id}

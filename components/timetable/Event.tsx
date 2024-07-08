@@ -1,4 +1,4 @@
-import { useFavorite } from '@/lib/hooks/useFavorites';
+import { useFavorite } from '@/hooks/useFavorite';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { Image, View } from 'react-native';
@@ -42,6 +42,7 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
                 borderRadius: 10,
                 backgroundColor: color,
             }}
+            elevation={0}
         >
             {dayjs().isAfter(end) &&
                 process.env.EXPO_PUBLIC_ENVIRONMENT !== 'development' &&
@@ -85,7 +86,7 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
                     backgroundColor: 'rgba(0, 0, 0, 0.75)',
                 }}
             />
-            <Surface style={{ padding: 16, width: '100%', alignItems: 'center' }}>
+            <View style={{ padding: 16, width: '100%', alignItems: 'center' }}>
                 <Text variant='titleMedium' style={{ textAlign: 'center' }}>
                     {title}
                 </Text>
@@ -98,10 +99,15 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
                 <Text variant='labelLarge' style={{ textAlign: 'center' }}>
                     {`${t('time')}: ${timeString}`}
                 </Text>
-            </Surface>
+            </View>
             <IconButton
                 onPress={() => toggleFavorite()}
                 icon={favorite ? 'heart' : 'heart-outline'}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                }}
             />
         </Surface>
     );
