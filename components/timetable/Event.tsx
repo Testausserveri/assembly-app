@@ -1,9 +1,11 @@
+import { useFavorite } from '@/hooks/useFavorite';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { Image, View } from 'react-native';
-import { Surface, Text } from 'react-native-paper';
+import { IconButton, Surface, Text } from 'react-native-paper';
 
 interface EventProps {
+    id: number;
     title: string;
     location: string;
     start: Date;
@@ -23,8 +25,9 @@ const getEventTimeString = (start: Date, end: Date) => {
     return `${startTime.format('HH:mm')} - ${endTime.format('HH:mm')}`;
 };
 
-const Event = ({ title, location, start, end, color, thumbnail }: EventProps) => {
+const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps) => {
     const timeString = getEventTimeString(start, end);
+    const { favorite, toggle: toggleFavorite } = useFavorite(id);
     const { t, i18n } = useTranslation();
     dayjs.locale(i18n.language);
 
@@ -39,6 +42,7 @@ const Event = ({ title, location, start, end, color, thumbnail }: EventProps) =>
                 borderRadius: 10,
                 backgroundColor: color,
             }}
+            elevation={0}
         >
             {dayjs().isAfter(end) &&
                 process.env.EXPO_PUBLIC_ENVIRONMENT !== 'development' &&
@@ -82,7 +86,7 @@ const Event = ({ title, location, start, end, color, thumbnail }: EventProps) =>
                     backgroundColor: 'rgba(0, 0, 0, 0.75)',
                 }}
             />
-            <Surface style={{ padding: 16, width: '100%', alignItems: 'center' }}>
+            <Surface elevation={0} style={{ padding: 16, width: '100%', alignItems: 'center' }}>
                 <Text variant='titleMedium' style={{ textAlign: 'center' }}>
                     {title}
                 </Text>
@@ -96,6 +100,19 @@ const Event = ({ title, location, start, end, color, thumbnail }: EventProps) =>
                     {`${t('time')}: ${timeString}`}
                 </Text>
             </Surface>
+            {dayjs().isBefore(start) ||
+                ((process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
+                    process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview') && (
+                    <IconButton
+                        onPress={() => toggleFavorite()}
+                        icon={favorite ? 'heart' : 'heart-outline'}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            right: 0,
+                        }}
+                    />
+                ))}
         </Surface>
     );
 };
