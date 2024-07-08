@@ -10,7 +10,11 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
+    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
+    "check:types": "tsc --noEmit",
+    "check:lint": "expo lint",
+    "check:format": "prettier --check \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
+    "check:test": "jest --bail --coverage"
   },
   "jest": {
     "preset": "jest-expo"
