@@ -13,7 +13,8 @@
             "backgroundColor": "#EDEDED"
         },
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "com.testausserveri.assemblyapp"
         },
         "android": {
             "adaptiveIcon": {
