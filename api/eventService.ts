@@ -79,11 +79,14 @@ type AssemblyEvent = {
 };
 
 const determineEvent = (): string => {
-    if (process.env.EXPO_PUBLIC_ENVIRONMENT === 'development') {
+    if (
+        process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
+        process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview'
+    ) {
         return 'summer23';
     }
     const now = new Date();
-    const julyFirst = new Date(now.getFullYear(), 7, 1);
+    const julyFirst = new Date(now.getFullYear(), 6, 1);
     const shortYear = now.getFullYear().toString().slice(-2);
 
     if (now >= julyFirst) {

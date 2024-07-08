@@ -40,18 +40,20 @@ const Event = ({ title, location, start, end, color, thumbnail }: EventProps) =>
                 backgroundColor: color,
             }}
         >
-            {dayjs().isAfter(end) && process.env.EXPO_PUBLIC_ENVIRONMENT !== 'development' && (
-                <View
-                    style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.75)',
-                        borderRadius: 8,
-                        zIndex: 10,
-                    }}
-                />
-            )}
+            {dayjs().isAfter(end) &&
+                process.env.EXPO_PUBLIC_ENVIRONMENT !== 'development' &&
+                process.env.EXPO_PUBLIC_ENVIRONMENT !== 'preview' && (
+                    <View
+                        style={{
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                            borderRadius: 8,
+                            zIndex: 10,
+                        }}
+                    />
+                )}
             {thumbnail && (
                 <Image
                     source={{ uri: thumbnail }}
