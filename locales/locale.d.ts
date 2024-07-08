@@ -6,15 +6,21 @@ type Locale = {
         auth: {
             joinUs: string;
             email: string;
+            password: string;
             registerWithEmail: string;
             registerNewAccount: string;
             acceptTerms: string;
             tosUrl: string;
             privacyUrl: string;
+            forgotPasswordUrl: string;
+            forgotPassword: string;
             dontHaveAnAccountYet: string;
             goToSignUp: string;
             alreadyHaveAnAccount: string;
             goToLogin: string;
+            login: string;
+            register: string;
+            loginUsingAnotherWay: string;
         };
         location: string;
         time: string;

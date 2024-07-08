@@ -1,31 +1,55 @@
-// @ts-ignore
-import Logo from '@/assets/images/logo.png';
-import Checkbox from '@/components/forms/Checkbox';
+import LoginAcceptTerms from '@/components/login/LoginAcceptTerms';
+import LoginFooterStageNavigation from '@/components/login/LoginFooterStageNavigation';
+import LoginLogo from '@/components/login/LoginLogo';
 import LoginOptionButtons from '@/components/login/LoginOptionButtons';
+import LoginTextHeader from '@/components/login/LoginTextHeader';
 import LoadingScreen from '@/elements/LoadingScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Image } from 'expo-image';
 import * as WebBrowser from 'expo-web-browser';
 import { t } from 'i18next';
-import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
-import { Trans } from 'react-i18next';
-import { ColorValue, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React, { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ColorValue, StyleSheet, Text, TextInput, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function Login() {
-    const [stage, setStage] = useState<'login' | 'register'>('login');
+    const [stage, setStage] = useState<'login' | 'register' | 'register_email' | 'login_email'>(
+        'login'
+    );
     const [loading, setLoading] = useState(false);
     const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
+    const [bottomHeight, setBottomHeight] = useState<number>(0);
 
-    const isFirstLoadRef = useRef<boolean>(true);
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+
+    const onEmailLogin = useCallback(async () => {
+        // TODO: implement login
+    }, []);
+
+    const onEmailRegister = useCallback(async () => {
+        // TODO: implement register
+    }, []);
+
+    const onOAuthLogin = useCallback(async (provider: 'google' | 'facebook' | 'twitch') => {
+        // TODO: implement OAuth login
+    }, []);
+
+    const shouldSkipLoadingScreen = useRef<boolean>(true);
     useEffect(() => {
-        // Do not show loading screen on first load.
-        if (isFirstLoadRef.current) {
-            isFirstLoadRef.current = false;
+        // Do not show loading screen on first load and when navigating away from register_email.
+        if (shouldSkipLoadingScreen.current) {
+            shouldSkipLoadingScreen.current = false;
             return;
         }
 
+        if (stage === 'register_email' || stage === 'login_email') {
+            shouldSkipLoadingScreen.current = true;
+        }
+
         // Reset the accept terms checkbox when switching between login and register.
-        setAcceptTerms(false);
+        if (stage === 'login') {
+            setAcceptTerms(false);
+        }
 
         // UX: Add loading between login->register transition and vice versa, because
         // the views are very similar and the user might not notice the change.
@@ -42,29 +66,43 @@ export default function Login() {
         color: ColorValue;
         textColor?: ColorValue;
         icon: ReactNode;
-    }[] = useMemo(() => [
-        {
-            name: 'Google',
-            color: 'rgb(234, 67, 53)',
-            icon: <Ionicons name={'logo-google'} size={24} color={'white'} />,
-        },
-        {
-            name: 'Facebook',
-            color: 'rgb(76, 113, 190)',
-            icon: <Ionicons name={'logo-facebook'} size={24} color={'white'} />,
-        },
-        {
-            name: 'Twitch',
-            color: 'rgb(100, 65, 165)',
-            icon: <Ionicons name={'logo-twitch'} size={24} color={'white'} />,
-        },
-        {
-            name: stage === 'login' ? t('auth.email') : t('auth.registerWithEmail'),
-            color: 'rgb(98,98,98)',
-            textColor: 'white',
-            icon: <Ionicons name={'mail'} size={24} color={'white'} />,
-        },
-    ], [stage]);
+        onPress?: () => void;
+    }[] = useMemo(
+        () => [
+            {
+                name: 'Google',
+                color: 'rgb(234, 67, 53)',
+                icon: <Ionicons name={'logo-google'} size={24} color={'white'} />,
+                onPress: () => onOAuthLogin('google'),
+            },
+            {
+                name: 'Facebook',
+                color: 'rgb(76, 113, 190)',
+                icon: <Ionicons name={'logo-facebook'} size={24} color={'white'} />,
+                onPress: () => onOAuthLogin('facebook'),
+            },
+            {
+                name: 'Twitch',
+                color: 'rgb(100, 65, 165)',
+                icon: <Ionicons name={'logo-twitch'} size={24} color={'white'} />,
+                onPress: () => onOAuthLogin('twitch'),
+            },
+            {
+                name: stage === 'login' ? t('auth.email') : t('auth.registerWithEmail'),
+                color: 'rgb(98,98,98)',
+                textColor: 'white',
+                icon: <Ionicons name={'mail'} size={24} color={'white'} />,
+                onPress: () => {
+                    if (stage === 'register') {
+                        setStage('register_email');
+                    } else if (stage === 'login') {
+                        setStage('login_email');
+                    }
+                },
+            },
+        ],
+        [onOAuthLogin, stage]
+    );
 
     if (loading) {
         return <LoadingScreen />;
@@ -77,7 +115,7 @@ export default function Login() {
                 flex: 1,
             }}
         >
-            <ScrollView
+            <KeyboardAwareScrollView
                 contentContainerStyle={{
                     display: 'flex',
                     flex: 1,
@@ -85,52 +123,20 @@ export default function Login() {
             >
                 <View
                     style={{
-                        flex: 1,
                         alignItems: 'center',
                         justifyContent: 'center',
                         display: 'flex',
                         padding: 32,
+                        flex: 1,
                     }}
                 >
-                    {stage === 'login' ? (
-                        <Image
-                            source={Logo}
-                            contentFit={'contain'}
-                            style={{
-                                width: '100%',
-                                flex: 1,
-                                maxWidth: '85%',
-                            }}
-                        />
+                    {stage === 'login' || stage === 'login_email' ? (
+                        <LoginLogo />
                     ) : (
-                        <View
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: 16,
-                            }}
-                        >
-                            <Text
-                                style={{
-                                    color: '#FFF',
-                                    fontSize: 36,
-                                    fontWeight: 'bold',
-                                    fontFamily: 'Gaba',
-                                }}
-                            >
-                                {t('auth.joinUs').toUpperCase()}
-                            </Text>
-                            <Text
-                                style={{
-                                    color: '#9d9d9d',
-                                    fontSize: 24,
-                                    fontWeight: 'bold',
-                                    fontFamily: 'Roboto',
-                                }}
-                            >
-                                {t('auth.registerNewAccount')}
-                            </Text>
-                        </View>
+                        <LoginTextHeader
+                            title={t('auth.joinUs').toUpperCase()}
+                            subtitle={t('auth.registerNewAccount')}
+                        />
                     )}
                 </View>
                 <View
@@ -139,100 +145,103 @@ export default function Login() {
                         marginHorizontal: 32,
                         gap: 16,
                         alignItems: 'center',
-                        justifyContent: 'center',
+                        height:
+                            stage === 'register_email' || stage === 'login_email'
+                                ? bottomHeight
+                                : undefined,
                     }}
+                    onLayout={(e) => setBottomHeight(e.nativeEvent.layout.height)}
                 >
-                    {stage === 'register' ? (
-                        <Checkbox value={acceptTerms} onChange={(value) => setAcceptTerms(value)}>
-                            <Text
-                                style={{
-                                    color: '#FFF',
-                                    fontSize: 16,
-                                    padding: 8,
-                                    lineHeight: 24,
-                                    textAlign: 'center',
-                                }}
-                            >
-                                <Trans
-                                    i18nKey={'auth.acceptTerms'}
-                                    components={{
-                                        tos: (
-                                            <Text
-                                                style={{
-                                                    color: '#FFF',
-                                                    textDecorationLine: 'underline',
-                                                }}
-                                                onPress={() => {
-                                                    WebBrowser.openBrowserAsync(
-                                                        t('auth.tosUrl')
-                                                    ).catch();
-                                                }}
-                                            />
-                                        ),
-                                        privacy: (
-                                            <Text
-                                                style={{
-                                                    color: '#FFF',
-                                                    textDecorationLine: 'underline',
-                                                }}
-                                                onPress={() => {
-                                                    WebBrowser.openBrowserAsync(
-                                                        t('auth.privacyUrl')
-                                                    ).catch();
-                                                }}
-                                            />
-                                        ),
-                                    }}
-                                />
-                            </Text>
-                        </Checkbox>
+                    {stage === 'register' || stage === 'register_email' ? (
+                        <LoginAcceptTerms
+                            acceptTerms={acceptTerms}
+                            setAcceptTerms={setAcceptTerms}
+                        />
                     ) : null}
-                    <LoginOptionButtons entries={entries} />
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <TouchableOpacity
+                    {stage === 'register_email' || stage === 'login_email' ? (
+                        <View
                             style={{
-                                padding: 16,
-                                alignItems: 'center',
-                                gap: 10,
-                            }}
-                            onPress={() => {
-                                if (stage === 'login') {
-                                    setStage('register');
-                                } else if (stage === 'register') {
-                                    setStage('login');
-                                }
+                                flexDirection: 'column',
+                                width: '100%',
+                                gap: 24,
                             }}
                         >
-                            <Text
+                            <TextInput
                                 style={{
-                                    color: '#FFF',
-                                    fontWeight: 'bold',
-                                    fontSize: 16,
+                                    backgroundColor: '#FFF',
+                                    borderStyle: 'solid',
+                                    borderColor: '#000',
+                                    borderWidth: StyleSheet.hairlineWidth * 3,
+                                    height: 50,
+                                    padding: 16,
                                 }}
-                            >
-                                {stage === 'login'
-                                    ? t('auth.dontHaveAnAccountYet')
-                                    : t('auth.alreadyHaveAnAccount')}
-                            </Text>
-                            <Text
+                                placeholder={t('auth.email')}
+                                placeholderTextColor={'#939292'}
+                                onChangeText={(value) => setEmail(value)}
+                                value={email}
+                                autoComplete={'email'}
+                            />
+                            <TextInput
                                 style={{
-                                    color: '#FFF',
-                                    textDecorationLine: 'underline',
+                                    backgroundColor: '#FFF',
+                                    borderStyle: 'solid',
+                                    borderColor: '#000',
+                                    borderWidth: StyleSheet.hairlineWidth * 3,
+                                    height: 50,
+                                    padding: 16,
+                                }}
+                                placeholder={t('auth.password')}
+                                placeholderTextColor={'#939292'}
+                                onChangeText={(value) => setPassword(value)}
+                                value={password}
+                                autoComplete={
+                                    stage === 'register_email' ? 'new-password' : 'current-password'
+                                }
+                                secureTextEntry={true}
+                            />
+                            <LoginOptionButtons
+                                entries={[
+                                    {
+                                        name:
+                                            stage === 'register_email'
+                                                ? t('auth.register')
+                                                : t('auth.login'),
+                                        color: 'rgb(98,98,98)',
+                                        textColor: '#FFF',
+                                        icon: <Ionicons name={'mail'} size={24} color={'white'} />,
+                                        onPress: () =>
+                                            stage === 'register_email'
+                                                ? onEmailRegister()
+                                                : onEmailLogin(),
+                                    },
+                                ]}
+                            />
 
-                                    fontSize: 16,
-                                }}
-                            >
-                                {stage === 'login' ? t('auth.goToSignUp') : t('auth.goToLogin')}
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+                            {stage === 'login_email' ? (
+                                <Text
+                                    style={{
+                                        color: '#FFF',
+                                        textDecorationLine: 'underline',
+                                        fontSize: 16,
+                                        textAlign: 'center',
+                                    }}
+                                    onPress={() => {
+                                        WebBrowser.openBrowserAsync(
+                                            t('auth.forgotPasswordUrl')
+                                        ).catch();
+                                    }}
+                                >
+                                    {t('auth.forgotPassword')}
+                                </Text>
+                            ) : null}
+                        </View>
+                    ) : (
+                        <LoginOptionButtons entries={entries} />
+                    )}
+
+                    <LoginFooterStageNavigation stage={stage} setStage={setStage} />
                 </View>
-            </ScrollView>
+            </KeyboardAwareScrollView>
         </View>
     );
 }

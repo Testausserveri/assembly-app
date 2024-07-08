@@ -1,4 +1,4 @@
-export default {
+const locale: Locale = {
     translation: {
         home: 'Koti',
         timetable: 'Aikataulu',
@@ -7,12 +7,22 @@ export default {
         auth: {
             joinUs: 'Liity mukaan',
             email: 'Sähköposti',
+            password: 'Salasana',
             registerWithEmail: 'Rekisteröidy sähköpostilla',
             registerNewAccount: 'Rekisteröi uusi käyttäjä',
             acceptTerms:
                 'Hyväksyn <tos>käyttöehdot</tos> ja olen lukenut <privacy>tietosuojaselosteen</privacy>.',
             tosUrl: 'https://assembly.org/terms-of-service',
             privacyUrl: 'https://assembly.org/privacy',
+            forgotPasswordUrl: 'https://assembly.org/forgot-password',
+            forgotPassword: 'Unohditko salasanasi?',
+            login: 'Kirjaudu sisään',
+            register: 'Rekisteröidy',
+            loginUsingAnotherWay: 'Kirjaudu käyttäen toista tapaa',
+            dontHaveAnAccountYet: 'Ei tiliä vielä?',
+            goToSignUp: 'Rekisteröidy!',
+            alreadyHaveAnAccount: 'Onko sinulla jo tili?',
+            goToLogin: 'Kirjautumissivulle',
         },
         time: 'Aika',
         'select-language': 'Valitse kieli',
@@ -22,3 +32,5 @@ export default {
         'error-lang-change': 'Virhe kielen vaihdossa',
     },
 };
+
+export default locale;

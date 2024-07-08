@@ -10,6 +10,7 @@ export default function LoginOptionButtons({
         color: ColorValue;
         textColor?: ColorValue;
         icon: ReactNode;
+        onPress?: () => void;
     }[];
 }) {
     return entries.map((item, index) => (
@@ -24,6 +25,7 @@ export default function LoginOptionButtons({
                 borderWidth: StyleSheet.hairlineWidth * 3,
             }}
             activeOpacity={0.6}
+            onPress={item.onPress}
         >
             <View
                 style={{
