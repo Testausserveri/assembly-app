@@ -1,6 +1,5 @@
 import { AssemblyEvent } from '@/api/eventService';
 import Event from '@/components/timetable/Event';
-import React from 'react';
 import { ScrollView } from 'react-native';
 
 interface EventsBoxProps {
@@ -13,6 +12,7 @@ const EventsBox = ({ events }: EventsBoxProps) => {
             {events.map((event) => (
                 <Event
                     key={event.id}
+                    id={event.id}
                     title={event.title}
                     location={event.location}
                     start={event.start}
