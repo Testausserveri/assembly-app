@@ -86,7 +86,7 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
                     backgroundColor: 'rgba(0, 0, 0, 0.75)',
                 }}
             />
-            <View style={{ padding: 16, width: '100%', alignItems: 'center' }}>
+            <Surface elevation={0} style={{ padding: 16, width: '100%', alignItems: 'center' }}>
                 <Text variant='titleMedium' style={{ textAlign: 'center' }}>
                     {title}
                 </Text>
@@ -99,16 +99,20 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
                 <Text variant='labelLarge' style={{ textAlign: 'center' }}>
                     {`${t('time')}: ${timeString}`}
                 </Text>
-            </View>
-            <IconButton
-                onPress={() => toggleFavorite()}
-                icon={favorite ? 'heart' : 'heart-outline'}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                }}
-            />
+            </Surface>
+            {dayjs().isBefore(start) ||
+                ((process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
+                    process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview') && (
+                    <IconButton
+                        onPress={() => toggleFavorite()}
+                        icon={favorite ? 'heart' : 'heart-outline'}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            right: 0,
+                        }}
+                    />
+                ))}
         </Surface>
     );
 };
