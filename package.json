@@ -14,7 +14,7 @@
     "check:types": "tsc --noEmit",
     "check:lint": "expo lint",
     "check:format": "prettier --check \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
-    "check:test": "jest --bail --coverage"
+    "check:test": "jest --bail --ci"
   },
   "jest": {
     "preset": "jest-expo"
