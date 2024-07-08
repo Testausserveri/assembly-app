@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { Image, View } from 'react-native';
-import { Surface, Text } from 'react-native-paper';
+import { IconButton, Surface, Text } from 'react-native-paper';
 
 interface EventProps {
     title: string;
@@ -10,6 +10,7 @@ interface EventProps {
     end: Date;
     color: string;
     thumbnail: string;
+    favorite?: boolean;
 }
 
 const getEventTimeString = (start: Date, end: Date) => {
@@ -23,7 +24,7 @@ const getEventTimeString = (start: Date, end: Date) => {
     return `${startTime.format('HH:mm')} - ${endTime.format('HH:mm')}`;
 };
 
-const Event = ({ title, location, start, end, color, thumbnail }: EventProps) => {
+const Event = ({ title, location, start, end, color, thumbnail, favorite }: EventProps) => {
     const timeString = getEventTimeString(start, end);
     const { t, i18n } = useTranslation();
     dayjs.locale(i18n.language);
@@ -96,6 +97,7 @@ const Event = ({ title, location, start, end, color, thumbnail }: EventProps) =>
                     {`${t('time')}: ${timeString}`}
                 </Text>
             </Surface>
+            <IconButton icon={favorite ? 'heart' : 'heart-outline'} />
         </Surface>
     );
 };
