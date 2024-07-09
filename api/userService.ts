@@ -1,4 +1,34 @@
-import { ProfileData } from '@/components/GlobalStateProvider';
+export interface ProfileData {
+    id: number;
+    email: string;
+    phone?: string;
+    created_at: string;
+    first_name?: string;
+    last_name?: string;
+    status: number;
+    verified_at?: string;
+    extra: unknown;
+    username?: string;
+    user_level: number;
+    is_banned: boolean;
+    profile_preferences: ProfilePreferences;
+    telia_linked_at?: string;
+    marketing_box_granted: boolean;
+    region: string;
+    opened_lootboxes_count: number;
+    balance: number;
+    social_login: boolean;
+}
+
+interface ProfilePreferences {
+    coins: boolean;
+    realName: boolean;
+    memberSince: boolean;
+    shoutTrophy: boolean;
+    questionTrophy: boolean;
+    allowShowUsername: boolean;
+    openedLootboxesCount: boolean;
+}
 
 const opts = (token?: string, body?: unknown) => ({
     method: 'POST',
@@ -22,7 +52,6 @@ export async function signupRequest(email: string, password: string) {
 
     const response = await fetch(url, opts(undefined, { email, password, region: 'asm' }));
     const data = await response.json();
-    console.log(data);
     return {
         profile: data as ProfileData,
         token: response.headers.get('x-auth-token')!,

@@ -1,5 +1,5 @@
-import { ProfileView } from '@/components/ProfileView';
 import LanguageSelector from '@/elements/LanguageSelector';
+import { ProfileView } from '@/elements/user/ProfileView';
 import { useTranslation } from 'react-i18next';
 import { Divider, Surface, Text, useTheme } from 'react-native-paper';
 

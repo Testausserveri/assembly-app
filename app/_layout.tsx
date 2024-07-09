@@ -1,4 +1,4 @@
-import { GlobalStateProvider } from '@/components/GlobalStateProvider';
+import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
 import Locales from '@/locales';
 import { Themes } from '@/styles';
 import { useFonts } from 'expo-font';
