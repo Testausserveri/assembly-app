@@ -24,7 +24,7 @@ export function ProfileView() {
                 <Text>
                     {profile.first_name && profile.last_name
                         ? `${profile.first_name} ${profile.last_name}`
-                        : 'No email set'}
+                        : 'No name set'}
                 </Text>
                 <Text>{profile.email ? `Email: ${profile.email}` : 'No email set'}</Text>
                 <Text>{profile.phone ? `Phone: ${profile.email}` : 'No phone number set'}</Text>
