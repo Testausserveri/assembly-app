@@ -1,5 +1,5 @@
 import { useGlobalState } from './GlobalStateProvider';
-import { loginRequest, signupRequest } from '@/api/user';
+import { loginRequest, signupRequest } from '@/api/userService';
 import { useState } from 'react';
 import { View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';

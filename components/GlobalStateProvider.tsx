@@ -1,8 +1,5 @@
-import { signup } from '@/api/user';
 import {
-    Dispatch,
     PropsWithChildren,
-    SetStateAction,
     createContext,
     useContext,
     useState,
