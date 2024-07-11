@@ -3,23 +3,13 @@ import DateSelector from '@/components/timetable/DateSelector';
 import EventsBox from '@/elements/timetable/EventsBox';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import PagerView from 'react-native-pager-view';
 import { ActivityIndicator } from 'react-native-paper';
 
 const Timetable = () => {
     const [events, setEvents] = useState<AssemblyEvent[][]>([]);
-    const [eventDayIndex, setEventDayIndex] = useState(0);
 
-    const previous = () => {
-        if (eventDayIndex > 0) {
-            setEventDayIndex(eventDayIndex - 1);
-        }
-    };
-
-    const next = () => {
-        if (eventDayIndex < events.length - 1) {
-            setEventDayIndex(eventDayIndex + 1);
-        }
-    };
+    let currentDay = 0;
 
     useEffect(() => {
         getEvents().then((eventRes) => {
@@ -46,33 +36,42 @@ const Timetable = () => {
             const index = eventsGroupedByDay.findIndex(
                 (events) => events[events.length - 1].end.getTime() > new Date().getTime()
             ); // If last event of the day has ended, it's not the current day
-            setEventDayIndex(index === -1 ? eventsGroupedByDay.length - 1 : index);
+            currentDay = index === -1 ? eventsGroupedByDay.length - 1 : index;
         });
     }, []);
 
     return (
-        <View
-            style={{
-                display: 'flex',
-                gap: 16,
-                flex: 1,
-            }}
-        >
+        <View style={{ flex: 1 }}>
             {events.length === 0 ? (
                 <ActivityIndicator animating />
             ) : (
-                <>
-                    <DateSelector
-                        date={events[eventDayIndex][0].start}
-                        next={next}
-                        previous={previous}
-                        nextVisible={eventDayIndex < events.length - 1}
-                        previousVisible={eventDayIndex > 0}
-                    />
-                    <View style={{ flex: 1 }}>
-                        <EventsBox events={events[eventDayIndex] ?? []} />
-                    </View>
-                </>
+                <PagerView
+                    initialPage={currentDay}
+                    layoutDirection='ltr'
+                    orientation='horizontal'
+                    style={{ flex: 1 }}
+                >
+                    {events.map((day, index) => (
+                        <View
+                            key={index}
+                            collapsable={false}
+                            style={{
+                                display: 'flex',
+                                gap: 16,
+                                flex: 1,
+                            }}
+                        >
+                            <DateSelector
+                                date={day[0].start}
+                                nextVisible={index < events.length - 1}
+                                previousVisible={index > 0}
+                            />
+                            <View style={{ flex: 1 }}>
+                                <EventsBox events={day ?? []} />
+                            </View>
+                        </View>
+                    ))}
+                </PagerView>
             )}
         </View>
     );

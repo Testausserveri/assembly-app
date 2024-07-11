@@ -10,19 +10,11 @@ dayjs.extend(weekday);
 
 interface DateSelectorProps {
     date: Date;
-    next: () => void;
-    previous: () => void;
     nextVisible?: boolean;
     previousVisible?: boolean;
 }
 
-const DateSelector = ({
-    date,
-    next,
-    previous,
-    nextVisible = true,
-    previousVisible = true,
-}: DateSelectorProps) => {
+const DateSelector = ({ date, nextVisible = true, previousVisible = true }: DateSelectorProps) => {
     const theme = useTheme();
 
     const { i18n } = useTranslation();
@@ -52,7 +44,6 @@ const DateSelector = ({
                             top: 0,
                             left: 6,
                         }}
-                        onPress={previous}
                     />
                 </View>
             )}
@@ -68,7 +59,6 @@ const DateSelector = ({
                             top: 0,
                             right: 6,
                         }}
-                        onPress={next}
                     />
                 </View>
             )}
