@@ -13,7 +13,7 @@ export default function AppBar({ title }: AppBarProps) {
         <Appbar
             mode='center-aligned'
             style={{
-                backgroundColor: theme.colors.background,
+                backgroundColor: 'transparent',
             }}
         >
             <Appbar.Content title={t(title)} />
