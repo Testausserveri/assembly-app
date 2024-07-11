@@ -1,3 +1,4 @@
+import { schedulePushNotification, useLocalNotification } from './useLocalNotification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 
@@ -34,10 +35,12 @@ const saveFavorites = async (favorites: number[]) => {
  * Hook to manage favorite state for a given eventId.
  *
  * @param id - The ID of the event to track favorite state for.
+ * @param eventTitle - The title of the event.
  * @returns An object containing the current favorite state and a function to toggle the favorite state.
  */
-export const useFavorite = (id: number) => {
+export const useFavorite = (id: number, eventTitle: string, start: Date) => {
     const [favorite, setFavorite] = useState(false);
+    useLocalNotification();
 
     useEffect(() => {
         getFavorites().then((favorites) => {
@@ -50,6 +53,7 @@ export const useFavorite = (id: number) => {
 
         if (!favorite) {
             favorites.push(id);
+            schedulePushNotification(eventTitle, start);
         } else {
             favorites = favorites.filter((f) => f !== id);
         }

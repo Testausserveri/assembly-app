@@ -27,7 +27,7 @@ const getEventTimeString = (start: Date, end: Date) => {
 
 const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps) => {
     const timeString = getEventTimeString(start, end);
-    const { favorite, toggle: toggleFavorite } = useFavorite(id);
+    const { favorite, toggle: toggleFavorite } = useFavorite(id, title, start);
     const { t, i18n } = useTranslation();
     dayjs.locale(i18n.language);
 

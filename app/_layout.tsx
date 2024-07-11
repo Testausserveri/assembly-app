@@ -1,6 +1,7 @@
 import Locales from '@/locales';
 import { Themes } from '@/styles';
 import { useFonts } from 'expo-font';
+import * as Notifications from 'expo-notifications';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import i18n from 'i18next';
@@ -23,6 +24,14 @@ i18n.use(initReactI18next).init({
     interpolation: {
         escapeValue: false, // not needed for react as it escapes by default
     },
+});
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: false,
+    }),
 });
 
 export default function RootLayout() {
