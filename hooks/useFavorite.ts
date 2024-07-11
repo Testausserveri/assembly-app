@@ -48,10 +48,10 @@ export const useFavorite = (id: number) => {
     const toggle = async () => {
         let favorites = await getFavorites();
 
-        if (favorite) {
+        if (!favorite) {
             favorites.push(id);
         } else {
-            favorites.filter((f) => f !== id);
+            favorites = favorites.filter((f) => f !== id);
         }
 
         saveFavorites(favorites);
