@@ -9,5 +9,6 @@ export default {
         english: 'English',
         'success-lang-change': 'Language changed successfully',
         'error-lang-change': 'Error changing language',
+        'event-starting-15': 'Event is starting in 15 minutes',
     },
 };

@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import { t } from 'i18next';
 import { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 
@@ -64,10 +65,10 @@ export const schedulePushNotification = async (eventTitle: string, start: Date) 
         content: {
             title: `${eventTitle}`,
             subtitle: '',
-            body: 'The event is starting in 15 minutes',
+            body: t('event-starting-15'),
         },
         trigger: {
-            seconds: time_difference,
+            seconds: 1,
         },
     });
 };
