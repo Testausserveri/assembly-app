@@ -2,7 +2,7 @@ import LanguageSelector from '@/elements/LanguageSelector';
 import { useTranslation } from 'react-i18next';
 import { Divider, Surface, Text, useTheme } from 'react-native-paper';
 
-export default function HomeScreen() {
+export default function MapScreen() {
     const { t } = useTranslation();
     const theme = useTheme();
 
@@ -17,9 +17,7 @@ export default function HomeScreen() {
                 backgroundColor: theme.colors.background,
             }}
         >
-            <Text>{t('home')}</Text>
-            <Divider />
-            <LanguageSelector />
+            <Text>{t('map')}</Text>
         </Surface>
     );
 }

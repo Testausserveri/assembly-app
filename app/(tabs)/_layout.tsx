@@ -22,10 +22,43 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name='useless'
+                name='map'
                 options={{
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />
+                        <TabBarIcon
+                            name={focused ? 'map' : 'map-outline'}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='lootbox'
+                options={{
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon
+                            name={focused ? 'cube' : 'cube-outline'}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='info'
+                options={{
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon
+                            name={focused ? 'information-circle' : 'information-circle-outline'}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='user'
+                options={{
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon name={focused ? 'person-circle' : 'person-circle-outline'} color={color} />
                     ),
                 }}
             />

@@ -2,6 +2,11 @@ export default {
     translation: {
         home: 'Koti',
         timetable: 'Aikataulu',
+        info: 'Info',
+        lootbox: 'Lootbox',
+        loot: 'Loot',
+        map: 'Kartta',
+        user: 'Käyttäjä',
         location: 'Sijainti',
         time: 'Aika',
         'select-language': 'Valitse kieli',

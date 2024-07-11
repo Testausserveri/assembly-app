@@ -1,10 +1,12 @@
-import AppBar from '@/elements/AppBar';
 import Timetable from '@/elements/timetable/Timetable';
 import { Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Title from '@/components/lootbox/Title'
+import { useTranslation } from 'react-i18next';
 
 export default function TimetableScreen() {
+    const { t } = useTranslation();
     const theme = useTheme();
     const insets = useSafeAreaInsets();
 
@@ -16,7 +18,7 @@ export default function TimetableScreen() {
                 paddingTop: insets.top,
             }}
         >
-            <AppBar title='timetable' />
+            <Title text={t("timetable")} />
             <Timetable />
         </Surface>
     );
