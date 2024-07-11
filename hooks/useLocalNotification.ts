@@ -68,7 +68,7 @@ export const schedulePushNotification = async (eventTitle: string, start: Date) 
             body: t('event-starting-15'),
         },
         trigger: {
-            seconds: 1,
+            seconds: time_difference,
         },
     });
 };
