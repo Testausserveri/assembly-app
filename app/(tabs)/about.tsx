@@ -1,5 +1,5 @@
 import AppBar from '@/elements/AppBar';
-import Timetable from '@/elements/timetable/Timetable';
+import AboutWebview from '@/elements/about/AboutWebview';
 import { Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -17,6 +17,7 @@ function AboutScreen() {
             }}
         >
             <AppBar title='About' />
+            <AboutWebview />
         </Surface>
     );
 }
