@@ -74,6 +74,16 @@ export const schedulePushNotification = async (eventTitle: string, start: Date) 
 };
 
 /**
+ * Cancels a scheduled push notification with the specified event title.
+ *
+ * @param eventTitle - The title of the event associated with the push notification.
+ * @returns A promise that resolves when the notification is successfully canceled.
+ */
+export const cancelScheduledPushNotification = async (eventTitle: string) => {
+    await Notifications.cancelScheduledNotificationAsync(eventTitle);
+};
+
+/**
  * Registers the device for push notifications and returns the push token.
  * @returns A promise that resolves to the push token.
  */
