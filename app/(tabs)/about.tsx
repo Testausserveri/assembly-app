@@ -16,7 +16,7 @@ function AboutScreen() {
                 paddingTop: insets.top,
             }}
         >
-            <AppBar title='About' />
+            <AppBar title='about' />
             <AboutWebview />
         </Surface>
     );
