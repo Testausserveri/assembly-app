@@ -2,6 +2,7 @@ export default {
     translation: {
         home: 'Koti',
         timetable: 'Aikataulu',
+        map: "Kartta",
         location: 'Sijainti',
         time: 'Aika',
         'select-language': 'Valitse kieli',
