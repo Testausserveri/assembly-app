@@ -1,4 +1,5 @@
 import AppBar from '@/elements/AppBar';
+import EventMap from '@/elements/map/EventMap';
 import { Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,6 +17,7 @@ export default function MapScreen() {
             }}
         >
             <AppBar title='map' />
+            <EventMap />
         </Surface>
     );
 }
