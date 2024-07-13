@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 
@@ -16,6 +17,8 @@ const injectedJavascript = `(function() {
 
 const AboutWebview = () => {
     const [loading, setLoading] = useState(true);
+    const { i18n } = useTranslation();
+    const uri = `https://assembly.org/${i18n.language}/about`;
 
     return (
         <>
@@ -24,11 +27,8 @@ const AboutWebview = () => {
                 style={{
                     display: loading ? 'none' : 'flex',
                 }}
-                onLoad={() => {
-                    console.log('Loaded');
-                    setLoading(false);
-                }}
-                source={{ uri: 'https://assembly.org/about' }}
+                onLoad={() => setLoading(false)}
+                source={{ uri }}
                 injectedJavaScript={injectedJavascript}
             />
         </>
