@@ -3,16 +3,17 @@ import { Button, Text, useTheme } from 'react-native-paper';
 
 interface BigButtonProps {
     textKey: string;
+    onPress: () => void;
 }
 
-const BigButton = ({ textKey }: BigButtonProps) => {
+const BigButton = ({ textKey, onPress }: BigButtonProps) => {
     const theme = useTheme();
     const { t } = useTranslation();
 
     return (
         <Button
             mode='contained'
-            onPress={() => console.log('Pressed')}
+            onPress={onPress}
             buttonColor={theme.colors.primary}
             rippleColor='transparent'
             style={{

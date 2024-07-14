@@ -7,6 +7,7 @@ export default {
         loot: 'Loot',
         opened: 'Opened',
         'insert-code': 'Insert code',
+        claim: 'Claim',
         map: 'Map',
         user: 'User',
         location: 'Location',

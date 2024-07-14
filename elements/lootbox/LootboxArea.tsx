@@ -7,6 +7,9 @@ import { Surface } from 'react-native-paper';
 
 const LootboxArea = () => {
     const [text, setText] = useState('');
+
+    const onClaim = () => {};
+
     return (
         <Surface
             style={{
@@ -19,7 +22,7 @@ const LootboxArea = () => {
                 onChangeText={(text) => setText(text.toUpperCase())}
                 placeholderKey='insert-code'
             />
-            <BigButton textKey='claim' />
+            <BigButton textKey='claim' onPress={onClaim} />
             <LinkButton />
         </Surface>
     );
