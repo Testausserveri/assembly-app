@@ -28,17 +28,18 @@ export default function TabLayout() {
                         <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />
                     ),
                 }}
-            />            
+            />
             <Tabs.Screen
                 name='about'
                 options={{
                     tabBarIcon: ({ color, focused }) => (
                         <TabBarIcon
                             name={focused ? 'information-circle' : 'information-circle-outline'}
-                            color={color} />
+                            color={color}
+                        />
                     ),
                 }}
-             />
+            />
             <Tabs.Screen
                 name='map'
                 options={{
