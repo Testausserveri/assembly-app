@@ -30,6 +30,17 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
+                name='about'
+                options={{
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon
+                            name={focused ? 'information-circle' : 'information-circle-outline'}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+            <Tabs.Screen
                 name='map'
                 options={{
                     tabBarIcon: ({ color, focused }) => (

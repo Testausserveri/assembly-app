@@ -2,6 +2,7 @@ export default {
     translation: {
         home: 'Home',
         timetable: 'Timetable',
+        about: 'About',
         map: 'Map',
         location: 'Location',
         time: 'Time',
