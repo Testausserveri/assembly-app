@@ -1,3 +1,4 @@
+import { DarkTheme } from '@/styles/index';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en';
 import 'dayjs/locale/fi';
@@ -23,7 +24,7 @@ const DateSelector = ({
     nextVisible = true,
     previousVisible = true,
 }: DateSelectorProps) => {
-    const theme = useTheme();
+    const theme = useTheme<DarkTheme>();
 
     const { i18n } = useTranslation();
     dayjs.locale(i18n.language);
