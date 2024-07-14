@@ -25,10 +25,7 @@ export default function TabLayout() {
                 name='map'
                 options={{
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon
-                            name={focused ? 'map' : 'map-outline'}
-                            color={color}
-                        />
+                        <TabBarIcon name={focused ? 'map' : 'map-outline'} color={color} />
                     ),
                 }}
             />
@@ -36,10 +33,7 @@ export default function TabLayout() {
                 name='lootbox'
                 options={{
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon
-                            name={focused ? 'cube' : 'cube-outline'}
-                            color={color}
-                        />
+                        <TabBarIcon name={focused ? 'cube' : 'cube-outline'} color={color} />
                     ),
                 }}
             />
@@ -58,7 +52,10 @@ export default function TabLayout() {
                 name='user'
                 options={{
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'person-circle' : 'person-circle-outline'} color={color} />
+                        <TabBarIcon
+                            name={focused ? 'person-circle' : 'person-circle-outline'}
+                            color={color}
+                        />
                     ),
                 }}
             />

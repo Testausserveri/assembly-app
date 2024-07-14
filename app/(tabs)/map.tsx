@@ -1,6 +1,5 @@
-import LanguageSelector from '@/elements/LanguageSelector';
 import { useTranslation } from 'react-i18next';
-import { Divider, Surface, Text, useTheme } from 'react-native-paper';
+import { Surface, Text, useTheme } from 'react-native-paper';
 
 export default function MapScreen() {
     const { t } = useTranslation();

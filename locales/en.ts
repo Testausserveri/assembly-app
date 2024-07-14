@@ -5,6 +5,8 @@ export default {
         info: 'Info',
         lootbox: 'Lootbox',
         loot: 'Loot',
+        opened: 'Opened',
+        'insert-code': 'Insert code',
         map: 'Map',
         user: 'User',
         location: 'Location',
