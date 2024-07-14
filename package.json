@@ -10,13 +10,18 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
+    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
+    "check:types": "tsc --noEmit",
+    "check:lint": "expo lint",
+    "check:format": "prettier --check \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
+    "check:test": "jest --bail --ci"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
+    "@openspacelabs/react-native-zoomable-view": "^2.1.6",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-navigation/native": "^6.0.2",
     "dayjs": "^1.11.11",

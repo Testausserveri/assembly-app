@@ -3,6 +3,7 @@ export default {
         home: 'Koti',
         timetable: 'Aikataulu',
         about: 'Tietoa',
+        map: "Kartta",
         location: 'Sijainti',
         time: 'Aika',
         'select-language': 'Valitse kieli',

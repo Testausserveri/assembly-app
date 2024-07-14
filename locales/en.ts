@@ -3,6 +3,7 @@ export default {
         home: 'Home',
         timetable: 'Timetable',
         about: 'About',
+        map: 'Map',
         location: 'Location',
         time: 'Time',
         'select-language': 'Select Language',
