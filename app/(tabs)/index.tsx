@@ -1,9 +1,9 @@
+import Title from '@/components/lootbox/Title';
 import Timetable from '@/elements/timetable/Timetable';
+import { useTranslation } from 'react-i18next';
 import { Surface } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Title from '@/components/lootbox/Title'
-import { useTranslation } from 'react-i18next';
 
 export default function TimetableScreen() {
     const { t } = useTranslation();
@@ -18,7 +18,7 @@ export default function TimetableScreen() {
                 paddingTop: insets.top,
             }}
         >
-            <Title text={t("timetable")} />
+            <Title text={t('timetable')} />
             <Timetable />
         </Surface>
     );

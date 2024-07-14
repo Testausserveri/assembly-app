@@ -5,9 +5,10 @@ const OpenedArea = () => {
     return (
         <View
             style={{
-                height: "90%",
+                height: '90%',
             }}
         >
+            {/* TODO: Add Opened Area */}
         </View>
     );
 };

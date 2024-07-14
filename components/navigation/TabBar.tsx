@@ -9,7 +9,7 @@ const TabBar = (props: BottomTabBarProps) => {
         <BottomNavigation.Bar
             style={{ backgroundColor: theme.colors.primaryContainer }}
             shifting
-            activeColor={ theme.colors.primary }
+            activeColor={theme.colors.primary}
             activeIndicatorStyle={{ backgroundColor: 'transparent' }}
             navigationState={props.state}
             safeAreaInsets={props.insets}

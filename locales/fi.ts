@@ -6,6 +6,8 @@ export default {
         info: 'Info',
         lootbox: 'Lootbox',
         loot: 'Loot',
+        opened: 'Avattu',
+        'insert-code': 'Syötä koodi',
         map: 'Kartta',
         user: 'Käyttäjä',
         location: 'Sijainti',

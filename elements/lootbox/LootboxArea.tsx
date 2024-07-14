@@ -1,22 +1,27 @@
-import React from 'react';
-import { View } from 'react-native';
+import BigButton from '@/components/lootbox/BigButton';
+import BigTextInput from '@/components/lootbox/BigTextInput';
+import LinkButton from '@/components/lootbox/LinkButton';
 import LootboxBox from '@/elements/lootbox/LootboxBox';
-import CodeBox from '@/components/lootbox/CodeBox';
-import ClaimButton from '@/components/lootbox/ClaimButton';
-import RaffleRulesButton from '@/components/lootbox/RaffleRulesButton';
+import React, { useState } from 'react';
+import { Surface } from 'react-native-paper';
 
 const LootboxArea = () => {
+    const [text, setText] = useState('');
     return (
-        <View
+        <Surface
             style={{
-                height: "90%",
+                gap: 16,
             }}
         >
             <LootboxBox />
-            <CodeBox />
-            <ClaimButton />
-            <RaffleRulesButton />
-        </View>
+            <BigTextInput
+                value={text}
+                onChangeText={(text) => setText(text.toUpperCase())}
+                placeholderKey='insert-code'
+            />
+            <BigButton textKey='claim' />
+            <LinkButton />
+        </Surface>
     );
 };
 
