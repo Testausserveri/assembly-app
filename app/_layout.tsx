@@ -51,10 +51,10 @@ export default function RootLayout() {
                     <Stack>
                         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
                         <Stack.Screen name='+not-found' />
-                    <Stack.Screen
-                        name='raffle/rules'
-                        options={{ headerTitle: t('raffle-rules') }}
-                    />
+                        <Stack.Screen
+                            name='raffle/rules'
+                            options={{ headerTitle: t('raffle-rules') }}
+                        />
                     </Stack>
                 </PaperProvider>
             </SafeAreaProvider>
