@@ -1,3 +1,5 @@
+import { StatusError } from './errors';
+
 export interface ProfileData {
     id: number;
     email: string;
@@ -51,6 +53,9 @@ export async function signupRequest(email: string, password: string) {
     const url = `${process.env.EXPO_PUBLIC_API_URL}/person/signup`;
 
     const response = await fetch(url, opts(undefined, { email, password, region: 'asm' }));
+    if (!response.ok) {
+        throw new StatusError('signup-failed', response.status);
+    }
     const data = await response.json();
     return {
         profile: data as ProfileData,
@@ -62,6 +67,9 @@ export async function loginRequest(login: string, password: string) {
     const url = `${process.env.EXPO_PUBLIC_API_URL}/auth/local?region=asm`;
 
     const response = await fetch(url, opts(undefined, { login, password }));
+    if (!response.ok) {
+        throw new StatusError('login-failed', response.status);
+    }
     const data = await response.json();
     console.log(data);
     return {
