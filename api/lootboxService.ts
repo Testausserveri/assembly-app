@@ -1,5 +1,3 @@
-import { determineEvent } from './eventService';
-
 export type PersonLootbox = {
     Id: number;
     status: LootboxStatus;
@@ -61,8 +59,6 @@ type LootboxSkin =
     | 'yellowRed'
     | 'blueRed'
     | 'esportal';
-
-const API_BASE_PATH = `https://wp.assembly.org/${determineEvent()}/index.php?rest_route=/api/v1`;
 
 // TODO: remove me
 function sleep(ms: number) {
