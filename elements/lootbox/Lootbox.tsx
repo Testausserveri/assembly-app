@@ -1,5 +1,6 @@
 import LootboxArea from '@/elements/lootbox/LootboxArea';
 import OpenedArea from '@/elements/lootbox/OpenedArea';
+import { useGlobalState } from '@/hooks/providers/GlobalStateProvider';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -10,6 +11,10 @@ const Lootbox = () => {
 
     const [isLootSelected, setIsLootSelected] = useState(true);
     const [isOpenedSelected, setIsOpenedSelected] = useState(false);
+
+    const {
+        state: { login },
+    } = useGlobalState();
 
     const selectLoot = () => {
         if (!isLootSelected) {
@@ -45,31 +50,54 @@ const Lootbox = () => {
                 flex: 1,
             }}
         >
-            <View
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    gap: 32,
-                }}
-            >
-                <Text
-                    variant='headlineMedium'
-                    style={isLootSelected ? styles.selected : styles.unselected}
-                    onPress={selectLoot}
+            {login ? (
+                <>
+                    <View
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignContent: 'center',
+                            gap: 32,
+                        }}
+                    >
+                        <Text
+                            variant='headlineMedium'
+                            style={isLootSelected ? styles.selected : styles.unselected}
+                            onPress={selectLoot}
+                        >
+                            {t('loot')}
+                        </Text>
+                        <Text
+                            variant='headlineMedium'
+                            style={isOpenedSelected ? styles.selected : styles.unselected}
+                            onPress={selectOpened}
+                        >
+                            {t('opened')}
+                        </Text>
+                    </View>
+                    {isLootSelected ? <LootboxArea /> : <OpenedArea />}
+                </>
+            ) : (
+                <View
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flex: 1,
+                    }}
                 >
-                    {t('loot')}
-                </Text>
-                <Text
-                    variant='headlineMedium'
-                    style={isOpenedSelected ? styles.selected : styles.unselected}
-                    onPress={selectOpened}
-                >
-                    {t('opened')}
-                </Text>
-            </View>
-            {isLootSelected ? <LootboxArea /> : <OpenedArea />}
+                    <Text
+                        style={{
+                            textAlign: 'center',
+                            paddingHorizontal: 16,
+                        }}
+                        variant='headlineMedium'
+                    >
+                        {t('please-login-lootbox')}
+                    </Text>
+                </View>
+            )}
         </View>
     );
 };

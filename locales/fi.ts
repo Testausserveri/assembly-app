@@ -32,5 +32,6 @@ export default {
         'email-exists': 'Sähköposti on jo käytössä',
         'invalid-credentials': 'Virheelliset tunnistetiedot',
         'raffle-rules': 'Arvonnan säännöt',
+        'please-login-lootbox': 'Kirjaudu sisään avataksesi lootboxeja',
     },
 };

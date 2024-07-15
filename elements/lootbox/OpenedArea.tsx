@@ -1,5 +1,6 @@
 import OpenedLootboxCard from './OpenedLootboxCard';
 import { type PersonLootbox, getOpenedLootboxes } from '@/api/lootboxService';
+import { useGlobalState } from '@/hooks/providers/GlobalStateProvider';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
@@ -7,10 +8,16 @@ import { ActivityIndicator } from 'react-native-paper';
 const OpenedArea = () => {
     const [opened, setOpened] = useState<PersonLootbox[]>([]);
 
+    const {
+        state: { login },
+    } = useGlobalState();
+
     useEffect(() => {
-        // TODO: add token
-        getOpenedLootboxes('TODO: ADD TOKEN').then((v) => setOpened(v));
-    }, []);
+        if (!login) {
+            return;
+        }
+        getOpenedLootboxes(login.token).then((v) => setOpened(v));
+    }, [login]);
 
     return (
         <View

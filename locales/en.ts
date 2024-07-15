@@ -32,5 +32,6 @@ export default {
         'email-exists': 'Email already exists',
         'invalid-credentials': 'Invalid credentials',
         'raffle-rules': 'Raffle rules',
+        'please-login-lootbox': 'Please login to open lootboxes',
     },
 };
