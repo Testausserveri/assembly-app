@@ -17,7 +17,7 @@ const LinkButton = ({ href, text }: LinkButtonProps) => {
             }}
         >
             <Link href={href}>
-                <Text style={{ fontWeight: 'bold' }}>{text}</Text>
+                <Text style={{ fontWeight: 'bold', textDecorationLine: 'underline' }}>{text}</Text>
             </Link>
         </View>
     );
