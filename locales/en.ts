@@ -17,5 +17,6 @@ export default {
         english: 'English',
         'success-lang-change': 'Language changed successfully',
         'error-lang-change': 'Error changing language',
+        'raffle-rules': 'Raffle rules',
     },
 };

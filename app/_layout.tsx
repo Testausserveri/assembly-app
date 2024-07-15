@@ -5,7 +5,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import i18n from 'i18next';
 import { useEffect } from 'react';
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next, useTranslation } from 'react-i18next';
 import { PaperProvider } from 'react-native-paper';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -31,6 +31,7 @@ export default function RootLayout() {
         Roboto: require('../assets/fonts/RobotoMono-Regular.ttf'),
         RobotoBold: require('../assets/fonts/RobotoMono-Bold.ttf'),
     });
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (loaded) {
@@ -48,6 +49,10 @@ export default function RootLayout() {
                 <Stack>
                     <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
                     <Stack.Screen name='+not-found' />
+                    <Stack.Screen
+                        name='raffle/rules'
+                        options={{ headerTitle: t('raffle-rules') }}
+                    />
                 </Stack>
             </PaperProvider>
         </SafeAreaProvider>

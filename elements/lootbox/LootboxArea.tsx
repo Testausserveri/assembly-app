@@ -3,10 +3,12 @@ import BigTextInput from '@/components/lootbox/BigTextInput';
 import LinkButton from '@/components/lootbox/LinkButton';
 import LootboxBox from '@/elements/lootbox/LootboxBox';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Surface } from 'react-native-paper';
 
 const LootboxArea = () => {
     const [text, setText] = useState('');
+    const { t } = useTranslation();
 
     const onClaim = () => {};
 
@@ -23,7 +25,7 @@ const LootboxArea = () => {
                 placeholderKey='insert-code'
             />
             <BigButton textKey='claim' onPress={onClaim} />
-            <LinkButton />
+            <LinkButton text={t('raffle-rules')} href='/raffle/rules' />
         </Surface>
     );
 };
