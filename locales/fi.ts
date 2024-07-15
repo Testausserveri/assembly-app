@@ -17,5 +17,6 @@ export default {
         english: 'Englanti',
         'success-lang-change': 'Kieli vaihdettu onnistuneesti',
         'error-lang-change': 'Virhe kielen vaihdossa',
+        'raffle-rules': 'Arvonnan säännöt',
     },
 };
