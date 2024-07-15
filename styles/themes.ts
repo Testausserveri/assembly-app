@@ -29,4 +29,6 @@ const Themes = {
     },
 };
 
+export type DarkTheme = (typeof Themes)['dark']['default'];
+
 export default Themes;
