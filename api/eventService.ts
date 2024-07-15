@@ -78,7 +78,7 @@ type AssemblyEvent = {
     color: string;
 };
 
-const determineEvent = (): string => {
+export const determineEvent = (): string => {
     if (
         process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
         process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview'
