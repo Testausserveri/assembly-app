@@ -1,3 +1,4 @@
+import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
 import Locales from '@/locales';
 import { Themes } from '@/styles';
 import { useFonts } from 'expo-font';
@@ -42,13 +43,15 @@ export default function RootLayout() {
     }
 
     return (
-        <SafeAreaProvider>
-            <PaperProvider theme={Themes['dark']['default']}>
-                <Stack>
-                    <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-                    <Stack.Screen name='+not-found' />
-                </Stack>
-            </PaperProvider>
-        </SafeAreaProvider>
+        <GlobalStateProvider>
+            <SafeAreaProvider>
+                <PaperProvider theme={Themes['dark']['default']}>
+                    <Stack>
+                        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+                        <Stack.Screen name='+not-found' />
+                    </Stack>
+                </PaperProvider>
+            </SafeAreaProvider>
+        </GlobalStateProvider>
     );
 }
