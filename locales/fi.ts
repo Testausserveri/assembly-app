@@ -31,5 +31,6 @@ export default {
         'empty-fields': 'Täytä kaikki kentät',
         'email-exists': 'Sähköposti on jo käytössä',
         'invalid-credentials': 'Virheelliset tunnistetiedot',
+        'raffle-rules': 'Arvonnan säännöt',
     },
 };

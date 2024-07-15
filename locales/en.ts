@@ -31,5 +31,6 @@ export default {
         'empty-fields': 'Please fill in all fields',
         'email-exists': 'Email already exists',
         'invalid-credentials': 'Invalid credentials',
+        'raffle-rules': 'Raffle rules',
     },
 };
