@@ -18,7 +18,12 @@
                 "EXPO_PUBLIC_API_URL": "https://yusf31nx11.execute-api.eu-west-1.amazonaws.com/staging"
             }
         },
-        "production": {}
+        "production": {
+            "env": {
+                "EXPO_PUBLIC_ENVIRONMENT": "production",
+                "EXPO_PUBLIC_API_URL": "https://api.series.gg"
+            }
+        }
     },
     "submit": {
         "production": {}
