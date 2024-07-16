@@ -1,8 +1,8 @@
 import { AssemblyEvent, getEvents } from '@/api/eventService';
 import DateSelector from '@/components/timetable/DateSelector';
 import EventsBox from '@/elements/timetable/EventsBox';
-import { usePagerPageHandler } from '@/hooks/usePagerPage';
-import { useEffect, useState } from 'react';
+import { useNavigationPanel } from '@/hooks/useNavigationPanel';
+import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { ActivityIndicator } from 'react-native-paper';
@@ -14,13 +14,10 @@ const Timetable = () => {
     const [events, setEvents] = useState<AssemblyEvent[][]>([]);
     const [eventDayIndex, setEventDayIndex] = useState(0);
 
-    const onPageSelectedHandler = usePagerPageHandler({
-        onPageSelected: (e: any) => {
-            'worklet';
-            console.log('Selected page ', e.position);
-            //setEventDayIndex(e.position);
-        },
-    });
+    const callback = useCallback((position: number) => {
+        console.log('Hey', `You are on ${position + 1} page`);
+    }, []);
+    const { ref, nextPage, previousPage, ...navigationPanel } = useNavigationPanel(callback);
 
     useEffect(() => {
         getEvents().then((eventRes) => {
@@ -47,7 +44,7 @@ const Timetable = () => {
             const index = eventsGroupedByDay.findIndex(
                 (events) => events[events.length - 1].end.getTime() > new Date().getTime()
             ); // If last event of the day has ended, it's not the current day
-            setEventDayIndex(index === -1 ? eventsGroupedByDay.length - 1 : index);
+            // setEventDayIndex(index === -1 ? eventsGroupedByDay.length - 1 : index);
         });
     }, []);
 
@@ -67,11 +64,14 @@ const Timetable = () => {
                         date={events[eventDayIndex][0].start}
                         nextVisible={eventDayIndex < events.length - 1}
                         previousVisible={eventDayIndex > 0}
+                        next={nextPage}
+                        previous={previousPage}
                     />
                     <AnimatedPager
-                        useNext={true}
+                        ref={ref}
+                        useNext={false}
                         initialPage={eventDayIndex}
-                        onPageSelected={onPageSelectedHandler}
+                        {...navigationPanel}
                         layoutDirection='ltr'
                         orientation='horizontal'
                         style={{ flex: 1 }}
