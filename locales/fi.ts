@@ -26,7 +26,7 @@ export default {
         'invalid-credentials': 'Virheelliset tunnistetiedot',
         profile: 'Profiili',
         'working-on-this':
-            'Hei! Työstämme sovellusta edelleen. Sovellukseen on tulossa paljon uusia hienoja ominaisuuksia, jotka ovat tällä hetkellä saatavilla verkkosivuilla. Vielä hienompaa, kuin tulevat ominaisuudet, ovat vapaaehtoiset velhot, jotka käyttävät paljon tunteja käyttäjäkokemuksesi eteen. Toivottavasti ymmärrät, että upeiden asioiden luominen vie aikaa ja läydät sovelluksesta silti hyötyä. Mahtavaa tapahtumaa!',
+            'Hei! Työstämme sovellusta edelleen. Sovellukseen on tulossa paljon uusia hienoja ominaisuuksia, jotka ovat tällä hetkellä saatavilla verkkosivuilla. Vielä hienompaa, kuin tulevat ominaisuudet, ovat vapaaehtoiset velhot, jotka käyttävät paljon tunteja käyttäjäkokemuksesi eteen. Toivottavasti ymmärrät, että upeiden asioiden luominen vie aikaa ja löydät sovelluksesta silti hyötyä. Mahtavaa tapahtumaa!',
         meanwhile:
             'Sillä välin, mikset kävisi vilkisemasssa tiimiä, joka kuin taikasauvalla, on tämän sovelluksen koonnut!',
         'testausserveri-credits':
