@@ -25,6 +25,7 @@ const BigTextInput = ({ onChangeText, value, placeholderKey }: BigTextInputProps
                 borderWidth: 2,
                 borderRadius: 5,
                 marginHorizontal: '15%',
+                marginBottom: '5%'
             }}
         />
     );

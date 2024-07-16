@@ -1,39 +1,37 @@
 import { useTranslation } from 'react-i18next';
-import { Button, Text, useTheme } from 'react-native-paper';
+import { View } from 'react-native';
+import { useTheme, Button } from 'react-native-paper';
 
-interface BigButtonProps {
-    textKey: string;
-    onPress: () => void;
-}
 
-const BigButton = ({ textKey, onPress }: BigButtonProps) => {
+const BigButton = ({text, onPress, disabled}:{text:string, onPress: () => void, disabled:boolean}) => {
     const theme = useTheme();
     const { t } = useTranslation();
-
     return (
-        <Button
-            mode='contained'
+        <View style={{
+            marginHorizontal: "20%",
+            justifyContent: 'center',
+            zIndex: 50
+        }}>
+            <Button 
+            mode="contained" 
             onPress={onPress}
-            buttonColor={theme.colors.primary}
-            rippleColor='transparent'
+            buttonColor={ theme.colors.primary }
+            textColor={ theme.colors.secondaryContainer }
+            rippleColor="transparent"
+            disabled={disabled}
             style={{
                 borderColor: theme.colors.onPrimaryContainer,
                 borderWidth: 2,
-                marginHorizontal: '20%',
             }}
-        >
-            <Text
-                style={{
-                    paddingVertical: 8,
-                    paddingHorizontal: 16,
-                    color: theme.colors.secondaryContainer,
-                    fontFamily: 'RobotoBold',
-                    fontSize: 20,
-                }}
+            labelStyle={{
+                fontFamily: "RobotoBold",
+                fontSize: 20,
+                textTransform: 'uppercase',
+            }}
             >
-                {t(textKey).toUpperCase()}
-            </Text>
-        </Button>
+                {t(text)}
+            </Button>
+        </View>
     );
 };
 

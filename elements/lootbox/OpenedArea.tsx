@@ -1,12 +1,19 @@
-import OpenedLootboxCard from './OpenedLootboxCard';
-import { type PersonLootbox, getOpenedLootboxes } from '@/api/lootboxService';
+import { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
+import { getLootboxes, LootboxType } from '@/api/lootboxService';
+import Animated, { SlideInRight, SlideOutRight } from 'react-native-reanimated'
+import LootboxItem from '@/components/lootbox/LootboxItem';
 import { useGlobalState } from '@/hooks/providers/GlobalStateProvider';
-import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
 
-const OpenedArea = () => {
-    const [opened, setOpened] = useState<PersonLootbox[]>([]);
+type Lootboxes = {
+    opened: LootboxType[],
+    unopened: LootboxType[]
+};
+
+//{selectLoot, setBoxID, setIsOpen}:{selectLoot: () => void, setBoxID: () => void, setIsOpen: () => void}
+
+const OpenedArea = ({selectLoot, setBoxID, setIsOpen, setSkin, setIsOpened}:{selectLoot: () => void, setBoxID: (id:number) => void, setIsOpen: (state:boolean) => void, setSkin: (name:string) => void, setIsOpened: (state:boolean) => void}) => {
+    const [lootboxes, setLootboxes] = useState<Lootboxes>({opened: [], unopened: []});
 
     const {
         state: { login },
@@ -14,31 +21,71 @@ const OpenedArea = () => {
 
     useEffect(() => {
         if (!login) {
-            return;
+            return
         }
-        getOpenedLootboxes(login.token).then((v) => setOpened(v));
+        getLootboxes(login.token).then((lootboxes) => {
+            // Group boxes by opened status
+            const sortedLootboxes : Lootboxes = lootboxes
+                .reduce((result: Lootboxes, lootbox: LootboxType) => {
+                    return (lootbox.status === 2) ? 
+                        { ...result, opened: [...result.opened, lootbox] }
+                        : { ...result, unopened: [...result.unopened, lootbox] }
+                },
+                {opened: [], unopened: []});
+            setLootboxes(sortedLootboxes)
+        });
     }, [login]);
 
     return (
-        <View
+        <Animated.View
+        entering={SlideInRight}
+        exiting={SlideOutRight}
             style={{
-                height: '90%',
+                height: "90%",
             }}
         >
-            {opened.length === 0 ? (
-                <ActivityIndicator animating />
-            ) : (
-                <FlatList
-                    style={{ paddingHorizontal: 33 }}
-                    contentContainerStyle={{ gap: 8 }}
-                    columnWrapperStyle={{ gap: 4 }}
-                    data={opened}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => <OpenedLootboxCard {...item} />}
-                    numColumns={2}
-                />
-            )}
-        </View>
+            <ScrollView
+                style={{ paddingHorizontal: 30, paddingBottom: 16 }}
+                contentContainerStyle={{ gap: 16 }}
+            >
+                {lootboxes.unopened.map((lootbox) => (
+                    <LootboxItem
+                        key={lootbox.id}
+                        code={lootbox.code}
+                        id={lootbox.id}
+                        skin={lootbox.skin}
+                        lootbox_id={lootbox.lootbox_id}
+                        lootbox_name={lootbox.lootbox_name}
+                        item_won_details={lootbox.status === 2 ? lootbox.item_won_details : undefined}
+                        status={lootbox.status}
+                        token={lootbox.token}
+                        selectLoot={selectLoot}
+                        setBoxID={setBoxID}
+                        setIsOpen={setIsOpen}
+                        setSkin={setSkin}
+                        setIsOpened={setIsOpened}
+                    />
+                ))}
+                {lootboxes.opened.map((lootbox) => (
+                    <LootboxItem
+                        key={lootbox.id}
+                        code={lootbox.code}
+                        id={lootbox.id}
+                        skin={lootbox.skin}
+                        lootbox_id={lootbox.lootbox_id}
+                        lootbox_name={lootbox.lootbox_name}
+                        item_won_details={lootbox.status === 2 ? lootbox.item_won_details : undefined}
+                        status={lootbox.status}
+                        token={lootbox.token}
+                        selectLoot={selectLoot}
+                        setBoxID={setBoxID}
+                        setIsOpen={setIsOpen}
+                        setSkin={setSkin}
+                        setIsOpened={setIsOpened}
+                    />
+                ))}
+            </ScrollView>
+        </Animated.View>
     );
 };
 
