@@ -1,5 +1,5 @@
 import { ProfileData } from '@/api/userService';
-import { PropsWithChildren, createContext, useContext, useState } from 'react';
+import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 
 export type Login = {
     token: string;
@@ -22,6 +22,8 @@ export function useGlobalState() {
 
 export function GlobalStateProvider({ children }: PropsWithChildren) {
     const [state, setState] = useState({});
+
+    useEffect(() => {}, []);
 
     const context = {
         state,

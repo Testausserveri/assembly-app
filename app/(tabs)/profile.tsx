@@ -1,27 +1,53 @@
+import AppBar from '@/elements/AppBar';
 import LanguageSelector from '@/elements/LanguageSelector';
-import { ProfileView } from '@/elements/user/ProfileView';
+import { Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Divider, Surface, Text, useTheme } from 'react-native-paper';
+import { View } from 'react-native';
+import { Surface, Text, useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
     const { t } = useTranslation();
     const theme = useTheme();
 
+    const insets = useSafeAreaInsets();
+
     return (
-        <Surface
+        <View
             style={{
                 flex: 1,
                 alignItems: 'center',
-                justifyContent: 'center',
                 gap: 8,
-                padding: 16,
                 backgroundColor: theme.colors.background,
+                paddingTop: insets.top,
             }}
         >
-            <Text>{t('home')}</Text>
-            <Divider />
-            <LanguageSelector />
-            <ProfileView />
-        </Surface>
+            <AppBar title={t('profile')} />
+            <View
+                style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}
+            >
+                <LanguageSelector />
+                <Surface
+                    elevation={0}
+                    style={{ padding: 16, width: '100%', justifyContent: 'center', gap: 16 }}
+                >
+                    <Text style={{ textAlign: 'center' }} variant='bodyLarge'>
+                        {t('working-on-this')}
+                    </Text>
+                    <Link
+                        style={{
+                            color: theme.colors.primary,
+                            textDecorationLine: 'underline',
+                            textAlign: 'center',
+                        }}
+                        href='/credits'
+                    >
+                        {t('meanwhile')}
+                    </Link>
+                </Surface>
+            </View>
+
+            {/** <ProfileView /> */}
+        </View>
     );
 }

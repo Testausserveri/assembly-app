@@ -7,7 +7,7 @@ function EventMap() {
             maxZoom={2.5}
             minZoom={0.5}
             zoomStep={0.5}
-            initialZoom={1}
+            initialZoom={0.5}
             bindToBorders={true}
             style={{
                 width: 'fit-content',

@@ -3,6 +3,7 @@ import { loginRequest, signupRequest } from '@/api/userService';
 import { useGlobalState } from '@/hooks/providers/GlobalStateProvider';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import { Button, Portal, Snackbar, Surface, Text, TextInput, useTheme } from 'react-native-paper';
 
 export function ProfileView() {
@@ -28,7 +29,7 @@ export function ProfileView() {
     return (
         <Surface
             elevation={0}
-            style={{ alignItems: 'center', gap: 10, marginTop: 20, width: '90%' }}
+            style={{ alignItems: 'center', gap: 10, marginTop: 20, width: '100%' }}
         >
             {login ? (
                 <>
@@ -51,7 +52,15 @@ export function ProfileView() {
                     </Button>
                 </>
             ) : (
-                <>
+                <View
+                    style={{
+                        width: '80%',
+                        gap: 16,
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Text variant='titleMedium'>{t('sign-in')}</Text>
                     <TextInput
                         mode='outlined'
                         label={t('email')}
@@ -179,7 +188,7 @@ export function ProfileView() {
                             <Text>{t(errorText)}</Text>
                         </Snackbar>
                     </Portal>
-                </>
+                </View>
             )}
         </Surface>
     );
