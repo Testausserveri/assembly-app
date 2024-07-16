@@ -1,22 +1,26 @@
 import OpenedLootboxCard from './OpenedLootboxCard';
-import { type PersonLootbox, getOpenedLootboxes } from '@/api/lootboxService';
+import { type PersonLootbox } from '@/api/lootboxService';
+import LinkButton from '@/components/lootbox/LinkButton';
 import { useGlobalState } from '@/hooks/providers/GlobalStateProvider';
+import { useLootboxes } from '@/hooks/useLootboxes';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FlatList, View } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, Button, Text } from 'react-native-paper';
 
-const OpenedArea = () => {
-    const [opened, setOpened] = useState<PersonLootbox[]>([]);
-
+const ClaimedArea = () => {
+    const [token, setToken] = useState<string | null>(null);
+    const { lootboxes, reloadLootboxes } = useLootboxes(token);
     const {
         state: { login },
     } = useGlobalState();
 
+    const { t } = useTranslation();
+
     useEffect(() => {
-        if (!login) {
-            return;
+        if (login) {
+            setToken(login.token);
         }
-        getOpenedLootboxes(login.token).then((v) => setOpened(v));
     }, [login]);
 
     return (
@@ -25,14 +29,19 @@ const OpenedArea = () => {
                 height: '90%',
             }}
         >
-            {opened.length === 0 ? (
+            {lootboxes.status === 'loading' ? (
                 <ActivityIndicator animating />
+            ) : lootboxes.status === 'error' ? (
+                <View>
+                    <Text>{t(lootboxes.message!)}</Text>
+                    <Button onPress={reloadLootboxes}>{t('try-again')}</Button>
+                </View>
             ) : (
                 <FlatList
                     style={{ paddingHorizontal: 33 }}
                     contentContainerStyle={{ gap: 8 }}
                     columnWrapperStyle={{ gap: 4 }}
-                    data={opened}
+                    data={lootboxes.lootboxes}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) => <OpenedLootboxCard {...item} />}
                     numColumns={2}
@@ -42,4 +51,4 @@ const OpenedArea = () => {
     );
 };
 
-export default OpenedArea;
+export default ClaimedArea;

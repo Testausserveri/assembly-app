@@ -33,5 +33,8 @@ export default {
         'invalid-credentials': 'Virheelliset tunnistetiedot',
         'raffle-rules': 'Arvonnan säännöt',
         'please-login-lootbox': 'Kirjaudu sisään avataksesi lootboxeja',
+        'lootbox-fetch-failed': 'Lootboxien hakeminen epäonnistui',
+        claimed: 'Lunastettu',
+        'try-again': 'Yritä uudelleen',
     },
 };

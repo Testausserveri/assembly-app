@@ -1,5 +1,5 @@
+import ClaimedArea from '@/elements/lootbox/ClaimedArea';
 import LootboxArea from '@/elements/lootbox/LootboxArea';
-import OpenedArea from '@/elements/lootbox/OpenedArea';
 import { useGlobalState } from '@/hooks/providers/GlobalStateProvider';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,7 @@ const Lootbox = () => {
     const { t } = useTranslation();
 
     const [isLootSelected, setIsLootSelected] = useState(true);
-    const [isOpenedSelected, setIsOpenedSelected] = useState(false);
+    const [isClaimedSelected, setIsClaimedSelected] = useState(false);
 
     const {
         state: { login },
@@ -19,13 +19,13 @@ const Lootbox = () => {
     const selectLoot = () => {
         if (!isLootSelected) {
             setIsLootSelected(true);
-            setIsOpenedSelected(false);
+            setIsClaimedSelected(false);
         }
     };
 
     const selectOpened = () => {
-        if (!isOpenedSelected) {
-            setIsOpenedSelected(true);
+        if (!isClaimedSelected) {
+            setIsClaimedSelected(true);
             setIsLootSelected(false);
         }
     };
@@ -70,13 +70,13 @@ const Lootbox = () => {
                         </Text>
                         <Text
                             variant='headlineMedium'
-                            style={isOpenedSelected ? styles.selected : styles.unselected}
+                            style={isClaimedSelected ? styles.selected : styles.unselected}
                             onPress={selectOpened}
                         >
-                            {t('opened')}
+                            {t('claimed')}
                         </Text>
                     </View>
-                    {isLootSelected ? <LootboxArea /> : <OpenedArea />}
+                    {isLootSelected ? <LootboxArea /> : <ClaimedArea />}
                 </>
             ) : (
                 <View

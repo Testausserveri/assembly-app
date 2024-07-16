@@ -33,5 +33,8 @@ export default {
         'invalid-credentials': 'Invalid credentials',
         'raffle-rules': 'Raffle rules',
         'please-login-lootbox': 'Please login to open lootboxes',
+        'lootbox-fetch-failed': 'Failed to fetch lootboxes',
+        claimed: 'Claimed',
+        'try-again': 'Try again',
     },
 };

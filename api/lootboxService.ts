@@ -1,3 +1,5 @@
+import { StatusError } from './errors';
+
 export type PersonLootbox = {
     Id: number;
     status: LootboxStatus;
@@ -60,39 +62,20 @@ type LootboxSkin =
     | 'blueRed'
     | 'esportal';
 
-// TODO: remove me
-function sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+const API_BASE_PATH = process.env.EXPO_PUBLIC_API_URL;
+
+// /person/lootboxes
+// TODO /lootbox/open/:id/:locale/asm
+// TODO /check-code/asm/:code
+// TODO /person/claim-lootbox
+
+// GET
+export async function getLootboxes(token: string) {
+    const url = `${API_BASE_PATH}/person/lootboxes`;
+    const response = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+    if (!response.ok) {
+        throw new StatusError('lootbox-fetch-failed', response.status);
+    }
+    const data = await response.json();
+    return data as PersonLootbox[];
 }
-
-export const getOpenedLootboxes = async (token: string): Promise<PersonLootbox[]> => {
-    // const response = await fetch(API_BASE_PATH + '/person/lootboxes', {
-    //     headers: { Authentication: `Bearer ${token}` },
-    // });
-    // const data = await response.json();
-    // return data;
-
-    await sleep(1000);
-    return Array(10).fill({
-        created_at: new Date().toISOString(),
-        expires_at: new Date().toISOString(),
-        opened_at: new Date().toISOString(),
-        Id: 1,
-        lootbox_id: 1,
-        item_won: 1,
-        lootbox_name: 'Bonus Box',
-        skin: 'blue',
-        status: LootboxStatus.OPENED,
-        item_won_details: {
-            id: 1,
-            image: 'https://asmcommunity.imgix.net/production/ence-muki.png?auto=format&fit=clip&ixlib=react-9.4.0&h=100&w=100',
-            coins_won: 0,
-            description: 'Musta keraaminen muki ENCEn neliölogolla. Tilavuus 350 ml.',
-            item_name: 'ENCE muki',
-            digital_code: '123',
-            only_coins: false,
-            telia_link_exclusive: false,
-            winner_info: 'abc',
-        },
-    });
-};
