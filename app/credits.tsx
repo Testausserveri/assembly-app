@@ -70,6 +70,7 @@ export default function Credits() {
                 <Text variant='bodyLarge'>Onni Linnala</Text>
                 <Text variant='bodyLarge'>Anto Keinänen</Text>
                 <Text variant='bodyLarge'>Samu Kupiainen</Text>
+                <Text variant='bodyLarge'>Miika Tuominen</Text>
             </View>
             <Text
                 variant='bodyLarge'
