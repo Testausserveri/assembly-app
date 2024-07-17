@@ -1,5 +1,6 @@
-import { useRef } from 'react';
-import { Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useEffect, useRef } from 'react';
+import { BackHandler, Linking, Platform } from 'react-native';
 import WebView, { WebViewProps } from 'react-native-webview';
 
 type WhitelistedWebviewProps = {
@@ -20,6 +21,32 @@ const injectedJavascript = `(function() {
 
 function WhitelistedWebview({ whitelistedUrls, ...props }: WhitelistedWebviewProps) {
     const webviewRef = useRef<WebView | null>(null);
+    const navigation = useNavigation();
+
+    const onAndroidBackPress = () => {
+        if (webviewRef.current) {
+            webviewRef.current.goBack();
+            return true; // prevent default behavior (exit app)
+        }
+        return false;
+    };
+
+    useEffect(() => {
+        // @ts-ignore
+        const unsubscribe = navigation.addListener('tabPress', () => {
+            if (webviewRef.current) {
+                webviewRef.current.goBack();
+            }
+        });
+
+        if (Platform.OS === 'android') {
+            BackHandler.addEventListener('hardwareBackPress', onAndroidBackPress);
+            return () => {
+                BackHandler.removeEventListener('hardwareBackPress', onAndroidBackPress);
+                if (unsubscribe) unsubscribe();
+            };
+        }
+    }, [navigation]);
 
     return (
         <WebView

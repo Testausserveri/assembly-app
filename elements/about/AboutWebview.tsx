@@ -6,6 +6,7 @@ import { ActivityIndicator } from 'react-native-paper';
 const AboutWebview = () => {
     const [loading, setLoading] = useState(true);
     const { i18n } = useTranslation();
+
     const uri = `https://assembly.org/${i18n.language}/about`;
     const whitelist = [
         /^https:\/\/assembly\.org\/(fi\/|en\/)?about/,
