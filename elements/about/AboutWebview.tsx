@@ -1,35 +1,39 @@
+import WhitelistedWebview from '@/components/WhitelistedWebview';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator } from 'react-native-paper';
-import { WebView } from 'react-native-webview';
-
-// Hide some elements from the page to prevent user navigation
-// and to make webview feel more like native experience
-const injectedJavascript = `(function() {
-    // Navbar and footer
-    document.querySelector("nav").style.display = "none";
-    document.querySelector("footer").style.display = "none";
-
-    // Breadcrumbs index page (bit hacky but the best way I could find)
-    document.querySelectorAll(".css-1ln5cin.e9onl6k0")[0].style.display = "none";
-    document.querySelectorAll(".css-1ln5cin.e9onl6k0")[1].style.display = "none";
-})();`;
 
 const AboutWebview = () => {
     const [loading, setLoading] = useState(true);
     const { i18n } = useTranslation();
     const uri = `https://assembly.org/${i18n.language}/about`;
+    const whitelist = [
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?about/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?history/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?historia/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?crewien-esittelyt/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?volunteer-crews/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?tietoa-vanhemmille/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?info-for-parents/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?tilaa-uutiskirje/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?subscribe-to-newsletter/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?tule-tekemaan-tapahtumaa/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?become-an-organizer/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?contact/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?yrityksille/,
+        /^https:\/\/assembly\.org\/(fi\/|en\/)?business/,
+    ];
 
     return (
         <>
             {loading && <ActivityIndicator animating />}
-            <WebView
+            <WhitelistedWebview
+                whitelistedUrls={whitelist}
                 style={{
                     display: loading ? 'none' : 'flex',
                 }}
                 onLoad={() => setLoading(false)}
                 source={{ uri }}
-                injectedJavaScript={injectedJavascript}
             />
         </>
     );
