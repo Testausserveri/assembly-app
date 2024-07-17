@@ -27,13 +27,8 @@ function WhitelistedWebview({ whitelistedUrls, ...props }: WhitelistedWebviewPro
             ref={webviewRef}
             injectedJavaScript={injectedJavascript}
             onNavigationStateChange={(newNavState) => {
-                let foundMatch = false;
-                for (const whitelistedUrl of whitelistedUrls) {
-                    if (whitelistedUrl.test(newNavState.url)) {
-                        foundMatch = true;
-                        break;
-                    }
-                }
+                let foundMatch = whitelistedUrls.find((regex) => regex.test(newNavState.url));
+
                 if (!foundMatch) {
                     Linking.openURL(newNavState.url);
                     webviewRef.current?.stopLoading();
