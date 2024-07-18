@@ -1,11 +1,12 @@
 import WhitelistedWebview from '@/components/WhitelistedWebview';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, useTheme } from 'react-native-paper';
 
 const AboutWebview = () => {
     const [loading, setLoading] = useState(true);
     const { i18n } = useTranslation();
+    const theme = useTheme();
 
     const uri = `https://assembly.org/${i18n.language}/about`;
     const whitelist = [
@@ -32,6 +33,7 @@ const AboutWebview = () => {
                 whitelistedUrls={whitelist}
                 style={{
                     display: loading ? 'none' : 'flex',
+                    backgroundColor: theme.colors.background,
                 }}
                 onLoad={() => setLoading(false)}
                 source={{ uri }}

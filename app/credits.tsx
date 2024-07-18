@@ -2,10 +2,14 @@ import { useTranslation } from 'react-i18next';
 import { ImageBackground, View } from 'react-native';
 import { ScrollView } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Credits() {
     const theme = useTheme();
     const { t } = useTranslation();
+
+    const safeArea = useSafeAreaInsets();
+
     return (
         <ScrollView
             style={{
@@ -15,7 +19,7 @@ export default function Credits() {
             }}
             contentContainerStyle={{
                 gap: 16,
-                paddingBottom: 16,
+                paddingBottom: safeArea.bottom,
             }}
         >
             <View>
@@ -66,11 +70,11 @@ export default function Credits() {
             <View style={{ gap: 16, paddingHorizontal: 16 }}>
                 <Text variant='bodyLarge'>Luukas Pörtfors</Text>
                 <Text variant='bodyLarge'>Otto Laakkonen</Text>
-                <Text variant='bodyLarge'>Eero Salla</Text>
                 <Text variant='bodyLarge'>Onni Linnala</Text>
                 <Text variant='bodyLarge'>Anto Keinänen</Text>
                 <Text variant='bodyLarge'>Samu Kupiainen</Text>
                 <Text variant='bodyLarge'>Miika Tuominen</Text>
+                <Text variant='bodyLarge'>Eero Salla</Text>
             </View>
             <Text
                 variant='bodyLarge'
