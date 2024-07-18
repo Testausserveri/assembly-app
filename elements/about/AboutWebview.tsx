@@ -7,22 +7,14 @@ const AboutWebview = () => {
     const [loading, setLoading] = useState(true);
     const { i18n } = useTranslation();
 
-    const uri = `https://assembly.org/${i18n.language}/about`;
+    const uri =
+        i18n.language === 'fi'
+            ? 'https://assembly.org/events/summer24/info'
+            : 'https://assembly.org/en/events/summer24/en/info-en';
+
     const whitelist = [
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?about/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?history/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?historia/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?crewien-esittelyt/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?volunteer-crews/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?tietoa-vanhemmille/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?info-for-parents/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?tilaa-uutiskirje/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?subscribe-to-newsletter/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?tule-tekemaan-tapahtumaa/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?become-an-organizer/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?contact/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?yrityksille/,
-        /^https:\/\/assembly\.org\/(fi\/|en\/)?business/,
+        /^https:\/\/assembly\.org\/(fi\/)?events\/summer24\/info/,
+        /^https:\/\/assembly\.org\/en\/events\/summer24\/en\/info-en/,
     ];
 
     return (
