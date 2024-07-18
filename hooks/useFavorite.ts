@@ -33,31 +33,26 @@ const saveFavorites = async (favorites: number[]) => {
 /**
  * Hook to manage favorite state for a given eventId.
  *
- * @param id - The ID of the event to track favorite state for.
- * @returns An object containing the current favorite state and a function to toggle the favorite state.
+ * @returns An object containing the current favorites and a function to toggle the favorite state by id.
  */
-export const useFavorite = (id: number) => {
-    const [favorite, setFavorite] = useState(false);
+export const useFavorite = () => {
+    const [favorites, setFavorites] = useState<number[]>([]);
 
     useEffect(() => {
         getFavorites().then((favorites) => {
-            setFavorite(favorites.includes(id));
+            setFavorites(favorites);
         });
-    }, [id]);
+    }, []);
 
-    const toggle = async () => {
-        let favorites = await getFavorites();
-
-        if (favorite) {
-            favorites.push(id);
+    const toggle = async (id: number) => {
+        if (!favorites.includes(id)) {
+            setFavorites([...favorites, id]);
+            await saveFavorites([...favorites, id]);
         } else {
-            favorites.filter((f) => f !== id);
+            setFavorites(favorites.filter((n) => n !== id));
+            await saveFavorites(favorites.filter((n) => n !== id));
         }
-
-        saveFavorites(favorites);
-        // Trigger redraw
-        setFavorite(!favorite);
     };
 
-    return { favorite, toggle };
+    return { favorites, toggle };
 };
