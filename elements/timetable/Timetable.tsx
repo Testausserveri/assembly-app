@@ -69,13 +69,19 @@ const Timetable = () => {
                 <ActivityIndicator animating />
             ) : (
                 <>
-                    <DateSelector
-                        date={events[eventDayIndex][0].start}
-                        next={next}
-                        previous={previous}
-                        nextVisible={eventDayIndex < events.length - 1}
-                        previousVisible={eventDayIndex > 0}
-                    />
+                    <View
+                        style={{
+                            zIndex: 2,
+                        }}
+                    >
+                        <DateSelector
+                            date={events[eventDayIndex][0].start}
+                            next={next}
+                            previous={previous}
+                            nextVisible={eventDayIndex < events.length - 1}
+                            previousVisible={eventDayIndex > 0}
+                        />
+                    </View>
                     <View style={{ flex: 1 }}>
                         <EventsBox events={events[eventDayIndex] ?? []} />
                     </View>

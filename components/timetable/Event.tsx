@@ -1,7 +1,9 @@
 import { useFavorite } from '@/hooks/useFavorite';
 import dayjs from 'dayjs';
+import { Image } from 'expo-image';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { IconButton, Surface, Text } from 'react-native-paper';
 
 interface EventProps {
@@ -26,10 +28,15 @@ const getEventTimeString = (start: Date, end: Date) => {
 };
 
 const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps) => {
-    const timeString = getEventTimeString(start, end);
-    const { favorite, toggle: toggleFavorite } = useFavorite(id);
+    const timeString = useMemo(() => getEventTimeString(start, end), [start, end]);
+    const { isFavorite, setIsFavorite } = useFavorite(id);
     const { t, i18n } = useTranslation();
-    dayjs.locale(i18n.language);
+
+    const [isAfterEnd, isBeforeStart] = useMemo(() => {
+        dayjs.locale(i18n.language);
+
+        return [dayjs().isAfter(end), dayjs().isBefore(start)];
+    }, [end, i18n.language, start]);
 
     return (
         <Surface
@@ -44,7 +51,7 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
             }}
             elevation={0}
         >
-            {dayjs().isAfter(end) &&
+            {isAfterEnd &&
                 process.env.EXPO_PUBLIC_ENVIRONMENT !== 'development' &&
                 process.env.EXPO_PUBLIC_ENVIRONMENT !== 'preview' && (
                     <View
@@ -61,7 +68,8 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
             {thumbnail && (
                 <Image
                     source={{ uri: thumbnail }}
-                    resizeMode='cover'
+                    contentFit='cover'
+                    cachePolicy='memory-disk'
                     style={{
                         position: 'absolute',
                         top: 0,
@@ -86,35 +94,60 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
                     backgroundColor: 'rgba(0, 0, 0, 0.75)',
                 }}
             />
-            <Surface elevation={0} style={{ padding: 16, width: '100%', alignItems: 'center' }}>
-                <Text variant='titleMedium' style={{ textAlign: 'center' }}>
-                    {title}
-                </Text>
-                {location && (
+
+            <Surface
+                elevation={0}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: '100%',
+                }}
+            >
+                <Surface
+                    elevation={0}
+                    style={{
+                        padding: 16,
+                        flex: 1,
+                        alignItems: 'center',
+                        paddingRight: 40,
+                        marginRight: -40,
+                        paddingLeft: 16 + 40,
+                        display: 'flex',
+                    }}
+                >
                     <Text
-                        variant='labelLarge'
-                        style={{ textAlign: 'center' }}
-                    >{`${t('location')}: ${location}`}</Text>
-                )}
-                <Text variant='labelLarge' style={{ textAlign: 'center' }}>
-                    {`${t('time')}: ${timeString}`}
-                </Text>
-            </Surface>
-            {dayjs().isBefore(start) ||
-                ((process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
-                    process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview') && (
-                    <IconButton
-                        onPress={() => toggleFavorite()}
-                        icon={favorite ? 'heart' : 'heart-outline'}
+                        variant='titleMedium'
                         style={{
-                            position: 'absolute',
-                            top: 0,
-                            right: 0,
+                            textAlign: 'center',
                         }}
-                    />
-                ))}
+                    >
+                        {title}
+                    </Text>
+                    {location && (
+                        <Text
+                            variant='labelLarge'
+                            style={{ textAlign: 'center' }}
+                        >{`${t('location')}: ${location}`}</Text>
+                    )}
+                    <Text variant='labelLarge' style={{ textAlign: 'center' }}>
+                        {`${t('time')}: ${timeString}`}
+                    </Text>
+                </Surface>
+                {isBeforeStart ||
+                    ((process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
+                        process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview') && (
+                        <IconButton
+                            onPress={() => setIsFavorite(!isFavorite)}
+                            icon={isFavorite ? 'heart' : 'heart-outline'}
+                            style={{
+                                height: 40,
+                                width: 40,
+                            }}
+                        />
+                    ))}
+            </Surface>
         </Surface>
     );
 };
 
-export default Event;
+export default React.memo(Event);
