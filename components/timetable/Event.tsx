@@ -1,4 +1,3 @@
-import { useFavorite } from '@/hooks/useFavorite';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { Image, View } from 'react-native';

@@ -34,7 +34,7 @@ export function useNavigationPanel(onPageSelectedCallback: (position: number) =>
                     useNativeDriver: false,
                 }
             ),
-        []
+        [onPageSelectedCallback, onPageSelectedPosition]
     );
 
     return {
@@ -43,6 +43,7 @@ export function useNavigationPanel(onPageSelectedCallback: (position: number) =>
         nextPage,
         previousPage,
         isAnimated,
+        setIsAnimated,
         setPage,
         onPageSelected,
     };
