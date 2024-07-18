@@ -80,7 +80,11 @@ const Timetable = () => {
                     >
                         {events.map((day, index) => (
                             <View collapsable={false} key={index}>
-                                <EventsBox events={day ?? []} favorites={favorites} toggleFavorite={toggleFavorite} />
+                                <EventsBox
+                                    events={day ?? []}
+                                    favorites={favorites}
+                                    toggleFavorite={toggleFavorite}
+                                />
                             </View>
                         ))}
                     </AnimatedPager>

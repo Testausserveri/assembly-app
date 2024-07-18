@@ -26,7 +26,17 @@ const getEventTimeString = (start: Date, end: Date) => {
     return `${startTime.format('HH:mm')} - ${endTime.format('HH:mm')}`;
 };
 
-const Event = ({ id, title, location, start, end, color, thumbnail, isFavorite, toggleFavorite }: EventProps) => {
+const Event = ({
+    id,
+    title,
+    location,
+    start,
+    end,
+    color,
+    thumbnail,
+    isFavorite,
+    toggleFavorite,
+}: EventProps) => {
     const timeString = getEventTimeString(start, end);
     const { t, i18n } = useTranslation();
     dayjs.locale(i18n.language);

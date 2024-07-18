@@ -1,7 +1,6 @@
 import { AssemblyEvent } from '@/api/eventService';
 import Event from '@/components/timetable/Event';
 import { ScrollView } from 'react-native';
-import { useFavorite } from '@/hooks/useFavorite';
 
 interface EventsBoxProps {
     events: AssemblyEvent[];
@@ -9,10 +8,7 @@ interface EventsBoxProps {
     toggleFavorite: (id: number) => void;
 }
 
-const EventsBox = ({ events, favorites, toggleFavorite
-}: EventsBoxProps) => {
-
-
+const EventsBox = ({ events, favorites, toggleFavorite }: EventsBoxProps) => {
     return (
         <ScrollView
             style={{ paddingHorizontal: 30, paddingBottom: 8 }}
