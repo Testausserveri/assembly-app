@@ -22,7 +22,27 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name='useless'
+                name='about'
+                options={{
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon
+                            name={focused ? 'information-circle' : 'information-circle-outline'}
+                            color={color}
+                        />
+                    ),
+                    unmountOnBlur: true,
+                }}
+            />
+            <Tabs.Screen
+                name='map'
+                options={{
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon name={focused ? 'map' : 'map-outline'} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='profile'
                 options={{
                     tabBarIcon: ({ color, focused }) => (
                         <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />
