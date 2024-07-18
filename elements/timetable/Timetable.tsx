@@ -1,4 +1,4 @@
-import { AssemblyEvent, getEvents } from '@/api/eventService';
+import { AssemblyEvent, determineStartDayIndex, getEvents } from '@/api/eventService';
 import DateSelector from '@/components/timetable/DateSelector';
 import EventsBox from '@/elements/timetable/EventsBox';
 import { useFavorite } from '@/hooks/useFavorite';
@@ -42,11 +42,18 @@ const Timetable = () => {
 
             setEvents(eventsGroupedByDay);
 
-            // Set index so that the current day is shown
-            const index = eventsGroupedByDay.findIndex(
-                (events) => events[events.length - 1].end.getTime() > new Date().getTime()
-            ); // If last event of the day has ended, it's not the current day
-            setEventDayIndex(index === -1 ? eventsGroupedByDay.length - 1 : index);
+            const startDayIndex = determineStartDayIndex(eventRes);
+            // If the event has not started yet
+            if (new Date().getTime() < eventsGroupedByDay[startDayIndex][0].start.getTime()) {
+                // Set the index to be the "official" event start index
+                setEventDayIndex(startDayIndex);
+            } else {
+                // Set index so that the current day is shown
+                const index = eventsGroupedByDay.findIndex(
+                    (events) => events[events.length - 1].end.getTime() > new Date().getTime()
+                ); // If last event of the day has ended, it's not the current day
+                setEventDayIndex(index === -1 ? eventsGroupedByDay.length - 1 : index);
+            }
         });
     }, []);
 
