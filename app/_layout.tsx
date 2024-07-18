@@ -1,5 +1,6 @@
 import { TabBarIcon } from '@/components';
 import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
+import { useFavoriteStoreStatus } from '@/hooks/useFavorite';
 import Locales from '@/locales';
 import { Themes } from '@/styles';
 import { useFonts } from 'expo-font';
@@ -34,13 +35,15 @@ export default function RootLayout() {
         Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
     });
 
+    const { hydrated: favoriteStoreReady } = useFavoriteStoreStatus();
+
     const { t } = useTranslation();
 
     useEffect(() => {
-        if (loaded) {
-            SplashScreen.hideAsync();
+        if (loaded && favoriteStoreReady) {
+            SplashScreen.hideAsync().catch();
         }
-    }, [loaded]);
+    }, [loaded, favoriteStoreReady]);
 
     if (!loaded) {
         return null;

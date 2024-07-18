@@ -1,63 +1,66 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState } from 'react';
+import { useCallback, useMemo } from 'react';
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { useShallow } from 'zustand/react/shallow';
 
-/**
- * Retrieves the favorite events from async storage.
- * @returns A promise that resolves to an array of numbers representing the favorite event ids .
- */
-const getFavorites = async (): Promise<number[]> => {
-    try {
-        const data = await AsyncStorage.getItem('favorite_events');
-        if (data) {
-            return data.split(';').map((n) => parseInt(n));
+type FavoriteStore = {
+    hydrated: boolean;
+    setHydrated: (value: boolean) => void;
+    favorites: Record<string, boolean | undefined>;
+    setFavorite: (id: number, value: boolean) => void;
+};
+
+const useFavoriteStore = create<FavoriteStore>()(
+    persist(
+        (set) => ({
+            hydrated: false,
+            setHydrated: (value) => set({ hydrated: value }),
+            favorites: {},
+            setFavorite: (id, value) =>
+                set((state) => ({
+                    favorites: { ...state.favorites, [id.toString(10)]: value || undefined },
+                })),
+        }),
+        {
+            name: 'favoriteEvents',
+            onRehydrateStorage: () => (state) => state?.setHydrated(true),
+            storage: createJSONStorage(() => AsyncStorage),
         }
-    } catch (ex) {
-        console.error('Failed to get favorites from async storage:', ex);
-    }
-    return [];
-};
-
-/**
- * Saves the favorite events to async storage.
- *
- * @param {number[]} favorites - The array of favorite event IDs.
- */
-const saveFavorites = async (favorites: number[]) => {
-    try {
-        await AsyncStorage.setItem('favorite_events', favorites.join(';'));
-    } catch (ex) {
-        console.error('Failed to save favorites to async storage:', ex);
-    }
-};
+    )
+);
 
 /**
  * Hook to manage favorite state for a given eventId.
  *
  * @param id - The ID of the event to track favorite state for.
- * @returns An object containing the current favorite state and a function to toggle the favorite state.
+ * @returns An object containing the current favorite state and a function to set the favorite state.
  */
 export const useFavorite = (id: number) => {
-    const [favorite, setFavorite] = useState(false);
+    const idStr = id.toString(10);
 
-    useEffect(() => {
-        getFavorites().then((favorites) => {
-            setFavorite(favorites.includes(id));
-        });
-    }, [id]);
+    const [isFavorite, setFavorite] = useFavoriteStore(
+        useShallow((state) => {
+            return [state.favorites[idStr] ?? false, state.setFavorite];
+        })
+    );
 
-    const toggle = async () => {
-        let favorites = await getFavorites();
+    const setIsFavorite = useCallback(
+        (value: boolean) => {
+            setFavorite(id, value);
+        },
+        [id, setFavorite]
+    );
 
-        if (favorite) {
-            favorites.push(id);
-        } else {
-            favorites.filter((f) => f !== id);
-        }
+    return useMemo(() => ({ isFavorite, setIsFavorite }), [isFavorite, setIsFavorite]);
+};
 
-        saveFavorites(favorites);
-        // Trigger redraw
-        setFavorite(!favorite);
-    };
+/**
+ * Hook to get the current favorite store status.
+ * @returns An object containing the current hydration status.
+ */
+export const useFavoriteStoreStatus = () => {
+    const hydrated = useFavoriteStore((state) => state.hydrated);
 
-    return { favorite, toggle };
+    return useMemo(() => ({ hydrated }), [hydrated]);
 };

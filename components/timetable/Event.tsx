@@ -1,7 +1,9 @@
 import { useFavorite } from '@/hooks/useFavorite';
 import dayjs from 'dayjs';
+import { Image } from 'expo-image';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { IconButton, Surface, Text } from 'react-native-paper';
 
 interface EventProps {
@@ -26,10 +28,15 @@ const getEventTimeString = (start: Date, end: Date) => {
 };
 
 const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps) => {
-    const timeString = getEventTimeString(start, end);
-    const { favorite, toggle: toggleFavorite } = useFavorite(id);
+    const timeString = useMemo(() => getEventTimeString(start, end), [start, end]);
+    const { isFavorite, setIsFavorite } = useFavorite(id);
     const { t, i18n } = useTranslation();
-    dayjs.locale(i18n.language);
+
+    const [isAfterEnd, isBeforeStart] = useMemo(() => {
+        dayjs.locale(i18n.language);
+
+        return [dayjs().isAfter(end), dayjs().isBefore(start)];
+    }, [end, i18n.language, start]);
 
     return (
         <Surface
@@ -44,7 +51,7 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
             }}
             elevation={0}
         >
-            {dayjs().isAfter(end) &&
+            {isAfterEnd &&
                 process.env.EXPO_PUBLIC_ENVIRONMENT !== 'development' &&
                 process.env.EXPO_PUBLIC_ENVIRONMENT !== 'preview' && (
                     <View
@@ -61,7 +68,8 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
             {thumbnail && (
                 <Image
                     source={{ uri: thumbnail }}
-                    resizeMode='cover'
+                    contentFit='cover'
+                    cachePolicy='memory-disk'
                     style={{
                         position: 'absolute',
                         top: 0,
@@ -117,4 +125,4 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
     );
 };
 
-export default Event;
+export default React.memo(Event);
