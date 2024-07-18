@@ -13,7 +13,7 @@ const AnimatedPager = Animated.createAnimatedComponent(PagerView);
 
 const Timetable = () => {
     const [events, setEvents] = useState<AssemblyEvent[][]>([]);
-    const [eventDayIndex, setEventDayIndex] = useState(0);
+    const [eventDayIndex, setEventDayIndex] = useState(-1);
     const { favorites, toggle: toggleFavorite } = useFavorite();
 
     const callback = useCallback((position: number) => {
@@ -52,7 +52,7 @@ const Timetable = () => {
 
     return (
         <View style={{ flex: 1 }}>
-            {events.length === 0 ? (
+            {events.length === 0 || eventDayIndex === -1 ? (
                 <ActivityIndicator animating />
             ) : (
                 <View
