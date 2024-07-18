@@ -12,6 +12,8 @@ interface EventProps {
     end: Date;
     color: string;
     thumbnail: string;
+    isFavorite: boolean;
+    toggleFavorite: () => void;
 }
 
 const getEventTimeString = (start: Date, end: Date) => {
@@ -25,9 +27,8 @@ const getEventTimeString = (start: Date, end: Date) => {
     return `${startTime.format('HH:mm')} - ${endTime.format('HH:mm')}`;
 };
 
-const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps) => {
+const Event = ({ id, title, location, start, end, color, thumbnail, isFavorite, toggleFavorite }: EventProps) => {
     const timeString = getEventTimeString(start, end);
-    const { favorite, toggle: toggleFavorite } = useFavorite(id);
     const { t, i18n } = useTranslation();
     dayjs.locale(i18n.language);
 
@@ -105,7 +106,7 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
                     process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview') && (
                     <IconButton
                         onPress={() => toggleFavorite()}
-                        icon={favorite ? 'heart' : 'heart-outline'}
+                        icon={isFavorite ? 'heart' : 'heart-outline'}
                         style={{
                             position: 'absolute',
                             top: 0,

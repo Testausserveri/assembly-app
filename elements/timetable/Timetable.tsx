@@ -1,6 +1,7 @@
 import { AssemblyEvent, getEvents } from '@/api/eventService';
 import DateSelector from '@/components/timetable/DateSelector';
 import EventsBox from '@/elements/timetable/EventsBox';
+import { useFavorite } from '@/hooks/useFavorite';
 import { useNavigationPanel } from '@/hooks/useNavigationPanel';
 import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
@@ -13,6 +14,7 @@ const AnimatedPager = Animated.createAnimatedComponent(PagerView);
 const Timetable = () => {
     const [events, setEvents] = useState<AssemblyEvent[][]>([]);
     const [eventDayIndex, setEventDayIndex] = useState(0);
+    const { favorites, toggle: toggleFavorite } = useFavorite();
 
     const callback = useCallback((position: number) => {
         setEventDayIndex(position);
@@ -78,7 +80,7 @@ const Timetable = () => {
                     >
                         {events.map((day, index) => (
                             <View collapsable={false} key={index}>
-                                <EventsBox events={day ?? []} />
+                                <EventsBox events={day ?? []} favorites={favorites} toggleFavorite={toggleFavorite} />
                             </View>
                         ))}
                     </AnimatedPager>
