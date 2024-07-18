@@ -22,6 +22,14 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
+                name='map'
+                options={{
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon name={focused ? 'map' : 'map-outline'} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
                 name='about'
                 options={{
                     tabBarIcon: ({ color, focused }) => (
@@ -31,14 +39,6 @@ export default function TabLayout() {
                         />
                     ),
                     unmountOnBlur: true,
-                }}
-            />
-            <Tabs.Screen
-                name='map'
-                options={{
-                    tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'map' : 'map-outline'} color={color} />
-                    ),
                 }}
             />
             <Tabs.Screen
