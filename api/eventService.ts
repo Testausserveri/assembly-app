@@ -96,6 +96,26 @@ const determineEvent = (): string => {
     }
 };
 
+export const determineStartDayIndex = (events: AssemblyEvent[]): number => {
+    const doorsOpen = events.find((event) => event.title.toLowerCase() === 'doors open');
+
+    if (!doorsOpen) {
+        console.error("Could not find event with name 'doors open'");
+        return 0;
+    }
+
+    const days = [...new Set(events.map((event) => event.start))];
+    const start_day_index = days.findIndex((day) => doorsOpen.start === day);
+
+    if (start_day_index === -1) {
+        console.error("Failed to find matching day for 'Doors Open' event");
+        return 0;
+    }
+
+    // the index returned by findIndex if off by one
+    return start_day_index - 1;
+};
+
 const API_BASE_PATH = `https://wp.assembly.org/${determineEvent()}/index.php?rest_route=/api/v1`;
 
 /**
