@@ -94,33 +94,58 @@ const Event = ({ id, title, location, start, end, color, thumbnail }: EventProps
                     backgroundColor: 'rgba(0, 0, 0, 0.75)',
                 }}
             />
-            <Surface elevation={0} style={{ padding: 16, width: '100%', alignItems: 'center' }}>
-                <Text variant='titleMedium' style={{ textAlign: 'center' }}>
-                    {title}
-                </Text>
-                {location && (
+
+            <Surface
+                elevation={0}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: '100%',
+                }}
+            >
+                <Surface
+                    elevation={0}
+                    style={{
+                        padding: 16,
+                        flex: 1,
+                        alignItems: 'center',
+                        paddingRight: 40,
+                        marginRight: -40,
+                        paddingLeft: 16 + 40,
+                        display: 'flex',
+                    }}
+                >
                     <Text
-                        variant='labelLarge'
-                        style={{ textAlign: 'center' }}
-                    >{`${t('location')}: ${location}`}</Text>
-                )}
-                <Text variant='labelLarge' style={{ textAlign: 'center' }}>
-                    {`${t('time')}: ${timeString}`}
-                </Text>
-            </Surface>
-            {dayjs().isBefore(start) ||
-                ((process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
-                    process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview') && (
-                    <IconButton
-                        onPress={() => toggleFavorite()}
-                        icon={favorite ? 'heart' : 'heart-outline'}
+                        variant='titleMedium'
                         style={{
-                            position: 'absolute',
-                            top: 0,
-                            right: 0,
+                            textAlign: 'center',
                         }}
-                    />
-                ))}
+                    >
+                        {title}
+                    </Text>
+                    {location && (
+                        <Text
+                            variant='labelLarge'
+                            style={{ textAlign: 'center' }}
+                        >{`${t('location')}: ${location}`}</Text>
+                    )}
+                    <Text variant='labelLarge' style={{ textAlign: 'center' }}>
+                        {`${t('time')}: ${timeString}`}
+                    </Text>
+                </Surface>
+                {isBeforeStart ||
+                    ((process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
+                        process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview') && (
+                        <IconButton
+                            onPress={() => setIsFavorite(!isFavorite)}
+                            icon={isFavorite ? 'heart' : 'heart-outline'}
+                            style={{
+                                height: 40,
+                                width: 40,
+                            }}
+                        />
+                    ))}
+            </Surface>
         </Surface>
     );
 };
