@@ -31,7 +31,7 @@ export function useNavigationPanel(onPageSelectedCallback: (position: number) =>
                         setActivePage(position);
                         onPageSelectedCallback(position);
                     },
-                    useNativeDriver: true,
+                    useNativeDriver: false,
                 }
             ),
         []

@@ -15,9 +15,9 @@ const Timetable = () => {
     const [eventDayIndex, setEventDayIndex] = useState(0);
 
     const callback = useCallback((position: number) => {
-        console.log('Hey', `You are on ${position + 1} page`);
+        setEventDayIndex(position);
     }, []);
-    const { ref, nextPage, previousPage, ...navigationPanel } = useNavigationPanel(callback);
+    const { ref, nextPage, previousPage, onPageSelected } = useNavigationPanel(callback);
 
     useEffect(() => {
         getEvents().then((eventRes) => {
@@ -44,7 +44,7 @@ const Timetable = () => {
             const index = eventsGroupedByDay.findIndex(
                 (events) => events[events.length - 1].end.getTime() > new Date().getTime()
             ); // If last event of the day has ended, it's not the current day
-            // setEventDayIndex(index === -1 ? eventsGroupedByDay.length - 1 : index);
+            setEventDayIndex(index === -1 ? eventsGroupedByDay.length - 1 : index);
         });
     }, []);
 
@@ -71,7 +71,7 @@ const Timetable = () => {
                         ref={ref}
                         useNext={false}
                         initialPage={eventDayIndex}
-                        {...navigationPanel}
+                        onPageSelected={onPageSelected}
                         layoutDirection='ltr'
                         orientation='horizontal'
                         style={{ flex: 1 }}
