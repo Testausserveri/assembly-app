@@ -18,7 +18,7 @@ export default () => {
                 bundleIdentifier:
                     process.env.EXPO_PUBLIC_ENVIRONMENT === 'production'
                         ? 'com.testausserveri.assemblyapp'
-                        : 'com.testausserveri.assemblyapp-dev',
+                        : 'com.testausserveri.assemblyapp_dev',
             },
             android: {
                 adaptiveIcon: {
@@ -28,14 +28,26 @@ export default () => {
                 package:
                     process.env.EXPO_PUBLIC_ENVIRONMENT === 'production'
                         ? 'com.testausserveri.assemblyapp'
-                        : 'com.testausserveri.assemblyapp-dev',
+                        : 'com.testausserveri.assemblyapp_dev',
+                useNextNotificationApi: true,
             },
             web: {
                 bundler: 'metro',
                 output: 'static',
                 favicon: './assets/images/favicon.png',
             },
-            plugins: ['expo-router', 'expo-build-properties'],
+            plugins: [
+                'expo-router',
+                'expo-build-properties',
+                [
+                    'expo-notifications',
+                    {
+                        icon: './assets/images/icon.png',
+                        color: '#191919',
+                        sounds: [],
+                    },
+                ],
+            ],
             experiments: {
                 typedRoutes: true,
             },

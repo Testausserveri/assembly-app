@@ -56,19 +56,19 @@ export const useLocalNotification = (): ILocalNotificationHook => {
  * @param eventTitle - The title of the event.
  * @param start - The start date of the event.
  */
-export const schedulePushNotification = async (eventTitle: string, start: Date) => {
-    const quarter_before_start = dayjs(start).subtract(15, 'minutes');
-    const time_difference = Math.round(dayjs(quarter_before_start).diff(new Date()) / 1000);
+export const schedulePushNotification = async (id: number, eventTitle: string, start: Date) => {
+    const quarterBeforeStart = dayjs(start).subtract(15, 'minutes');
+    const timeDifference = Math.round(dayjs(quarterBeforeStart).diff(new Date(), 'seconds'));
 
     await Notifications.scheduleNotificationAsync({
-        identifier: eventTitle,
+        identifier: id.toString(),
         content: {
             title: `${eventTitle}`,
             subtitle: '',
             body: t('event-starting-15'),
         },
         trigger: {
-            seconds: time_difference,
+            seconds: timeDifference,
         },
     });
 };
@@ -79,8 +79,8 @@ export const schedulePushNotification = async (eventTitle: string, start: Date) 
  * @param eventTitle - The title of the event associated with the push notification.
  * @returns A promise that resolves when the notification is successfully canceled.
  */
-export const cancelScheduledPushNotification = async (eventTitle: string) => {
-    await Notifications.cancelScheduledNotificationAsync(eventTitle);
+export const cancelScheduledPushNotification = async (id: number) => {
+    await Notifications.cancelScheduledNotificationAsync(id.toString());
 };
 
 /**
