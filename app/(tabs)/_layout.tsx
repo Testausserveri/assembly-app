@@ -1,4 +1,5 @@
 import { TabBar, TabBarIcon } from '@/components';
+import LootboxNavigationButton from '@/elements/lootbox/LootboxNavigationButton';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
@@ -27,6 +28,12 @@ export default function TabLayout() {
                     tabBarIcon: ({ color, focused }) => (
                         <TabBarIcon name={focused ? 'map' : 'map-outline'} color={color} />
                     ),
+                }}
+            />
+            <Tabs.Screen
+                name='lootbox'
+                options={{
+                    tabBarIcon: ({ focused }) => <LootboxNavigationButton focused={focused} />,
                 }}
             />
             <Tabs.Screen

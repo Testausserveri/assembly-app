@@ -36,5 +36,10 @@ export default {
         devteam: 'Development Team',
         'some-great-administrative-work': 'Some great administrative work',
         credits: 'Credits',
+        loot: 'Loot',
+        'lootbox-coming-soon': 'Lootboxes coming soon!',
+        'lootbox-under-construction': 'Lootboxes are part of the awesomness coming in the future!',
+        'lootbox-link':
+            'While we are working on getting them in the app, lootboxes can be found on the website.',
     },
 };

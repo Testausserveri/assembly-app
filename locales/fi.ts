@@ -36,5 +36,10 @@ export default {
         devteam: 'Kehitystiimi',
         'some-great-administrative-work': 'Hienoa hallinnollista työtä',
         credits: 'Kiitokset',
+        loot: 'Loot',
+        'lootbox-coming-soon': 'Lootboxit tulossa pian!',
+        'lootbox-under-construction': 'Lootboxit ovat osa tulevaisuuden mahtavia ominaisuuksia!',
+        'lootbox-link':
+            'Sillä välin kun työstämme niitä saataville sovellukseen, lootboxit löytyvät verkkosivuilta.',
     },
 };
