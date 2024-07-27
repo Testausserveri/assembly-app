@@ -1,25 +1,25 @@
 import { AssemblyEvent, determineStartDayIndex, getEvents } from '@/api/eventService';
 import DateSelector from '@/components/timetable/DateSelector';
 import EventsBox from '@/elements/timetable/EventsBox';
-import { useEffect, useState } from 'react';
+import { useFavorite } from '@/hooks/useFavorite';
+import { useNavigationPanel } from '@/hooks/useNavigationPanel';
+import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
+import PagerView from 'react-native-pager-view';
 import { ActivityIndicator } from 'react-native-paper';
+import Animated from 'react-native-reanimated';
+
+const AnimatedPager = Animated.createAnimatedComponent(PagerView);
 
 const Timetable = () => {
     const [events, setEvents] = useState<AssemblyEvent[][]>([]);
-    const [eventDayIndex, setEventDayIndex] = useState(0);
+    const [eventDayIndex, setEventDayIndex] = useState(-1);
+    const { favorites, toggle: toggleFavorite } = useFavorite();
 
-    const previous = () => {
-        if (eventDayIndex > 0) {
-            setEventDayIndex(eventDayIndex - 1);
-        }
-    };
-
-    const next = () => {
-        if (eventDayIndex < events.length - 1) {
-            setEventDayIndex(eventDayIndex + 1);
-        }
-    };
+    const callback = useCallback((position: number) => {
+        setEventDayIndex(position);
+    }, []);
+    const { ref, nextPage, previousPage, onPageSelected } = useNavigationPanel(callback);
 
     useEffect(() => {
         getEvents().then((eventRes) => {
@@ -58,28 +58,44 @@ const Timetable = () => {
     }, []);
 
     return (
-        <View
-            style={{
-                display: 'flex',
-                gap: 16,
-                flex: 1,
-            }}
-        >
-            {events.length === 0 ? (
+        <View style={{ flex: 1 }}>
+            {events.length === 0 || eventDayIndex === -1 ? (
                 <ActivityIndicator animating />
             ) : (
-                <>
+                <View
+                    style={{
+                        display: 'flex',
+                        gap: 16,
+                        flex: 1,
+                    }}
+                >
                     <DateSelector
                         date={events[eventDayIndex][0].start}
-                        next={next}
-                        previous={previous}
                         nextVisible={eventDayIndex < events.length - 1}
                         previousVisible={eventDayIndex > 0}
+                        next={nextPage}
+                        previous={previousPage}
                     />
-                    <View style={{ flex: 1 }}>
-                        <EventsBox events={events[eventDayIndex] ?? []} />
-                    </View>
-                </>
+                    <AnimatedPager
+                        ref={ref}
+                        useNext={false}
+                        initialPage={eventDayIndex}
+                        onPageSelected={onPageSelected}
+                        layoutDirection='ltr'
+                        orientation='horizontal'
+                        style={{ flex: 1 }}
+                    >
+                        {events.map((day, index) => (
+                            <View collapsable={false} key={index}>
+                                <EventsBox
+                                    events={day ?? []}
+                                    favorites={favorites}
+                                    toggleFavorite={toggleFavorite}
+                                />
+                            </View>
+                        ))}
+                    </AnimatedPager>
+                </View>
             )}
         </View>
     );
