@@ -2,6 +2,8 @@ export default {
     translation: {
         home: 'Koti',
         timetable: 'Aikataulu',
+        about: 'Tietoa',
+        map: 'Kartta',
         location: 'Sijainti',
         time: 'Aika',
         'select-language': 'Valitse kieli',
@@ -10,5 +12,29 @@ export default {
         'success-lang-change': 'Kieli vaihdettu onnistuneesti',
         'error-lang-change': 'Virhe kielen vaihdossa',
         'event-starting-15': 'Tapahtuma alkaa 15 minuutin kuluttua',
+        'login-failed': 'Kirjautuminen epäonnistui',
+        'signup-failed': 'Rekisteröityminen epäonnistui',
+        'unknown-error': 'Tuntematon virhe',
+        email: 'Sähköposti',
+        password: 'Salasana',
+        'sign-in': 'Kirjaudu sisään',
+        'sign-up': 'Rekisteröidy',
+        instead: 'sen sijaan?',
+        'confirm-password': 'Vahvista salasana',
+        'password-mismatch': 'Salasanat eivät täsmää',
+        'empty-fields': 'Täytä kaikki kentät',
+        'email-exists': 'Sähköposti on jo käytössä',
+        'invalid-credentials': 'Virheelliset tunnistetiedot',
+        profile: 'Profiili',
+        'working-on-this':
+            'Hei! Työstämme sovellusta edelleen. Sovellukseen on tulossa paljon uusia hienoja ominaisuuksia, jotka ovat tällä hetkellä saatavilla verkkosivuilla. Vielä hienompaa, kuin tulevat ominaisuudet, ovat vapaaehtoiset velhot, jotka käyttävät paljon tunteja käyttäjäkokemuksesi eteen. Toivottavasti ymmärrät, että upeiden asioiden luominen vie aikaa ja löydät sovelluksesta silti hyötyä. Mahtavaa tapahtumaa!',
+        meanwhile:
+            'Sillä välin, mikset kävisi vilkaisemasssa tiimiä, joka kuin taikasauvalla, on tämän sovelluksen koonnut!',
+        'testausserveri-credits':
+            'Testausserveri Ry:n vapaaehtoiset ovat mahdollistaneet sovelluksen syntymisen. Kiitos!',
+        'project-management': 'Projektin hallinta',
+        devteam: 'Kehitystiimi',
+        'some-great-administrative-work': 'Hienoa hallinnollista työtä',
+        credits: 'Kiitokset',
     },
 };

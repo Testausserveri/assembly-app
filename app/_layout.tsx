@@ -1,12 +1,15 @@
+import { TabBarIcon } from '@/components';
+import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
 import Locales from '@/locales';
 import { Themes } from '@/styles';
 import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
-import { Stack } from 'expo-router';
+import { Stack, router } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import i18n from 'i18next';
 import { useEffect } from 'react';
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next, useTranslation } from 'react-i18next';
+import { Platform } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -40,6 +43,8 @@ export default function RootLayout() {
         Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
     });
 
+    const { t } = useTranslation();
+
     useEffect(() => {
         if (loaded) {
             SplashScreen.hideAsync();
@@ -51,13 +56,36 @@ export default function RootLayout() {
     }
 
     return (
-        <SafeAreaProvider>
-            <PaperProvider theme={Themes['dark']['default']}>
-                <Stack>
-                    <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-                    <Stack.Screen name='+not-found' />
-                </Stack>
-            </PaperProvider>
-        </SafeAreaProvider>
+        <GlobalStateProvider>
+            <SafeAreaProvider>
+                <PaperProvider theme={Themes['dark']['default']}>
+                    <Stack>
+                        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+                        <Stack.Screen name='+not-found' />
+
+                        <Stack.Screen
+                            name='credits'
+                            options={{
+                                headerTitle: t('credits'),
+                                headerStyle: {
+                                    backgroundColor: Themes['dark']['default'].colors.background,
+                                },
+                                headerTintColor: Themes['dark']['default'].colors.primary,
+                                headerLeft: (props) => (
+                                    <TabBarIcon
+                                        style={{
+                                            color: Themes['dark']['default'].colors.primary,
+                                            marginRight: 10,
+                                        }}
+                                        name={Platform.OS === 'ios' ? 'chevron-back' : 'arrow-back'}
+                                        onPress={() => router.canGoBack() && router.back()}
+                                    />
+                                ),
+                            }}
+                        />
+                    </Stack>
+                </PaperProvider>
+            </SafeAreaProvider>
+        </GlobalStateProvider>
     );
 }

@@ -4,9 +4,11 @@ import { ScrollView } from 'react-native';
 
 interface EventsBoxProps {
     events: AssemblyEvent[];
+    favorites: number[];
+    toggleFavorite: (id: number) => void;
 }
 
-const EventsBox = ({ events }: EventsBoxProps) => {
+const EventsBox = ({ events, favorites, toggleFavorite }: EventsBoxProps) => {
     return (
         <ScrollView
             style={{ paddingHorizontal: 30, paddingBottom: 8 }}
@@ -22,6 +24,8 @@ const EventsBox = ({ events }: EventsBoxProps) => {
                     end={event.end}
                     color={event.color}
                     thumbnail={event.thumbnail}
+                    toggleFavorite={() => toggleFavorite(event.id)}
+                    isFavorite={favorites.includes(event.id)}
                 />
             ))}
         </ScrollView>

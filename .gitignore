@@ -11,6 +11,9 @@ npm-debug.*
 web-build/
 .env
 
+# Test stuff
+coverage/
+
 # macOS
 .DS_Store
 
