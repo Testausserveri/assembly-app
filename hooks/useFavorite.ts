@@ -1,3 +1,4 @@
+import { cancelScheduledPushNotification, schedulePushNotification } from './useLocalNotification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 
@@ -44,13 +45,15 @@ export const useFavorite = () => {
         });
     }, []);
 
-    const toggle = async (id: number) => {
+    const toggle = async (id: number, eventTitle: string, start: Date) => {
         if (!favorites.includes(id)) {
             setFavorites([...favorites, id]);
             await saveFavorites([...favorites, id]);
+            schedulePushNotification(id, eventTitle, start);
         } else {
             setFavorites(favorites.filter((n) => n !== id));
             await saveFavorites(favorites.filter((n) => n !== id));
+            cancelScheduledPushNotification(id);
         }
     };
 

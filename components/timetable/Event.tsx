@@ -110,19 +110,19 @@ const Event = ({
                     {`${t('time')}: ${timeString}`}
                 </Text>
             </Surface>
-            {dayjs().isBefore(start) ||
-                ((process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
-                    process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview') && (
-                    <IconButton
-                        onPress={() => toggleFavorite()}
-                        icon={isFavorite ? 'heart' : 'heart-outline'}
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            right: 0,
-                        }}
-                    />
-                ))}
+            {(dayjs().isBefore(start) ||
+                process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
+                process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview') && (
+                <IconButton
+                    onPress={() => toggleFavorite()}
+                    icon={isFavorite ? 'heart' : 'heart-outline'}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                    }}
+                />
+            )}
         </Surface>
     );
 };

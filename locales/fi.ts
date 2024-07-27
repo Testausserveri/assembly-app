@@ -11,6 +11,7 @@ export default {
         english: 'Englanti',
         'success-lang-change': 'Kieli vaihdettu onnistuneesti',
         'error-lang-change': 'Virhe kielen vaihdossa',
+        'event-starting-15': 'Tapahtuma alkaa 15 minuutin kuluttua',
         'login-failed': 'Kirjautuminen epäonnistui',
         'signup-failed': 'Rekisteröityminen epäonnistui',
         'unknown-error': 'Tuntematon virhe',
