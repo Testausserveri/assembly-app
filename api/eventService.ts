@@ -1,4 +1,5 @@
 import { Colors } from '@/styles';
+import dayjs from 'dayjs';
 
 type ApiEventLocation = {
     term_id: number;
@@ -105,15 +106,14 @@ export const determineStartDayIndex = (events: AssemblyEvent[]): number => {
     }
 
     const days = [...new Set(events.map((event) => event.start))];
-    const start_day_index = days.findIndex((day) => doorsOpen.start === day);
+    const start_day_index = days.findIndex((day) => dayjs(doorsOpen.start).isSame(day, "day"));
 
     if (start_day_index === -1) {
         console.error("Failed to find matching day for 'Doors Open' event");
         return 0;
     }
 
-    // the index returned by findIndex if off by one
-    return start_day_index - 1;
+    return start_day_index;
 };
 
 const API_BASE_PATH = `https://wp.assembly.org/${determineEvent()}/index.php?rest_route=/api/v1`;
