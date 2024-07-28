@@ -106,14 +106,14 @@ export const determineStartDayIndex = (events: AssemblyEvent[]): number => {
     }
 
     const days = [...new Set(events.map((event) => event.start))];
-    const start_day_index = days.findIndex((day) => dayjs(doorsOpen.start).isSame(day, "day"));
+    const startDayIndex = days.findIndex((day) => dayjs(doorsOpen.start).isSame(day, 'day'));
 
-    if (start_day_index === -1) {
+    if (startDayIndex === -1) {
         console.error("Failed to find matching day for 'Doors Open' event");
         return 0;
     }
 
-    return start_day_index;
+    return startDayIndex;
 };
 
 const API_BASE_PATH = `https://wp.assembly.org/${determineEvent()}/index.php?rest_route=/api/v1`;
