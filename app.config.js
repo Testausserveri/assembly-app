@@ -18,7 +18,7 @@ export default () => {
                 bundleIdentifier:
                     process.env.EXPO_PUBLIC_ENVIRONMENT === 'production'
                         ? 'fi.testausserveri.assemblyapp'
-                        : 'fi.testausserveri.assemblyapp_dev',
+                        : 'fi.testausserveri.assemblyapp-dev',
             },
             android: {
                 adaptiveIcon: {
