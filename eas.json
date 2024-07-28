@@ -13,12 +13,14 @@
         },
         "preview": {
             "distribution": "internal",
+            "channel": "preview",
             "env": {
                 "EXPO_PUBLIC_ENVIRONMENT": "preview",
                 "EXPO_PUBLIC_API_URL": "https://yusf31nx11.execute-api.eu-west-1.amazonaws.com/staging"
             }
         },
         "production": {
+            "channel": "production",
             "env": {
                 "EXPO_PUBLIC_ENVIRONMENT": "production",
                 "EXPO_PUBLIC_API_URL": "https://api.series.gg"

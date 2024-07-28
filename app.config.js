@@ -17,8 +17,8 @@ export default () => {
                 supportsTablet: true,
                 bundleIdentifier:
                     process.env.EXPO_PUBLIC_ENVIRONMENT === 'production'
-                        ? 'com.testausserveri.assemblyapp'
-                        : 'com.testausserveri.assemblyapp_dev',
+                        ? 'fi.testausserveri.assemblyapp'
+                        : 'fi.testausserveri.assemblyapp_dev',
             },
             android: {
                 adaptiveIcon: {
@@ -27,8 +27,8 @@ export default () => {
                 },
                 package:
                     process.env.EXPO_PUBLIC_ENVIRONMENT === 'production'
-                        ? 'com.testausserveri.assemblyapp'
-                        : 'com.testausserveri.assemblyapp_dev',
+                        ? 'fi.testausserveri.assemblyapp'
+                        : 'fi.testausserveri.assemblyapp_dev',
                 useNextNotificationApi: true,
             },
             web: {
@@ -60,6 +60,12 @@ export default () => {
                 },
             },
             owner: 'testausserveri',
+            updates: {
+                url: 'https://u.expo.dev/469c71b6-54c5-4111-bc4a-03e2cf92a23d',
+            },
+            runtimeVersion: {
+                policy: 'appVersion',
+            },
         },
     };
 };
