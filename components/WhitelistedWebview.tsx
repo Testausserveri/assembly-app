@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { useTrackingPermissions } from 'expo-tracking-transparency';
 import { useEffect, useRef } from 'react';
 import { BackHandler, Linking, Platform } from 'react-native';
 import WebView, { WebViewProps } from 'react-native-webview';
@@ -20,6 +21,7 @@ const injectedJavascript = `(function() {
 })();`;
 
 function WhitelistedWebview({ whitelistedUrls, ...props }: WhitelistedWebviewProps) {
+    const [status, requestPermission] = useTrackingPermissions();
     const webviewRef = useRef<WebView | null>(null);
     const navigation = useNavigation();
 
@@ -48,10 +50,18 @@ function WhitelistedWebview({ whitelistedUrls, ...props }: WhitelistedWebviewPro
         }
     }, [navigation]);
 
+    useEffect(() => {
+        (async () => {
+            await requestPermission();
+        })();
+    }, [requestPermission]);
+
     return (
         <WebView
             {...props}
             ref={webviewRef}
+            sharedCookiesEnabled={status?.granted}
+            thirdPartyCookiesEnabled={status?.granted}
             injectedJavaScript={injectedJavascript}
             onNavigationStateChange={(newNavState) => {
                 let foundMatch = whitelistedUrls.find((regex) => regex.test(newNavState.url));
