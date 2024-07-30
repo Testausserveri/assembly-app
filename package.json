@@ -53,7 +53,8 @@
     "expo-notifications": "~0.28.9",
     "expo-device": "~6.0.2",
     "react-native-webview": "13.8.6",
-    "expo-updates": "~0.25.21"
+    "expo-updates": "~0.25.21",
+    "expo-tracking-transparency": "~4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

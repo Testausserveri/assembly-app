@@ -47,6 +47,13 @@ export default () => {
                         sounds: [],
                     },
                 ],
+                [
+                    'expo-tracking-transparency',
+                    {
+                        userTrackingPermission:
+                            'This identifier will be used for providing services, personalization of services, statistical purposes and for legal obligations.',
+                    },
+                ],
             ],
             experiments: {
                 typedRoutes: true,
