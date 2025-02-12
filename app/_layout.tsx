@@ -2,7 +2,6 @@ import { TabBarIcon } from '@/components';
 import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
 import Locales from '@/locales';
 import { Themes } from '@/styles';
-import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import { Stack, router } from 'expo-router';
@@ -56,42 +55,35 @@ export default function RootLayout() {
 
     return (
         <GlobalStateProvider>
-            <NavigationContainer>
-                <SafeAreaProvider>
-                    <PaperProvider theme={Themes['dark']['default']}>
-                        <Stack>
-                            <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-                            <Stack.Screen name='+not-found' />
+            <SafeAreaProvider>
+                <PaperProvider theme={Themes['dark']['default']}>
+                    <Stack>
+                        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+                        <Stack.Screen name='+not-found' />
 
-                            <Stack.Screen
-                                name='credits'
-                                options={{
-                                    headerTitle: t('credits'),
-                                    headerStyle: {
-                                        backgroundColor:
-                                            Themes['dark']['default'].colors.background,
-                                    },
-                                    headerTintColor: Themes['dark']['default'].colors.primary,
-                                    headerLeft: (props) => (
-                                        <TabBarIcon
-                                            style={{
-                                                color: Themes['dark']['default'].colors.primary,
-                                                marginRight: 10,
-                                            }}
-                                            name={
-                                                Platform.OS === 'ios'
-                                                    ? 'chevron-back'
-                                                    : 'arrow-back'
-                                            }
-                                            onPress={() => router.canGoBack() && router.back()}
-                                        />
-                                    ),
-                                }}
-                            />
-                        </Stack>
-                    </PaperProvider>
-                </SafeAreaProvider>
-            </NavigationContainer>
+                        <Stack.Screen
+                            name='credits'
+                            options={{
+                                headerTitle: t('credits'),
+                                headerStyle: {
+                                    backgroundColor: Themes['dark']['default'].colors.background,
+                                },
+                                headerTintColor: Themes['dark']['default'].colors.primary,
+                                headerLeft: (props) => (
+                                    <TabBarIcon
+                                        style={{
+                                            color: Themes['dark']['default'].colors.primary,
+                                            marginRight: 10,
+                                        }}
+                                        name={Platform.OS === 'ios' ? 'chevron-back' : 'arrow-back'}
+                                        onPress={() => router.canGoBack() && router.back()}
+                                    />
+                                ),
+                            }}
+                        />
+                    </Stack>
+                </PaperProvider>
+            </SafeAreaProvider>
         </GlobalStateProvider>
     );
 }
