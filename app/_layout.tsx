@@ -1,5 +1,5 @@
 import { TabBarIcon } from '@/components';
-import { GlobalStateProvider, useGlobalState } from '@/hooks/providers/GlobalStateProvider';
+import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
 import Locales from '@/locales';
 import { Colors, Themes } from '@/styles';
 import { useFonts } from 'expo-font';
@@ -7,7 +7,6 @@ import * as Notifications from 'expo-notifications';
 import { Stack, router } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import i18n from 'i18next';
-import { useEffect } from 'react';
 import { initReactI18next, useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
