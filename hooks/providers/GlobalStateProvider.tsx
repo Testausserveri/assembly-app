@@ -1,4 +1,5 @@
 import { ProfileData, fetchProfile } from '@/api/userService';
+import { Buffer } from 'buffer';
 import * as SecureStore from 'expo-secure-store';
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 
