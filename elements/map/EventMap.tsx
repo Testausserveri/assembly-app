@@ -17,7 +17,7 @@ function EventMap() {
             contentHeight={5625}
         >
             <View style={{ width: '100%' }}>
-                <Image source={require('@/assets/images/summer24-aluekartta.png')} />
+                <Image source={require('@/assets/images/winter25-aluekartta.png')} />
             </View>
         </ReactNativeZoomableView>
     );
