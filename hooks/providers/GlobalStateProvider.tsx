@@ -9,12 +9,27 @@ export type GlobalState = { login?: Login };
 const GlobalStateContext = createContext<{
     state: GlobalState;
     authLoaded: boolean;
+    isAuthenticated: () => boolean;
     signin: (login: Login) => void;
     signout: () => void;
 }>({} as any);
 
 export function useGlobalState() {
     return useContext(GlobalStateContext);
+}
+
+function isTokenExpired(token: string) {
+    try {
+        const payloadBase64 = token.split('.')[1];
+        const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
+        const decoded = JSON.parse(decodedJson);
+        const exp = decoded.exp;
+        const expired = Date.now() >= exp * 1000;
+        return expired;
+    } catch (error) {
+        console.error(error);
+        return true;
+    }
 }
 
 export function GlobalStateProvider({ children }: PropsWithChildren) {
@@ -57,6 +72,11 @@ export function GlobalStateProvider({ children }: PropsWithChildren) {
         },
         signout() {
             setState((s) => ({ ...s, login: undefined }));
+        },
+        isAuthenticated() {
+            if (!state.login?.token) return false;
+            if (isTokenExpired(state.login.token)) return false;
+            return true;
         },
     };
 

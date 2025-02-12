@@ -6,9 +6,7 @@ import { Redirect, SplashScreen, Tabs } from 'expo-router';
 import React, { useEffect } from 'react';
 
 export default function TabLayout() {
-    const { state, authLoaded } = useGlobalState();
-
-    console.log(authLoaded);
+    const { authLoaded, signout, isAuthenticated } = useGlobalState();
 
     useEffect(() => {
         if (authLoaded) {
@@ -16,7 +14,8 @@ export default function TabLayout() {
         }
     }, [authLoaded]);
 
-    if (authLoaded && !state.login?.token) {
+    if (isAuthenticated()) {
+        signout();
         return <Redirect href={'/signin'} />;
     }
 
