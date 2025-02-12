@@ -1,3 +1,4 @@
+import { determineEvent } from '@/api/eventService';
 import WhitelistedWebview from '@/components/WhitelistedWebview';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,14 +8,16 @@ const AboutWebview = () => {
     const [loading, setLoading] = useState(true);
     const { i18n } = useTranslation();
 
+    const event = determineEvent();
+
     const uri =
         i18n.language === 'fi'
-            ? 'https://assembly.org/events/summer24/info'
-            : 'https://assembly.org/en/events/summer24/en/info-en';
+            ? `https://assembly.org/events/${event}/info`
+            : `https://assembly.org/en/events/${event}/en/info-en`;
 
     const whitelist = [
-        /^https:\/\/assembly\.org\/(fi\/)?events\/summer24\/info/,
-        /^https:\/\/assembly\.org\/en\/events\/summer24\/en\/info-en/,
+        new RegExp(`^https:\/\/assembly\.org\/(fi\/)?events\/${event}\/info`),
+        new RegExp(`^https:\/\/assembly\.org\/en\/events\/${event}\/en\/info-en`),
     ];
 
     return (
@@ -22,9 +25,7 @@ const AboutWebview = () => {
             {loading && <ActivityIndicator animating />}
             <WhitelistedWebview
                 whitelistedUrls={whitelist}
-                style={{
-                    display: loading ? 'none' : 'flex',
-                }}
+                style={{ display: loading ? 'none' : 'flex' }}
                 onLoad={() => setLoading(false)}
                 source={{ uri }}
             />

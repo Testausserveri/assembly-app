@@ -16,8 +16,8 @@ const injectedJavascript = `(function() {
     document.querySelector("footer").style.display = "none";
 
     // Breadcrumbs index page (bit hacky but the best way I could find)
-    document.querySelectorAll(".css-1ln5cin.e9onl6k0")[0].style.display = "none";
-    document.querySelectorAll(".css-1ln5cin.e9onl6k0")[1].style.display = "none";
+    document.querySelectorAll("ul.e9onl6k3")[0].style.display = "none";
+    document.querySelectorAll("ul.e9onl6k3")[1].style.display = "none";
 })();`;
 
 function WhitelistedWebview({ whitelistedUrls, ...props }: WhitelistedWebviewProps) {
