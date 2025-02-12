@@ -1,5 +1,5 @@
 import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
-import { Image, View } from 'react-native';
+import { DimensionValue, Image, View } from 'react-native';
 
 function EventMap() {
     return (
@@ -9,9 +9,7 @@ function EventMap() {
             zoomStep={0.5}
             initialZoom={0.05}
             bindToBorders={true}
-            style={{
-                width: 'fit-content',
-            }}
+            style={{ width: 'fit-content' as DimensionValue }}
             // Image dimensions
             contentWidth={10000}
             contentHeight={5625}
