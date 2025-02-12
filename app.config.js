@@ -34,6 +34,14 @@ export default () => {
             },
             web: { bundler: 'metro', output: 'static', favicon: './assets/images/favicon.png' },
             plugins: [
+                [
+                    'expo-secure-store',
+                    {
+                        configureAndroidBackup: true,
+                        faceIDPermission:
+                            'Allow $(PRODUCT_NAME) to access your Face ID biometric data.',
+                    },
+                ],
                 'expo-font',
                 'expo-router',
                 'expo-build-properties',

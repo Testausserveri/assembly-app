@@ -1,5 +1,5 @@
 import { TabBarIcon } from '@/components';
-import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
+import { GlobalStateProvider, useGlobalState } from '@/hooks/providers/GlobalStateProvider';
 import Locales from '@/locales';
 import { Colors, Themes } from '@/styles';
 import { useFonts } from 'expo-font';
@@ -51,14 +51,7 @@ export default function RootLayout() {
         Gaba: require('../assets/fonts/Gaba-Super.otf'),
         Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
     });
-
     const { t } = useTranslation();
-
-    useEffect(() => {
-        if (loaded) {
-            SplashScreen.hideAsync();
-        }
-    }, [loaded]);
 
     if (!loaded) {
         return null;
