@@ -1,15 +1,14 @@
 import { TabBar, TabBarIcon } from '@/components';
 import LootboxNavigationButton from '@/elements/lootbox/LootboxNavigationButton';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
 export default function TabLayout() {
     return (
         <Tabs
-            tabBar={(props) => <TabBar {...props} />}
-            screenOptions={{
-                headerShown: false,
-            }}
+            tabBar={(props: BottomTabBarProps) => <TabBar {...props} />}
+            screenOptions={{ headerShown: false }}
         >
             <Tabs.Screen
                 name='index'
@@ -45,7 +44,7 @@ export default function TabLayout() {
                             color={color}
                         />
                     ),
-                    unmountOnBlur: true,
+                    // unmountOnBlur: true,
                 }}
             />
             <Tabs.Screen
