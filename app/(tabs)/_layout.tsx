@@ -1,10 +1,17 @@
 import { TabBar, TabBarIcon } from '@/components';
 import LootboxNavigationButton from '@/elements/lootbox/LootboxNavigationButton';
+import { useGlobalState } from '@/hooks/providers/GlobalStateProvider';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 import React from 'react';
 
 export default function TabLayout() {
+    const { state } = useGlobalState();
+
+    if (!state.login?.token) {
+        return <Redirect href={'/signin'} />;
+    }
+
     return (
         <Tabs
             tabBar={(props: BottomTabBarProps) => <TabBar {...props} />}

@@ -61,6 +61,8 @@ export default function RootLayout() {
                         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
                         <Stack.Screen name='+not-found' />
 
+                        <Stack.Screen name='signin' options={{ headerShown: false }} />
+
                         <Stack.Screen
                             name='credits'
                             options={{
