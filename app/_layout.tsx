@@ -1,7 +1,7 @@
 import { TabBarIcon } from '@/components';
 import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
 import Locales from '@/locales';
-import { Themes } from '@/styles';
+import { Colors, Themes } from '@/styles';
 import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import { Stack, router } from 'expo-router';
@@ -13,6 +13,7 @@ import { Platform } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Toast, { ErrorToast } from 'react-native-toast-message';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -34,6 +35,16 @@ Notifications.setNotificationHandler({
         shouldSetBadge: false,
     }),
 });
+
+const toastConfig = {
+    error: ({ ...props }) => (
+        <ErrorToast
+            {...props}
+            style={{ backgroundColor: Colors.dark.default.error, borderLeftWidth: 0 }}
+            text1Style={{ color: Colors.dark.default.onError }}
+        />
+    ),
+};
 
 export default function RootLayout() {
     const [loaded] = useFonts({
@@ -84,6 +95,7 @@ export default function RootLayout() {
                             }}
                         />
                     </Stack>
+                    <Toast config={toastConfig} />
                 </PaperProvider>
             </SafeAreaProvider>
         </GlobalStateProvider>
