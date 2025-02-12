@@ -8,6 +8,7 @@ export default () => {
             icon: './assets/images/icon.png',
             scheme: 'myapp',
             userInterfaceStyle: 'automatic',
+            newArchEnabled: true,
             splash: {
                 image: './assets/images/splash.png',
                 resizeMode: 'contain',
@@ -31,21 +32,14 @@ export default () => {
                         : 'fi.testausserveri.assemblyapp_dev',
                 useNextNotificationApi: true,
             },
-            web: {
-                bundler: 'metro',
-                output: 'static',
-                favicon: './assets/images/favicon.png',
-            },
+            web: { bundler: 'metro', output: 'static', favicon: './assets/images/favicon.png' },
             plugins: [
+                'expo-font',
                 'expo-router',
                 'expo-build-properties',
                 [
                     'expo-notifications',
-                    {
-                        icon: './assets/images/icon.png',
-                        color: '#191919',
-                        sounds: [],
-                    },
+                    { icon: './assets/images/icon.png', color: '#191919', sounds: [] },
                 ],
                 [
                     'expo-tracking-transparency',
@@ -55,24 +49,14 @@ export default () => {
                     },
                 ],
             ],
-            experiments: {
-                typedRoutes: true,
-            },
+            experiments: { typedRoutes: true },
             extra: {
-                router: {
-                    origin: false,
-                },
-                eas: {
-                    projectId: '469c71b6-54c5-4111-bc4a-03e2cf92a23d',
-                },
+                router: { origin: false },
+                eas: { projectId: '469c71b6-54c5-4111-bc4a-03e2cf92a23d' },
             },
             owner: 'testausserveri',
-            updates: {
-                url: 'https://u.expo.dev/469c71b6-54c5-4111-bc4a-03e2cf92a23d',
-            },
-            runtimeVersion: {
-                policy: 'appVersion',
-            },
+            updates: { url: 'https://u.expo.dev/469c71b6-54c5-4111-bc4a-03e2cf92a23d' },
+            runtimeVersion: { policy: 'appVersion' },
         },
     };
 };
