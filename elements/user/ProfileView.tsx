@@ -47,7 +47,7 @@ export function ProfileView() {
                 }}
                 onPress={handleSignout}
             >
-                {t("signout")}
+                {t('signout')}
             </Button>
         </View>
     );

@@ -8,7 +8,6 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll",
     "lint": "expo lint",
     "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
     "build:android:preview": "eas build --platform android --profile preview --non-interactive --no-wait",
@@ -16,7 +15,6 @@
     "check:types": "tsc --noEmit",
     "check:lint": "expo lint",
     "check:format": "prettier --check \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
-    "check:test": "jest --bail --ci",
     "check:all": "npm run check:types && npm run check:lint && npm run check:format"
   },
   "jest": {

@@ -86,7 +86,7 @@ function SignIn() {
                         width: 'auto',
                     }}
                 >
-                    {loading ? <ActivityIndicator /> : <Text>{t("sign-in")}</Text>}
+                    {loading ? <ActivityIndicator /> : <Text>{t('sign-in')}</Text>}
                 </Button>
                 <Link href='https://assembly.org/signup'>
                     <Text variant='labelMedium' style={{ textAlign: 'center' }}>
