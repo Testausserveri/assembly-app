@@ -41,5 +41,9 @@ export default {
         'lootbox-under-construction': 'Lootboxit ovat osa tulevaisuuden mahtavia ominaisuuksia!',
         'lootbox-link':
             'Sillä välin kun työstämme niitä saataville sovellukseen, lootboxit löytyvät verkkosivuilta.',
+        signout: 'Kirjaudu ulos',
+        greeting: 'Hei {{username}}!',
+        'no-account-prompt': 'Uupuuko tunnus?',
+        'no-account-cta': 'Rekisteröidy heti!',
     },
 };

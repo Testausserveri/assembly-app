@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { DarkTheme } from '@/styles';
 import { Link, Redirect, router } from 'expo-router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ImageBackground, View } from 'react-native';
 import { ActivityIndicator, Button, Surface, Text, TextInput, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -11,6 +12,7 @@ import Toast from 'react-native-toast-message';
 
 function SignIn() {
     const theme = useTheme<DarkTheme>();
+    const { t } = useTranslation();
     const insets = useSafeAreaInsets();
     const { signin, status } = useAuth();
     const [email, setEmail] = useState('');
@@ -63,13 +65,13 @@ function SignIn() {
                     value={email}
                     onChangeText={setEmail}
                     style={{ marginBottom: 8 }}
-                    label='Email'
+                    label={t('email')}
                 />
                 <TextInput
                     value={password}
                     onChangeText={setPassword}
                     style={{ marginBottom: 8 }}
-                    label='Password'
+                    label={t('password')}
                     secureTextEntry
                 />
                 <Button
@@ -84,12 +86,14 @@ function SignIn() {
                         width: 'auto',
                     }}
                 >
-                    {loading ? <ActivityIndicator /> : <Text>Sign in</Text>}
+                    {loading ? <ActivityIndicator /> : <Text>{t("sign-in")}</Text>}
                 </Button>
                 <Link href='https://assembly.org/signup'>
                     <Text variant='labelMedium' style={{ textAlign: 'center' }}>
-                        No account yet?{' '}
-                        <Text style={{ textDecorationLine: 'underline' }}>Sign up now!</Text>
+                        {t('no-account-prompt')}{' '}
+                        <Text style={{ textDecorationLine: 'underline' }}>
+                            {t('no-account-cta')}
+                        </Text>
                     </Text>
                 </Link>
             </View>

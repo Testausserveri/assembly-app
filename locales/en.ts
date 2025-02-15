@@ -41,5 +41,9 @@ export default {
         'lootbox-under-construction': 'Lootboxes are part of the awesomness coming in the future!',
         'lootbox-link':
             'While we are working on getting them in the app, lootboxes can be found on the website.',
+        signout: 'Log out',
+        greeting: 'Hello {{username}}!',
+        'no-account-prompt': 'No account yet?',
+        'no-account-cta': 'Sign up now!',
     },
 };

@@ -7,11 +7,9 @@ import { View } from 'react-native';
 import { Button, Surface, Text, useTheme } from 'react-native-paper';
 
 export function ProfileView() {
-    const { profile } = useAuth();
+    const { profile, signout } = useAuth();
     const theme = useTheme<DarkTheme>();
     const { t } = useTranslation();
-
-    const { signout } = useAuth();
 
     function handleSignout() {
         signout();
@@ -20,7 +18,7 @@ export function ProfileView() {
 
     return (
         <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-            <Text variant='headlineLarge'>Hello {profile?.username ?? 'there'}!</Text>
+            <Text variant='headlineLarge'>{t('greeting', { username: profile?.username })}</Text>
             <LanguageSelector />
             <Surface
                 elevation={0}
@@ -49,7 +47,7 @@ export function ProfileView() {
                 }}
                 onPress={handleSignout}
             >
-                Log out
+                {t("signout")}
             </Button>
         </View>
     );
