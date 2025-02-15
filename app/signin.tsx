@@ -1,6 +1,6 @@
 import { StatusError } from '@/api/errors';
 import { loginRequest } from '@/api/userService';
-import { useGlobalState } from '@/hooks/providers/GlobalStateProvider';
+import { useAuth } from '@/hooks/useAuth';
 import { DarkTheme } from '@/styles';
 import { Link, Redirect, router } from 'expo-router';
 import { useState } from 'react';
@@ -12,7 +12,7 @@ import Toast from 'react-native-toast-message';
 function SignIn() {
     const theme = useTheme<DarkTheme>();
     const insets = useSafeAreaInsets();
-    const { signin, state } = useGlobalState();
+    const { signin, status } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -20,8 +20,8 @@ function SignIn() {
     async function handleSignin() {
         setLoading(true);
         try {
-            const login = await loginRequest(email, password);
-            signin(login);
+            const { token, profile } = await loginRequest(email, password);
+            signin(token, profile);
             setLoading(false);
 
             router.dismissTo('/(tabs)');
@@ -37,7 +37,7 @@ function SignIn() {
         setLoading(false);
     }
 
-    if (state.login?.token) {
+    if (status === 'logged-in') {
         return <Redirect href={'/(tabs)'} />;
     }
 

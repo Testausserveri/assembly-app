@@ -1,5 +1,5 @@
 import { TabBarIcon } from '@/components';
-import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
+import { AuthStateProvider } from '@/hooks/useAuth';
 import Locales from '@/locales';
 import { Colors, Themes } from '@/styles';
 import { useFonts } from 'expo-font';
@@ -57,7 +57,7 @@ export default function RootLayout() {
     }
 
     return (
-        <GlobalStateProvider>
+        <AuthStateProvider>
             <SafeAreaProvider>
                 <PaperProvider theme={Themes['dark']['default']}>
                     <Stack>
@@ -90,6 +90,6 @@ export default function RootLayout() {
                     <Toast config={toastConfig} />
                 </PaperProvider>
             </SafeAreaProvider>
-        </GlobalStateProvider>
+        </AuthStateProvider>
     );
 }

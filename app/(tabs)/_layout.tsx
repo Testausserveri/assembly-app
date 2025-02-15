@@ -1,21 +1,20 @@
 import { TabBar, TabBarIcon } from '@/components';
 import LootboxNavigationButton from '@/elements/lootbox/LootboxNavigationButton';
-import { useGlobalState } from '@/hooks/providers/GlobalStateProvider';
+import { useAuth } from '@/hooks/useAuth';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Redirect, SplashScreen, Tabs } from 'expo-router';
 import React, { useEffect } from 'react';
 
 export default function TabLayout() {
-    const { authLoaded, signout, isAuthenticated } = useGlobalState();
+    const { status } = useAuth();
 
     useEffect(() => {
-        if (authLoaded) {
+        if (status !== 'loading') {
             SplashScreen.hide();
         }
-    }, [authLoaded]);
+    }, [status]);
 
-    if (isAuthenticated()) {
-        signout();
+    if (status === 'logged-out') {
         return <Redirect href={'/signin'} />;
     }
 
