@@ -1,18 +1,18 @@
 import { TabBarIcon } from '@/components';
-import { GlobalStateProvider } from '@/hooks/providers/GlobalStateProvider';
+import { AuthStateProvider } from '@/hooks/useAuth';
 import Locales from '@/locales';
-import { Themes } from '@/styles';
+import { Colors, Themes } from '@/styles';
 import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import { Stack, router } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import i18n from 'i18next';
-import { useEffect } from 'react';
 import { initReactI18next, useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Toast, { ErrorToast } from 'react-native-toast-message';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -21,9 +21,7 @@ i18n.use(initReactI18next).init({
     fallbackLng: 'en',
     compatibilityJSON: 'v3',
     debug: true,
-    resources: {
-        ...Locales,
-    },
+    resources: { ...Locales },
     interpolation: {
         escapeValue: false, // not needed for react as it escapes by default
     },
@@ -37,31 +35,36 @@ Notifications.setNotificationHandler({
     }),
 });
 
+const toastConfig = {
+    error: ({ ...props }) => (
+        <ErrorToast
+            {...props}
+            style={{ backgroundColor: Colors.dark.default.error, borderLeftWidth: 0 }}
+            text1Style={{ color: Colors.dark.default.onError }}
+        />
+    ),
+};
+
 export default function RootLayout() {
     const [loaded] = useFonts({
         Gaba: require('../assets/fonts/Gaba-Super.otf'),
         Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
     });
-
     const { t } = useTranslation();
-
-    useEffect(() => {
-        if (loaded) {
-            SplashScreen.hideAsync();
-        }
-    }, [loaded]);
 
     if (!loaded) {
         return null;
     }
 
     return (
-        <GlobalStateProvider>
+        <AuthStateProvider>
             <SafeAreaProvider>
                 <PaperProvider theme={Themes['dark']['default']}>
                     <Stack>
                         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
                         <Stack.Screen name='+not-found' />
+
+                        <Stack.Screen name='signin' options={{ headerShown: false }} />
 
                         <Stack.Screen
                             name='credits'
@@ -84,8 +87,9 @@ export default function RootLayout() {
                             }}
                         />
                     </Stack>
+                    <Toast config={toastConfig} />
                 </PaperProvider>
             </SafeAreaProvider>
-        </GlobalStateProvider>
+        </AuthStateProvider>
     );
 }

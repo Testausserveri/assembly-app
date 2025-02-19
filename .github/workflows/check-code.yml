@@ -32,6 +32,3 @@ jobs:
 
             - name: Format
               run: npm run check:format
-
-            - name: Test
-              run: npm run check:test

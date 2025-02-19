@@ -28,3 +28,4 @@ expo-env.d.ts
 
 yarn.lock
 .vscode
+pnpm-lock.yaml

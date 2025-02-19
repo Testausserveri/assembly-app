@@ -16,9 +16,7 @@ type ApiEventLocation = {
     priority: string; // A number encoded as a string or empty
 };
 
-type ApiCalendarEventLocation = {
-    calendar_event_location: number[];
-};
+type ApiCalendarEventLocation = { calendar_event_location: number[] };
 
 type ApiAssemblyEvent = {
     ID: number;
@@ -84,7 +82,7 @@ const determineEvent = (): string => {
         process.env.EXPO_PUBLIC_ENVIRONMENT === 'development' ||
         process.env.EXPO_PUBLIC_ENVIRONMENT === 'preview'
     ) {
-        return 'summer23';
+        return 'winter25';
     }
     const now = new Date();
     const julyFirst = new Date(now.getFullYear(), 6, 1);
@@ -156,4 +154,4 @@ const getEvents = async (): Promise<AssemblyEvent[]> => {
     }
 };
 
-export { AssemblyEvent, getEvents };
+export { AssemblyEvent, getEvents, determineEvent };

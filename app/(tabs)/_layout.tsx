@@ -1,15 +1,30 @@
 import { TabBar, TabBarIcon } from '@/components';
 import LootboxNavigationButton from '@/elements/lootbox/LootboxNavigationButton';
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { Redirect, SplashScreen, Tabs } from 'expo-router';
+import React, { useEffect } from 'react';
 
 export default function TabLayout() {
+    const { status } = useAuth();
+
+    useEffect(() => {
+        if (status !== 'loading') {
+            SplashScreen.hide();
+        }
+    }, [status]);
+
+    /*
+     * TODO
+    if (status === 'logged-out') {
+        return <Redirect href={'/signin'} />;
+    }
+    */
+
     return (
         <Tabs
-            tabBar={(props) => <TabBar {...props} />}
-            screenOptions={{
-                headerShown: false,
-            }}
+            tabBar={(props: BottomTabBarProps) => <TabBar {...props} />}
+            screenOptions={{ headerShown: false }}
         >
             <Tabs.Screen
                 name='index'
@@ -45,7 +60,7 @@ export default function TabLayout() {
                             color={color}
                         />
                     ),
-                    unmountOnBlur: true,
+                    // unmountOnBlur: true,
                 }}
             />
             <Tabs.Screen
