@@ -38,6 +38,7 @@ export function ProfileView() {
                     {t('meanwhile')}
                 </Link>
             </Surface>
+            {/* TODO: auth
             <Button
                 style={{
                     width: '100%',
@@ -49,6 +50,7 @@ export function ProfileView() {
             >
                 {t('signout')}
             </Button>
+            */}
         </View>
     );
 }

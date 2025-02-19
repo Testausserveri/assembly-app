@@ -14,9 +14,12 @@ export default function TabLayout() {
         }
     }, [status]);
 
+    /*
+     * TODO
     if (status === 'logged-out') {
         return <Redirect href={'/signin'} />;
     }
+    */
 
     return (
         <Tabs
