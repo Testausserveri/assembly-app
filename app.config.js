@@ -3,7 +3,7 @@ export default () => {
         expo: {
             name: 'Assembly',
             slug: 'assembly-app',
-            version: '1.0.0',
+            version: '1.0.1',
             orientation: 'portrait',
             icon: './assets/images/icon.png',
             scheme: 'myapp',
@@ -16,6 +16,7 @@ export default () => {
             },
             ios: {
                 supportsTablet: true,
+                buildNumber: '4',
                 bundleIdentifier:
                     process.env.EXPO_PUBLIC_ENVIRONMENT === 'production'
                         ? 'fi.testausserveri.assemblyapp'
@@ -31,6 +32,7 @@ export default () => {
                         ? 'fi.testausserveri.assemblyapp'
                         : 'fi.testausserveri.assemblyapp_dev',
                 useNextNotificationApi: true,
+                versionCode: 4,
             },
             web: { bundler: 'metro', output: 'static', favicon: './assets/images/favicon.png' },
             plugins: [
